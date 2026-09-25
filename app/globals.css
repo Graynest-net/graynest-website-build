@@ -256,6 +256,22 @@ body::before {
   border-color: var(--gn-line-2);
 }
 
+.contact-input {
+  width: 100%;
+  border: 1px solid var(--gn-line-2);
+  border-radius: 14px;
+  background: var(--gn-glass-bg);
+  color: var(--gn-bone-50);
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.contact-input:focus {
+  border-color: var(--gn-red);
+  box-shadow: 0 0 0 4px var(--gn-red-haze);
+}
+
 /* Falloff gradient */
 .falloff-gradient {
   background: radial-gradient(60% 50% at 50% 40%, var(--gn-ink-700) 0%, var(--gn-ink-900) 70%, var(--gn-ink-950) 100%);
