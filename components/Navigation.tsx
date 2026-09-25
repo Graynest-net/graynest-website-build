@@ -43,7 +43,7 @@ export function Navigation() {
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <img
-            src="/brand/logo_icon.png"
+            src="/icon.svg"
             alt="GrayNest"
             className="h-8 w-8"
           />

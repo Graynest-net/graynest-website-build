@@ -1,7 +1,6 @@
 import { Navigation } from '@/components/Navigation'
 import { Footer } from '@/components/Footer'
 import { Headline } from '@/components/Headline'
-import { MediaSlot } from '@/components/MediaSlot'
 import { CoreGlow } from '@/components/CoreGlow'
 import Link from 'next/link'
 
@@ -100,7 +99,7 @@ export default function Home() {
               <span className="accent-word">TALK?</span>
             </h2>
             <p className="body-lg mx-auto mb-12">
-              Start a project, book a demo, or ask our agent a question. Let's build something together.
+              Start a project, book a demo, or ask our agent a question. Let&apos;s build something together.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="btn-primary">

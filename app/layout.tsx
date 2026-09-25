@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   description: 'AI agents and custom product engineering with AI integration for startups and enterprises.',
   generator: 'v0.app',
   icons: {
-    icon: '/brand/logo_favicon_32.png',
-    apple: '/brand/logo_appicon_512.png',
+    icon: '/icon-dark-32x32.png',
+    apple: '/apple-icon.png',
   },
 }
 
