@@ -131,22 +131,22 @@ export default function Home() {
                     alt={card.alt}
                     className="service-cinema-slot"
                   />
-                </div>
-                <div className="service-cinema-body">
-                  <p className="micro">{card.eyebrow}</p>
-                  <ServiceTitle
-                    line1={card.titleLine1}
-                    line2={card.titleLine2}
-                    accent={card.accent}
-                  />
-                  <ul className="service-cinema-bullets">
-                    {card.bullets.map((bullet) => (
-                      <li key={bullet}>{bullet}</li>
-                    ))}
-                  </ul>
-                  <Link href={card.href} className="btn-glass service-cinema-cta">
-                    {card.cta}
-                  </Link>
+                  <div className="service-cinema-body">
+                    <p className="micro">{card.eyebrow}</p>
+                    <ServiceTitle
+                      line1={card.titleLine1}
+                      line2={card.titleLine2}
+                      accent={card.accent}
+                    />
+                    <ul className="service-cinema-bullets">
+                      {card.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
+                    <Link href={card.href} className="btn-glass service-cinema-cta">
+                      {card.cta}
+                    </Link>
+                  </div>
                 </div>
               </article>
             </Reveal>
