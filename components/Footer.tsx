@@ -20,9 +20,9 @@ export function Footer() {
         </svg>
       </div>
 
-      <div className="relative z-10 grid-12 py-20">
+      <div className="relative z-10 grid-12 py-[clamp(96px,12vh,160px)]">
         {/* Giant headline */}
-        <div className="col-span-full mb-16">
+        <div className="col-span-full mb-[clamp(48px,8vw,80px)]">
           <h2 className="h2 leading-tight">
             YOUR ROADMAP.
             <br />

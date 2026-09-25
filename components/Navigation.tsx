@@ -40,14 +40,18 @@ export function Navigation() {
       }`}
       style={{ height: '72px' }}
     >
-      <div className="h-full px-8 max-w-7xl mx-auto flex items-center justify-between">
+      <div className="h-full mx-auto flex w-full max-w-[1440px] items-center justify-between px-[var(--gn-page-gutter)]">
         {/* Logo */}
-        <Link href="/" className="flex-shrink-0">
+        <Link href="/" className="flex shrink-0 items-center gap-3 no-underline">
           <img
             src="/icon.svg"
-            alt="GrayNest"
+            alt=""
             className="h-8 w-8"
+            aria-hidden="true"
           />
+          <span className="text-[15px] font-bold tracking-[-0.02em] text-[var(--gn-bone-50)]">
+            GrayNest
+          </span>
         </Link>
 
         {/* Center navigation */}
