@@ -152,23 +152,40 @@ body {
   left: 0;
   right: 0;
   z-index: 40;
-  height: calc(var(--gn-nav-height) + var(--gn-safe-top));
+  min-height: calc(var(--gn-nav-height) + var(--gn-safe-top));
   padding-top: var(--gn-safe-top);
   background: transparent;
-  transition: transform var(--gn-dur-s) var(--gn-ease-enter),
-    background-color var(--gn-dur-s) ease,
-    border-color var(--gn-dur-s) ease,
-    backdrop-filter var(--gn-dur-s) ease;
+  transition: transform var(--gn-dur-s) var(--gn-ease-enter);
+}
+
+/**
+ * Full-bleed frosted layer — covers the notch / status-bar safe area as well as
+ * the 72px nav row. Separate from padding so Safari paints backdrop-filter edge-to-edge.
+ */
+.site-nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: rgba(22, 22, 26, 0.72);
+  -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  backdrop-filter: blur(18px) saturate(1.35);
+  border-bottom: 1px solid transparent;
+  transition: opacity var(--gn-dur-s) ease, border-color var(--gn-dur-s) ease;
 }
 
 .site-nav-hidden {
   transform: translateY(-100%);
 }
 
-.site-nav-glass {
-  background: rgba(22, 22, 26, 0.72);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--gn-line);
+.site-nav-glass::before {
+  opacity: 1;
+  border-bottom-color: var(--gn-line);
 }
 
 .site-nav-inner {
