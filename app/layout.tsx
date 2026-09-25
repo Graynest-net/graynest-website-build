@@ -1,6 +1,7 @@
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata, Viewport } from "next"
 import { SmoothScroll } from "@/components/SmoothScroll"
+import { AgentAppShell } from "@/components/agent/AgentAppShell"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -37,7 +38,9 @@ export default function RootLayout({
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <SmoothScroll>{children}</SmoothScroll>
+        <AgentAppShell>
+          <SmoothScroll>{children}</SmoothScroll>
+        </AgentAppShell>
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>

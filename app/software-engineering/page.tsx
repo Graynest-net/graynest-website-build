@@ -4,7 +4,6 @@ import { Headline } from "@/components/Headline"
 import { CoreGlow } from "@/components/CoreGlow"
 import { Reveal } from "@/components/Reveal"
 import { MagneticButton } from "@/components/MagneticButton"
-import { AgentLauncher } from "@/components/AgentLauncher"
 import { HexGrid } from "@/components/HexGrid"
 import Link from "next/link"
 
@@ -121,7 +120,6 @@ export default function SoftwareEngineeringPage() {
       </section>
 
       <Footer />
-      <AgentLauncher />
     </main>
   )
 }

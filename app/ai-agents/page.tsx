@@ -5,7 +5,7 @@ import { MediaSlot } from "@/components/MediaSlot"
 import { CoreGlow } from "@/components/CoreGlow"
 import { Reveal } from "@/components/Reveal"
 import { MagneticButton } from "@/components/MagneticButton"
-import { AgentLauncher } from "@/components/AgentLauncher"
+import { TalkToAgentButton } from "@/components/agent/TalkToAgentButton"
 import { HexGrid } from "@/components/HexGrid"
 import Link from "next/link"
 
@@ -33,10 +33,7 @@ export default function AIAgentsPage() {
               They speak your language and never miss a call.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-4">
-              <MagneticButton type="button">
-                Talk to our agent
-                <span aria-hidden="true">→</span>
-              </MagneticButton>
+              <TalkToAgentButton />
               <Link href="/contact" className="btn-glass">
                 Book a demo
               </Link>
@@ -137,7 +134,6 @@ export default function AIAgentsPage() {
       </section>
 
       <Footer />
-      <AgentLauncher />
     </main>
   )
 }
