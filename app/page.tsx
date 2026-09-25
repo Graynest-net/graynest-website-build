@@ -14,7 +14,7 @@ export default function Home() {
         <div className="absolute inset-0 falloff-gradient -z-10" />
         
         <div className="grid-12 relative z-10">
-          <div className="col-span-full md:col-span-8 space-y-8">
+          <div className="col-span-full md:col-span-8 space-y-8 hero-copy">
             <Headline
               line1="WE DESIGN, BUILD"
               line2="AND SHIP WITH AI."
@@ -39,9 +39,7 @@ export default function Home() {
         </div>
 
         {/* Right side media */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-full -z-5 opacity-20">
-          <div className="w-full h-full bg-gradient-to-l from-[#ea2e00]/20 to-transparent" />
-        </div>
+        <div className="hero-orb pointer-events-none absolute right-[-18%] top-[18%] h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle_at_center,rgba(234,46,0,.28),rgba(234,46,0,.08)_35%,transparent_70%)] blur-[2px] md:right-[-6%] md:top-1/2 md:h-[680px] md:w-[680px] md:-translate-y-1/2" aria-hidden="true" />
       </section>
 
       {/* Two services teaser */}
@@ -52,7 +50,7 @@ export default function Home() {
           </div>
 
           {/* AI Agents card */}
-          <div className="col-span-full md:col-span-6 feature-card group cursor-pointer">
+          <div className="col-span-full md:col-span-6 feature-card reveal-card group cursor-pointer">
             <div className="space-y-4">
               <CoreGlow size={24} pulse={true} />
               <h3 className="h3">AI Agents</h3>
@@ -69,7 +67,7 @@ export default function Home() {
           </div>
 
           {/* Software Engineering card */}
-          <div className="col-span-full md:col-span-6 feature-card group cursor-pointer">
+          <div className="col-span-full md:col-span-6 feature-card reveal-card group cursor-pointer">
             <div className="space-y-4">
               <CoreGlow size={24} pulse={true} />
               <h3 className="h3">Software Engineering</h3>

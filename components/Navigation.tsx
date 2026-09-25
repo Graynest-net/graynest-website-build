@@ -7,6 +7,7 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,16 +61,12 @@ export function Navigation() {
               <Link href="/software-engineering" className="hover:text-white transition">
                 Software
               </Link>
-              <span className="text-white/30">·</span>
-              <a href="#" className="hover:text-white transition opacity-50">
-                Work
-              </a>
             </div>
           </div>
         </div>
 
         {/* Right CTA */}
-        <button className="btn-primary hidden md:flex">
+        <button className="btn-primary nav-cta hidden md:flex">
           Start a project
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -77,11 +74,25 @@ export function Navigation() {
         </button>
 
         {/* Mobile menu button */}
-        <button className="md:hidden w-10 h-10 flex items-center justify-center">
+        <button
+          className="md:hidden w-10 h-10 flex items-center justify-center"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M3 12h18M3 6h18M3 18h18" strokeWidth="2" strokeLinecap="round" />
+            <path d={menuOpen ? 'M5 5l14 14M19 5L5 19' : 'M3 12h18M3 6h18M3 18h18'} strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
+      </div>
+
+      <div className={`mobile-menu md:hidden ${menuOpen ? 'mobile-menu-open' : ''}`} aria-hidden={!menuOpen}>
+        <div className="mobile-menu-links">
+          <Link href="/ai-agents" onClick={() => setMenuOpen(false)}>AI Agents</Link>
+          <Link href="/software-engineering" onClick={() => setMenuOpen(false)}>Software</Link>
+          <Link href="/contact" onClick={() => setMenuOpen(false)}>Start a project</Link>
+        </div>
+        <a className="mobile-menu-contact" href="mailto:hello@graynest.co">hello@graynest.co</a>
       </div>
     </nav>
   )
