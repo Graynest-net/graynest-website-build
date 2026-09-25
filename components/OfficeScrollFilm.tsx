@@ -51,8 +51,8 @@ function beatForProgress(progress: number) {
 }
 
 /**
- * Theme-aware office scroll film: same camera path, day people vs night persona.
- * Playback is scrubbed by scroll while the section is pinned.
+ * Full-screen agents vibe feature: day people / night persona plates,
+ * same camera path, scrubbed by scroll, swapped by theme.
  */
 export function OfficeScrollFilm() {
   const { theme } = useTheme()
@@ -69,6 +69,7 @@ export function OfficeScrollFilm() {
   const beat = useMemo(() => beatForProgress(progress), [progress])
   const isLight = theme === "light"
   const activeLabel = isLight ? OFFICE_FILM_SLOTS.day.label : OFFICE_FILM_SLOTS.night.label
+  const activeSlot = isLight ? OFFICE_FILM_SLOTS.day : OFFICE_FILM_SLOTS.night
 
   /**
    * Keeps both plates on the same frame so theme switches stay continuous.
@@ -142,9 +143,9 @@ export function OfficeScrollFilm() {
     const trigger = ScrollTrigger.create({
       trigger: section,
       start: "top top",
-      end: "+=280%",
+      end: "+=220%",
       pin: true,
-      scrub: 0.45,
+      scrub: 0.4,
       anticipatePin: 1,
       onUpdate: (self) => {
         syncVideos(self.progress)
@@ -179,11 +180,11 @@ export function OfficeScrollFilm() {
   return (
     <section
       ref={sectionRef}
-      className="office-film"
-      aria-label="GrayNest agents office day and night scroll film"
+      className="office-film office-film-feature"
+      aria-label="AI Agents service vibe — day and night office film"
     >
-      <div className="office-film-stage" aria-hidden={!availability.day && !availability.night}>
-        <div className={`office-film-plate office-film-day ${isLight ? "is-active" : ""}`.trim()}>
+      <div className="office-film-stage">
+        <div className={`office-film-plate ${isLight ? "is-active" : ""}`.trim()}>
           {availability.day ? (
             <video
               ref={dayRef}
@@ -196,17 +197,11 @@ export function OfficeScrollFilm() {
               aria-label={OFFICE_FILM_SLOTS.day.id}
             />
           ) : (
-            <div className="office-film-placeholder office-film-placeholder-day">
-              <div className="office-film-placeholder-glow" />
-              <p className="glass-pill">{OFFICE_FILM_SLOTS.day.id} · VIDEO · 16:9</p>
-              <p className="office-film-placeholder-copy">
-                Daylight agency floor. People at desks. Same camera path as night.
-              </p>
-            </div>
+            <div className="office-film-placeholder office-film-placeholder-day" />
           )}
         </div>
 
-        <div className={`office-film-plate office-film-night ${isLight ? "" : "is-active"}`.trim()}>
+        <div className={`office-film-plate ${isLight ? "" : "is-active"}`.trim()}>
           {availability.night ? (
             <video
               ref={nightRef}
@@ -219,56 +214,47 @@ export function OfficeScrollFilm() {
               aria-label={OFFICE_FILM_SLOTS.night.id}
             />
           ) : (
-            <div className="office-film-placeholder office-film-placeholder-night">
-              <div className="office-film-placeholder-glow" />
-              <p className="glass-pill">{OFFICE_FILM_SLOTS.night.id} · VIDEO · 16:9</p>
-              <p className="office-film-placeholder-copy">
-                Soft warm night office. GrayNest persona on the floor. Same dolly.
-              </p>
-            </div>
+            <div className="office-film-placeholder office-film-placeholder-night" />
           )}
         </div>
 
-        <div className="office-film-veil" />
+        <div className="office-film-veil office-film-veil-feature" />
       </div>
 
-      <div className="office-film-copy grid-12">
-        <div className="office-film-copy-inner col-span-full md:col-span-7 lg:col-span-6">
-          <p className="micro office-film-eyebrow">{beat.eyebrow}</p>
-          <h2 className="h2 office-film-title">
-            <span className="office-film-title-line">{beat.line1}</span>
-            <span className="office-film-title-line">
-              {(() => {
-                const accentIndex = beat.line2.toLowerCase().indexOf(beat.accent.toLowerCase())
+      <div className="office-film-feature-copy">
+        <p className="micro">{beat.eyebrow}</p>
+        <h2 className="office-film-feature-title">
+          <span>{beat.line1}</span>
+          <span>
+            {(() => {
+              const accentIndex = beat.line2.toLowerCase().indexOf(beat.accent.toLowerCase())
 
-                if (accentIndex < 0) {
-                  return beat.line2
-                }
+              if (accentIndex < 0) {
+                return beat.line2
+              }
 
-                return (
-                  <>
-                    {beat.line2.slice(0, accentIndex)}
-                    <span className="accent-word">
-                      {beat.line2.slice(accentIndex, accentIndex + beat.accent.length)}
-                    </span>
-                    {beat.line2.slice(accentIndex + beat.accent.length)}
-                  </>
-                )
-              })()}
-            </span>
-          </h2>
-          <p className="body office-film-support">
-            Scroll to move the camera. Flip theme to change the shift — people by day, the persona by night.
-          </p>
-        </div>
+              return (
+                <>
+                  {beat.line2.slice(0, accentIndex)}
+                  <span className="accent-word">
+                    {beat.line2.slice(accentIndex, accentIndex + beat.accent.length)}
+                  </span>
+                  {beat.line2.slice(accentIndex + beat.accent.length)}
+                </>
+              )
+            })()}
+          </span>
+        </h2>
       </div>
 
-      <div className="office-film-hud" aria-hidden="true">
+      <div className="office-film-hud office-film-hud-feature" aria-hidden="true">
         <span className="glass-pill">{activeLabel}</span>
         <div className="office-film-progress">
           <span style={{ transform: `scaleX(${Math.max(progress, 0.02)})` }} />
         </div>
-        <span className="micro">{Math.round(progress * 100)}%</span>
+        {!availability.day && !availability.night ? (
+          <span className="micro office-film-slot-id">{activeSlot.id}</span>
+        ) : null}
       </div>
     </section>
   )

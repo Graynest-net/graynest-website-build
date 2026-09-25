@@ -1467,23 +1467,37 @@ body::before {
   }
 }
 
-/* Office scroll film — day/night theme plates scrubbed by scroll */
+/* Office scroll film — full-bleed agents vibe (day/night plates) */
 .office-film {
   position: relative;
+  isolation: isolate;
+  width: 100%;
   min-height: 100svh;
+  height: 100svh;
   overflow: hidden;
-  background: var(--gn-ink-950);
-  color: var(--gn-bone-50);
+  background: #0e0c0b;
+  color: #f7f5f1;
+}
+
+.office-film-feature {
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
 
 .office-film-stage {
   position: absolute;
   inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .office-film-plate {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   opacity: 0;
   transition: opacity 0.55s var(--gn-ease-enter);
   will-change: opacity;
@@ -1494,108 +1508,106 @@ body::before {
 }
 
 .office-film-video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   display: block;
 }
 
 .office-film-placeholder {
   position: absolute;
   inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  gap: 14px;
-  padding: clamp(24px, 4vw, 48px);
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
 .office-film-placeholder-day {
-  background: var(--gn-media-world);
+  background:
+    radial-gradient(70% 55% at 55% 40%, rgba(255, 236, 210, 0.55) 0%, transparent 55%),
+    linear-gradient(135deg, #e8dfd2 0%, #f7f5f1 45%, #d9cfc0 100%);
 }
 
 .office-film-placeholder-night {
-  background: radial-gradient(70% 60% at 60% 40%, #2a2420 0%, #1a1816 45%, #111114 100%);
+  background:
+    radial-gradient(65% 50% at 58% 42%, rgba(234, 46, 0, 0.18) 0%, transparent 42%),
+    radial-gradient(80% 70% at 40% 60%, #3a2e26 0%, #1a1613 48%, #0e0c0b 100%);
 }
 
-[data-theme="light"] .office-film-placeholder-night {
-  background: radial-gradient(70% 60% at 60% 40%, #3a322c 0%, #241f1c 50%, #161310 100%);
-}
-
-.office-film-placeholder-glow {
-  position: absolute;
-  inset: -10%;
-  background: radial-gradient(circle at 55% 45%, var(--gn-red-haze) 0%, transparent 48%);
-  animation: media-glow-drift 10s ease-in-out infinite;
-}
-
-.office-film-placeholder-copy {
-  position: relative;
-  z-index: 1;
-  max-width: 36ch;
-  color: var(--gn-text-2);
-  font-size: 15px;
-  line-height: 1.5;
+[data-theme="light"] .office-film-placeholder-day {
+  background:
+    radial-gradient(70% 55% at 55% 40%, rgba(255, 248, 235, 0.9) 0%, transparent 55%),
+    linear-gradient(135deg, #efe6d8 0%, #faf8f4 50%, #e2d6c6 100%);
 }
 
 .office-film-veil {
   position: absolute;
   inset: 0;
   pointer-events: none;
+}
+
+/* Keep legibility without burying the full-bleed film */
+.office-film-veil-feature {
   background:
-    linear-gradient(90deg, color-mix(in srgb, var(--gn-ink-950) 72%, transparent) 0%, transparent 52%),
-    linear-gradient(180deg, color-mix(in srgb, var(--gn-ink-950) 35%, transparent) 0%, transparent 28%, color-mix(in srgb, var(--gn-ink-950) 55%, transparent) 100%);
+    linear-gradient(180deg, rgba(14, 12, 11, 0.22) 0%, transparent 28%),
+    linear-gradient(180deg, transparent 55%, rgba(14, 12, 11, 0.58) 100%),
+    linear-gradient(90deg, rgba(14, 12, 11, 0.32) 0%, transparent 38%);
 }
 
-.office-film-copy {
-  position: relative;
+.office-film-feature-copy {
+  position: absolute;
+  left: var(--gn-gutter-left);
+  right: var(--gn-gutter-right);
+  bottom: calc(88px + var(--gn-safe-bottom));
   z-index: 2;
-  min-height: 100svh;
-  display: grid;
-  align-items: end;
-  padding-block: calc(var(--gn-nav-height) + var(--gn-safe-top) + 48px) calc(120px + var(--gn-safe-bottom));
-}
-
-.office-film-copy-inner {
-  max-width: 18ch;
-}
-
-.office-film-eyebrow {
-  margin-bottom: 18px;
-}
-
-.office-film-title {
+  max-width: min(16ch, 88vw);
   display: flex;
   flex-direction: column;
-  gap: 0.12em;
+  gap: 14px;
+  pointer-events: none;
+  color: #f7f5f1;
+  text-shadow: 0 1px 18px rgba(14, 12, 11, 0.35);
 }
 
-.office-film-title-line {
-  display: block;
+.office-film-feature-copy .micro {
+  color: color-mix(in srgb, #f7f5f1 72%, transparent);
 }
 
-.office-film-support {
-  margin-top: 20px;
-  max-width: 34ch;
+.office-film-feature-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08em;
+  font-family: var(--font-satoshi);
+  font-weight: 900;
+  font-size: clamp(40px, 7vw, 96px);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: #f7f5f1;
 }
 
 .office-film-hud {
   position: absolute;
-  right: var(--gn-gutter-right);
-  bottom: calc(28px + var(--gn-safe-bottom));
   z-index: 3;
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
+.office-film-hud-feature {
+  right: var(--gn-gutter-right);
+  bottom: calc(28px + var(--gn-safe-bottom));
+}
+
 .office-film-progress {
-  width: min(180px, 28vw);
+  width: min(160px, 26vw);
   height: 2px;
   border-radius: 999px;
-  background: var(--gn-line-2);
+  background: rgba(247, 245, 241, 0.22);
   overflow: hidden;
 }
 
@@ -1607,13 +1619,22 @@ body::before {
   background: var(--gn-red);
 }
 
+.office-film-slot-id {
+  opacity: 0.55;
+  color: #f7f5f1;
+}
+
 @media (max-width: 768px) {
-  .office-film-copy {
-    align-items: end;
-    padding-bottom: calc(148px + var(--gn-safe-bottom));
+  .office-film-feature-copy {
+    bottom: calc(110px + var(--gn-safe-bottom));
+    max-width: 14ch;
   }
 
-  .office-film-hud {
+  .office-film-feature-title {
+    font-size: clamp(34px, 11vw, 52px);
+  }
+
+  .office-film-hud-feature {
     left: var(--gn-gutter-left);
     right: var(--gn-gutter-right);
     justify-content: space-between;
@@ -1636,8 +1657,7 @@ body::before {
   .hero-copy > *,
   .manifesto-haze,
   .agent-launcher-pulse,
-  .service-cinema-slot,
-  .office-film-placeholder-glow {
+  .service-cinema-slot {
     animation: none !important;
     transition: none !important;
   }
