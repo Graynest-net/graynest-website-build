@@ -35,6 +35,21 @@ NEXT_PUBLIC_AGENT_WHATSAPP=970...
 
 3. Restart the dev server. The floating pill and “Talk to our agent” CTAs open the same drawer.
 
+### Office scroll film (day / night)
+
+Pinned `/ai-agents` section that **scrubs a video while you scroll**. Light mode shows the daylight people plate; dark mode shows the night persona plate. Same camera path on both.
+
+Drop masters into `public/media/`:
+
+| File | Theme |
+|---|---|
+| `home.office.day.mp4` | Light — daylight office with people |
+| `home.office.night.mp4` | Dark — warm night office with GrayNest persona |
+
+Generation prompts and motion notes: `content/media-manifest.json`.
+
+Until files exist, branded placeholders still scrub and theme-switch.
+
 ## Learn More
 
 To learn more, take a look at the following resources:

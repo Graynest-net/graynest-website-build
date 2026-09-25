@@ -1,0 +1,40 @@
+{
+  "slots": [
+    {
+      "id": "home.office.day",
+      "page": "/ai-agents",
+      "section": "office-scroll-film",
+      "type": "video",
+      "register": "world",
+      "status": "generate",
+      "aspect": "16:9",
+      "mobileAspect": "9:16",
+      "size": "1920x1080",
+      "duration": "8s",
+      "loop": false,
+      "alt": "Daytime GrayNest agency office with people working at desks under natural daylight",
+      "focus": "Wide tracking shot through an open-plan software agency; left third clear for typography overlay",
+      "prompt": "Cinematic slow dolly / tracking shot through a contemporary software agency open-plan office in daylight. Multiple desks with monitors, laptops, sticky notes, and a few hexagon brand accents in charcoal and off-white. Diverse young professionals working calmly — coding, reviewing designs, talking quietly in pairs. Large windows with soft natural daylight, gentle sun shafts, dust motes, shallow depth of field, Canon EOS 5D look, 35mm f/1.8, natural white balance, subtle film grain. Brand red only as tiny practical LED accents on a monitor bezel or desk lamp, never as a wash. Same locked camera path for a night counterpart: starts at the entrance looking down the aisle, glides between desks toward a glass meeting room at the far end. No text in frame. Photoreal, premium agency atmosphere, Palestine-adjacent modern office architecture without landmark clichés.",
+      "motion": "Continuous slow forward tracking shot, ~8 seconds, steady gimbal, same path every time. Subtle parallax on foreground monitors. People micro-movements only — typing, turning heads — no walk-ins that break continuity with the night plate.",
+      "negative": "neon cyberpunk, purple glow, empty office, horror, distorted faces, logos of other brands, on-screen UI text, shaky cam, jump cuts, night lighting"
+    },
+    {
+      "id": "home.office.night",
+      "page": "/ai-agents",
+      "section": "office-scroll-film",
+      "type": "video",
+      "register": "world",
+      "status": "generate",
+      "aspect": "16:9",
+      "mobileAspect": "9:16",
+      "size": "1920x1080",
+      "duration": "8s",
+      "loop": false,
+      "alt": "Same agency office at night, soft warm light, GrayNest persona robot working the desks",
+      "focus": "Identical camera path to home.office.day; persona is the primary moving subject",
+      "prompt": "Same contemporary software agency office as the day plate, identical layout and camera path, but night. City glow through the windows, soft warm practical lamps, dim desk lights, charcoal shadows, gentle film grain. No human staff. Instead the GrayNest persona robot — hexagon-inspired soft off-white panels, charcoal seams, a small red-orange core glow in the chest — moves calmly through the aisle and works at desks: checking a monitor, adjusting a laptop, pausing at a second station. Soft-shaded System look for the robot, World look for the room. Warm tungsten practicals plus one motivated red core glow as accent only. Photoreal room + stylized persona that feels built from hex panels. No on-screen text.",
+      "motion": "Exact same slow forward tracking path and timing as home.office.day (~8s). Persona walks/works with confident, unhurried motion matching the dolly. Keep the robot fully in frame without crossing the left typography safe area until the final third.",
+      "negative": "crowded humans, daylight, cool blue cyberpunk, purple neon, horror, monster robot, cheap CGI plastic, brand logos, on-screen text, different camera path from the day version"
+    }
+  ]
+}

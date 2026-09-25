@@ -27,17 +27,17 @@ export function MediaSlot({
     throw new Error(`MediaSlot received invalid aspect ratio: ${aspect}`)
   }
 
-  const gradient =
-    register === "system"
-      ? "radial-gradient(60% 50% at 50% 40%, #232326 0%, #16161a 70%, #111114 100%)"
-      : "radial-gradient(55% 48% at 55% 42%, #2a2624 0%, #1b1b1f 48%, #16161a 78%, #111114 100%)"
-
   return (
     <div
-      className={`media-slot relative overflow-hidden rounded-2xl ${className}`.trim()}
+      className={[
+        "media-slot relative overflow-hidden rounded-2xl",
+        register === "system" ? "media-slot-system" : "media-slot-world",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
       style={{
         aspectRatio: `${aspectRatio} / 1`,
-        background: gradient,
       }}
       role="img"
       aria-label={alt}
