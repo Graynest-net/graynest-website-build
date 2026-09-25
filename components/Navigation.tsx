@@ -40,7 +40,7 @@ export function Navigation() {
       }`}
       style={{ height: '72px' }}
     >
-      <div className="h-full px-8 max-w-7xl mx-auto flex items-center justify-between">
+      <div className="h-full mx-auto flex w-full max-w-[1440px] items-center justify-between px-[var(--gn-page-gutter)]">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <img

@@ -1,128 +1,190 @@
-import { Navigation } from '@/components/Navigation'
-import { Footer } from '@/components/Footer'
-import { Headline } from '@/components/Headline'
-import { CoreGlow } from '@/components/CoreGlow'
-import Link from 'next/link'
+import { Navigation } from "@/components/Navigation"
+import { Footer } from "@/components/Footer"
+import { AgentLauncher } from "@/components/AgentLauncher"
+import { TwoDoorHero } from "@/components/TwoDoorHero"
+import { ManifestoScrub } from "@/components/ManifestoScrub"
+import { Reveal } from "@/components/Reveal"
+import { MagneticButton } from "@/components/MagneticButton"
+import { MediaSlot } from "@/components/MediaSlot"
+import { HexGrid } from "@/components/HexGrid"
+import Link from "next/link"
 
+interface ServiceCard {
+  eyebrow: string
+  titleLine1: string
+  titleLine2: string
+  accent: string
+  bullets: string[]
+  href: string
+  cta: string
+  mediaId: string
+  alt: string
+}
+
+const SERVICE_CARDS: ServiceCard[] = [
+  {
+    eyebrow: "01 · AI AGENTS",
+    titleLine1: "YOUR SHOP CLOSES AT 9.",
+    titleLine2: "Your agent doesn't.",
+    accent: "doesn't.",
+    bullets: [
+      "Palestinian Arabic & English",
+      "Phone, WhatsApp, Instagram, web",
+      "Books, sells, hands off to your team",
+    ],
+    href: "/ai-agents",
+    cta: "Explore AI Agents →",
+    mediaId: "home.service.agents.card",
+    alt: "Shop floor after hours with a glowing phone",
+  },
+  {
+    eyebrow: "02 · SOFTWARE + AI",
+    titleLine1: "THE BRIEF STOPS HERE.",
+    titleLine2: "The build starts.",
+    accent: "starts.",
+    bullets: [
+      "Web, mobile, backend, internal tools",
+      "AI where it earns its keep",
+      "Senior engineers who ship",
+    ],
+    href: "/software-engineering",
+    cta: "Explore Software →",
+    mediaId: "home.service.software.card",
+    alt: "Product war room with a red practical light",
+  },
+]
+
+/**
+ * Renders the house-style accent wrap inside a service card headline.
+ */
+function ServiceTitle({
+  line1,
+  line2,
+  accent,
+}: {
+  line1: string
+  line2: string
+  accent: string
+}) {
+  const accentIndex = line2.toLowerCase().indexOf(accent.toLowerCase())
+
+  if (accentIndex < 0) {
+    return (
+      <h3 className="service-card-title">
+        <span>{line1}</span>
+        <span>{line2}</span>
+      </h3>
+    )
+  }
+
+  const before = line2.slice(0, accentIndex)
+  const matched = line2.slice(accentIndex, accentIndex + accent.length)
+  const after = line2.slice(accentIndex + accent.length)
+
+  return (
+    <h3 className="service-card-title">
+      <span>{line1}</span>
+      <span>
+        {before}
+        <span className="accent-word">{matched}</span>
+        {after}
+      </span>
+    </h3>
+  )
+}
+
+/**
+ * Home page: two-door hero, manifesto scrub, cinematic service doors, closing CTA.
+ */
 export default function Home() {
   return (
-    <main className="bg-[#16161a]">
+    <main id="main" className="bg-[var(--gn-ink-900)]">
       <Navigation />
+      <TwoDoorHero />
+      <ManifestoScrub />
 
-      {/* Hero section */}
-      <section className="hero-section pt-20 relative overflow-hidden">
+      <section className="section-padding section-cinematic relative overflow-hidden">
         <div className="absolute inset-0 falloff-gradient -z-10" />
-        
-        <div className="grid-12 relative z-10">
-          <div className="col-span-full md:col-span-8 space-y-8 hero-copy">
-            <Headline
-              line1="WE DESIGN, BUILD"
-              line2="AND SHIP WITH AI."
-              accent="AI."
-            />
-            <p className="body-lg max-w-2xl">
-              Custom software for startups and enterprises. AI agents that answer calls, texts, and chat in Palestinian Arabic and English.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="btn-primary">
-                Start a project
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </button>
-              <button className="btn-glass flex items-center gap-2">
-                <CoreGlow size={12} pulse={false} />
-                Ask GrayNest
-              </button>
-            </div>
-          </div>
-        </div>
+        <HexGrid opacity={0.03} />
 
-        {/* Right side media */}
-        <div className="hero-orb pointer-events-none absolute right-[-18%] top-[18%] h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle_at_center,rgba(234,46,0,.28),rgba(234,46,0,.08)_35%,transparent_70%)] blur-[2px] md:right-[-6%] md:top-1/2 md:h-[680px] md:w-[680px] md:-translate-y-1/2" aria-hidden="true" />
-      </section>
-
-      {/* Two services teaser */}
-      <section className="section-padding relative overflow-hidden">
         <div className="grid-12">
-          <div className="col-span-full space-y-4 mb-16">
-            <h2 className="h2">TWO WAYS TO WORK.</h2>
+          <div className="col-span-full mb-14 md:mb-20">
+            <Reveal>
+              <p className="micro mb-5">TWO DOORS</p>
+              <h2 className="h2">TWO WAYS TO WORK.</h2>
+            </Reveal>
           </div>
 
-          {/* AI Agents card */}
-          <div className="col-span-full md:col-span-6 feature-card reveal-card group cursor-pointer">
-            <div className="space-y-4">
-              <CoreGlow size={24} pulse={true} />
-              <h3 className="h3">AI Agents</h3>
-              <p className="body">
-                Voice and chat agents that handle calls, WhatsApp, Instagram, and site chat. Speak Palestinian Arabic and English.
-              </p>
-              <Link href="/ai-agents" className="inline-flex items-center gap-2 text-white/60 hover:text-white transition group">
-                Learn more
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="group-hover:translate-x-1 transition">
-                  <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </Link>
-            </div>
-          </div>
-
-          {/* Software Engineering card */}
-          <div className="col-span-full md:col-span-6 feature-card reveal-card group cursor-pointer">
-            <div className="space-y-4">
-              <CoreGlow size={24} pulse={true} />
-              <h3 className="h3">Software Engineering</h3>
-              <p className="body">
-                Custom product engineering with AI built in where it pays. Web, mobile, backend, internal tools for ambitious teams.
-              </p>
-              <Link href="/software-engineering" className="inline-flex items-center gap-2 text-white/60 hover:text-white transition group">
-                Learn more
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="group-hover:translate-x-1 transition">
-                  <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </Link>
-            </div>
-          </div>
+          {SERVICE_CARDS.map((card, index) => (
+            <Reveal
+              key={card.href}
+              className="col-span-full md:col-span-6"
+              delay={index * 0.12}
+            >
+              <article className="service-cinema-card group">
+                <div className="service-cinema-media">
+                  <MediaSlot
+                    id={card.mediaId}
+                    type="image"
+                    aspect="4:5"
+                    register="world"
+                    alt={card.alt}
+                    className="service-cinema-slot"
+                  />
+                </div>
+                <div className="service-cinema-body">
+                  <p className="micro">{card.eyebrow}</p>
+                  <ServiceTitle
+                    line1={card.titleLine1}
+                    line2={card.titleLine2}
+                    accent={card.accent}
+                  />
+                  <ul className="service-cinema-bullets">
+                    {card.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                  <Link href={card.href} className="btn-glass service-cinema-cta">
+                    {card.cta}
+                  </Link>
+                </div>
+              </article>
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      {/* Call to action section */}
-      <section className="section-padding relative overflow-hidden border-t border-white/8">
+      <section className="section-padding relative overflow-hidden border-t border-[var(--gn-line)]">
         <div className="absolute inset-0 falloff-gradient -z-10" />
-        
+        <div className="manifesto-haze manifesto-haze-center" aria-hidden="true" />
+
         <div className="grid-12 relative z-10">
-          <div className="col-span-full md:col-span-8 mx-auto text-center">
+          <Reveal className="col-span-full md:col-span-8 md:col-start-3 text-center">
             <h2 className="h2 mb-8">
               READY TO
               <br />
-              <span className="accent-word">TALK?</span>
+              <span className="accent-word">talk?</span>
             </h2>
             <p className="body-lg mx-auto mb-12">
-              Start a project, book a demo, or ask our agent a question. Let&apos;s build something together.
+              Start a project, book a demo, or ask our agent a question.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn-primary">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <MagneticButton href="/contact">
                 Start a project
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
-              </button>
-              <Link href="/contact" className="btn-glass">
-                Book a call
+              </MagneticButton>
+              <Link href="/contact" className="btn-glass" data-event="cta_demo">
+                Book a demo
               </Link>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <Footer />
-
-      {/* Live agent launcher - placeholder */}
-      <div className="fixed bottom-8 right-8 z-50">
-        <button className="btn-glass flex items-center gap-2 animate-pulse" style={{ animationDuration: '2.4s' }}>
-          <CoreGlow size={12} pulse={true} />
-          Ask GrayNest
-        </button>
-      </div>
+      <AgentLauncher />
     </main>
   )
 }

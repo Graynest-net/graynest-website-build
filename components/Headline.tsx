@@ -5,18 +5,30 @@ export interface HeadlineProps {
   className?: string
 }
 
-export function Headline({ line1, line2, accent, className = '' }: HeadlineProps) {
-  // Find and wrap the accent word in line2
-  const parts = line2.split(new RegExp(`(${accent})`, 'i'))
-  
+/**
+ * House-style two-line headline. Finds the accent substring in line 2 and wraps it.
+ */
+export function Headline({ line1, line2, accent, className = "" }: HeadlineProps) {
+  if (!line1.trim() || !line2.trim() || !accent.trim()) {
+    throw new Error("Headline requires non-empty line1, line2, and accent values.")
+  }
+
+  const accentIndex = line2.toLowerCase().indexOf(accent.toLowerCase())
+
   return (
-    <div className={`space-y-2 ${className}`}>
+    <div className={`headline-block ${className}`.trim()}>
       <h1 className="display-line">{line1}</h1>
       <h1 className="display-line">
-        {parts.map((part, i) => 
-          part.toLowerCase() === accent.toLowerCase() ? 
-            <span key={i} className="accent-word">{part}</span> : 
-            <span key={i}>{part}</span>
+        {accentIndex < 0 ? (
+          line2
+        ) : (
+          <>
+            {line2.slice(0, accentIndex)}
+            <span className="accent-word">
+              {line2.slice(accentIndex, accentIndex + accent.length)}
+            </span>
+            {line2.slice(accentIndex + accent.length)}
+          </>
         )}
       </h1>
     </div>
