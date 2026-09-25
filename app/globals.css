@@ -1467,6 +1467,163 @@ body::before {
   }
 }
 
+/* Office scroll film — day/night theme plates scrubbed by scroll */
+.office-film {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--gn-ink-950);
+  color: var(--gn-bone-50);
+}
+
+.office-film-stage {
+  position: absolute;
+  inset: 0;
+}
+
+.office-film-plate {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.55s var(--gn-ease-enter);
+  will-change: opacity;
+}
+
+.office-film-plate.is-active {
+  opacity: 1;
+}
+
+.office-film-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.office-film-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: clamp(24px, 4vw, 48px);
+  overflow: hidden;
+}
+
+.office-film-placeholder-day {
+  background: var(--gn-media-world);
+}
+
+.office-film-placeholder-night {
+  background: radial-gradient(70% 60% at 60% 40%, #2a2420 0%, #1a1816 45%, #111114 100%);
+}
+
+[data-theme="light"] .office-film-placeholder-night {
+  background: radial-gradient(70% 60% at 60% 40%, #3a322c 0%, #241f1c 50%, #161310 100%);
+}
+
+.office-film-placeholder-glow {
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(circle at 55% 45%, var(--gn-red-haze) 0%, transparent 48%);
+  animation: media-glow-drift 10s ease-in-out infinite;
+}
+
+.office-film-placeholder-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 36ch;
+  color: var(--gn-text-2);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.office-film-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--gn-ink-950) 72%, transparent) 0%, transparent 52%),
+    linear-gradient(180deg, color-mix(in srgb, var(--gn-ink-950) 35%, transparent) 0%, transparent 28%, color-mix(in srgb, var(--gn-ink-950) 55%, transparent) 100%);
+}
+
+.office-film-copy {
+  position: relative;
+  z-index: 2;
+  min-height: 100svh;
+  display: grid;
+  align-items: end;
+  padding-block: calc(var(--gn-nav-height) + var(--gn-safe-top) + 48px) calc(120px + var(--gn-safe-bottom));
+}
+
+.office-film-copy-inner {
+  max-width: 18ch;
+}
+
+.office-film-eyebrow {
+  margin-bottom: 18px;
+}
+
+.office-film-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12em;
+}
+
+.office-film-title-line {
+  display: block;
+}
+
+.office-film-support {
+  margin-top: 20px;
+  max-width: 34ch;
+}
+
+.office-film-hud {
+  position: absolute;
+  right: var(--gn-gutter-right);
+  bottom: calc(28px + var(--gn-safe-bottom));
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.office-film-progress {
+  width: min(180px, 28vw);
+  height: 2px;
+  border-radius: 999px;
+  background: var(--gn-line-2);
+  overflow: hidden;
+}
+
+.office-film-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  background: var(--gn-red);
+}
+
+@media (max-width: 768px) {
+  .office-film-copy {
+    align-items: end;
+    padding-bottom: calc(148px + var(--gn-safe-bottom));
+  }
+
+  .office-film-hud {
+    left: var(--gn-gutter-left);
+    right: var(--gn-gutter-right);
+    justify-content: space-between;
+  }
+
+  .office-film-progress {
+    flex: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   body::before {
     animation: none;
@@ -1479,7 +1636,8 @@ body::before {
   .hero-copy > *,
   .manifesto-haze,
   .agent-launcher-pulse,
-  .service-cinema-slot {
+  .service-cinema-slot,
+  .office-film-placeholder-glow {
     animation: none !important;
     transition: none !important;
   }
