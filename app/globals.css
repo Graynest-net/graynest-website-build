@@ -1,0 +1,320 @@
+@import 'tailwindcss';
+
+/* GrayNest Design System */
+:root {
+  /* Charcoal (dominant - 50%) */
+  --gn-ink-950: #111114;
+  --gn-ink-900: #16161a;
+  --gn-ink-850: #1b1b1f;
+  --gn-ink-800: #202024;
+  --gn-ink-700: #232326;
+  --gn-ink-600: #2b2b2f;
+
+  /* Off-white (secondary - 30%) */
+  --gn-bone-50: #fafafa;
+  --gn-bone-100: #edebe7;
+  --gn-bone-300: #bdbab4;
+  --gn-text-2: rgba(250, 250, 250, 0.66);
+  --gn-text-3: rgba(250, 250, 250, 0.42);
+  --gn-line: rgba(250, 250, 250, 0.08);
+  --gn-line-2: rgba(250, 250, 250, 0.14);
+
+  /* Brand red (accent - 20% max) */
+  --gn-red: #ea2e00;
+  --gn-red-hot: #ff4a1c;
+  --gn-red-glow: rgba(234, 46, 0, 0.38);
+  --gn-red-haze: rgba(234, 46, 0, 0.1);
+
+  /* Glass */
+  --gn-glass-bg: rgba(250, 250, 250, 0.06);
+  --gn-glass-border: rgba(250, 250, 250, 0.14);
+  --gn-glass-blur: 18px;
+
+  /* Typography */
+  --font-satoshi: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-alexandria: 'Alexandria', serif;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Alexandria';
+  src: url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;900&display=swap');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--gn-ink-900);
+  color: var(--gn-bone-50);
+  font-family: var(--font-satoshi);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Film grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="4" seed="1" /></filter><rect width="100" height="100" fill="white" filter="url(%23noise)" opacity="0.05"/></svg>');
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: overlay;
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-2px, -2px); }
+  20% { transform: translate(-2px, 2px); }
+  30% { transform: translate(2px, -2px); }
+  40% { transform: translate(2px, 2px); }
+  50% { transform: translate(-1px, -1px); }
+  60% { transform: translate(-1px, 1px); }
+  70% { transform: translate(1px, -1px); }
+  80% { transform: translate(1px, 1px); }
+  90% { transform: translate(0, 0); }
+  100% { transform: translate(0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+    opacity: 0.03;
+  }
+}
+
+/* Display line */
+.display-line {
+  font-family: var(--font-satoshi);
+  font-weight: 900;
+  font-size: clamp(48px, 8.4vw, 168px);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: var(--gn-bone-50);
+}
+
+/* Accent word in display */
+.accent-word {
+  font-family: var(--font-satoshi);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--gn-red);
+  text-shadow: 0 0 40px var(--gn-red-glow);
+}
+
+/* Section title H2 */
+.h2 {
+  font-family: var(--font-satoshi);
+  font-weight: 900;
+  font-size: clamp(36px, 5vw, 88px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* H3 */
+.h3 {
+  font-family: var(--font-satoshi);
+  font-weight: 700;
+  font-size: clamp(22px, 2vw, 32px);
+  line-height: 1.15;
+}
+
+/* Body Large */
+.body-lg {
+  font-family: var(--font-satoshi);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.55;
+  max-width: 60ch;
+  color: var(--gn-text-2);
+}
+
+/* Body */
+.body {
+  font-family: var(--font-satoshi);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 64ch;
+  color: var(--gn-text-2);
+}
+
+/* Micro/eyebrow */
+.micro {
+  font-family: var(--font-satoshi);
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gn-text-3);
+}
+
+/* Primary Button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 28px;
+  background-color: var(--gn-red);
+  color: var(--gn-bone-50);
+  font-family: var(--font-satoshi);
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background-color: var(--gn-red-hot);
+  box-shadow: 0 0 0 6px rgba(234, 46, 0, 0.12), 0 10px 40px var(--gn-red-glow);
+}
+
+.btn-primary svg {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:hover svg {
+  transform: translateX(4px);
+}
+
+/* Glass Button */
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 20px;
+  background-color: var(--gn-glass-bg);
+  backdrop-filter: blur(var(--gn-glass-blur));
+  border: 1px solid var(--gn-glass-border);
+  color: var(--gn-bone-50);
+  font-family: var(--font-satoshi);
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn-glass:hover {
+  border-color: var(--gn-line-2);
+}
+
+/* Falloff gradient */
+.falloff-gradient {
+  background: radial-gradient(60% 50% at 50% 40%, var(--gn-ink-700) 0%, var(--gn-ink-900) 70%, var(--gn-ink-950) 100%);
+}
+
+/* Grid layout */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(16px, 2vw, 32px);
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 8vw, 128px);
+}
+
+/* Section padding */
+.section-padding {
+  padding: clamp(96px, 14vh, 200px) 0;
+}
+
+.hero-section {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Feature Card */
+.feature-card {
+  background-color: var(--gn-ink-800);
+  border: 1px solid var(--gn-line);
+  border-radius: 20px;
+  padding: 32px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feature-card:hover {
+  border-color: var(--gn-line-2);
+  transform: translateY(-4px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .display-line {
+    font-size: clamp(32px, 7vw, 88px);
+  }
+
+  .h2 {
+    font-size: clamp(28px, 4vw, 64px);
+  }
+
+  .section-padding {
+    padding: clamp(64px, 12vh, 120px) 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
