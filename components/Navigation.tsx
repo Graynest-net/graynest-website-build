@@ -2,9 +2,10 @@
 
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { ThemeToggle } from "@/components/theme/ThemeToggle"
 
 /**
- * Fixed site header with brand gutters and iOS safe-area insets.
+ * Fixed site header with brand gutters, theme toggle, and iOS safe-area insets.
  */
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
@@ -72,28 +73,30 @@ export function Navigation() {
           </div>
         </div>
 
-        <Link href="/contact" className="btn-primary nav-cta site-nav-cta">
-          Start a project
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-        </Link>
-
-        <button
-          type="button"
-          className="site-nav-menu-btn"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path
-              d={menuOpen ? "M5 5l14 14M19 5L5 19" : "M3 12h18M3 6h18M3 18h18"}
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-        </button>
+        <div className="site-nav-actions">
+          <ThemeToggle />
+          <Link href="/contact" className="btn-primary nav-cta site-nav-cta">
+            Start a project
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </Link>
+          <button
+            type="button"
+            className="site-nav-menu-btn"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path
+                d={menuOpen ? "M5 5l14 14M19 5L5 19" : "M3 12h18M3 6h18M3 18h18"}
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
 
       <div
@@ -111,9 +114,12 @@ export function Navigation() {
             Start a project
           </Link>
         </div>
-        <a className="mobile-menu-contact" href="mailto:hello@graynest.co">
-          hello@graynest.co
-        </a>
+        <div className="mobile-menu-footer">
+          <ThemeToggle />
+          <a className="mobile-menu-contact" href="mailto:hello@graynest.co">
+            hello@graynest.co
+          </a>
+        </div>
       </div>
     </header>
   )

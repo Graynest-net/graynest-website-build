@@ -101,7 +101,7 @@ export default function AIAgentsPage() {
               <div dir="rtl" lang="ar" className="rounded-xl bg-[var(--gn-ink-600)] p-5 text-lg">
                 أهلين! كيف فيني أساعدك اليوم؟
               </div>
-              <div className="ml-12 rounded-xl bg-[var(--gn-red)] p-5 text-white">
+              <div className="ml-12 rounded-xl bg-[var(--gn-red)] p-5 text-[var(--gn-on-red)]">
                 I&apos;d like to book a table for tonight.
               </div>
               <div className="micro flex items-center gap-2">
