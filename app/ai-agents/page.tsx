@@ -5,7 +5,8 @@ import { MediaSlot } from "@/components/MediaSlot"
 import { CoreGlow } from "@/components/CoreGlow"
 import { Reveal } from "@/components/Reveal"
 import { MagneticButton } from "@/components/MagneticButton"
-import { AgentLauncher } from "@/components/AgentLauncher"
+import { TalkToAgentButton } from "@/components/agent/TalkToAgentButton"
+import { OfficeScrollFilm } from "@/components/OfficeScrollFilm"
 import { HexGrid } from "@/components/HexGrid"
 import Link from "next/link"
 
@@ -33,10 +34,7 @@ export default function AIAgentsPage() {
               They speak your language and never miss a call.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-4">
-              <MagneticButton type="button">
-                Talk to our agent
-                <span aria-hidden="true">→</span>
-              </MagneticButton>
+              <TalkToAgentButton />
               <Link href="/contact" className="btn-glass">
                 Book a demo
               </Link>
@@ -53,6 +51,8 @@ export default function AIAgentsPage() {
           </Reveal>
         </div>
       </section>
+
+      <OfficeScrollFilm />
 
       <section className="section-padding relative overflow-hidden border-t border-[var(--gn-line)]">
         <div className="grid-12">
@@ -104,7 +104,7 @@ export default function AIAgentsPage() {
               <div dir="rtl" lang="ar" className="rounded-xl bg-[var(--gn-ink-600)] p-5 text-lg">
                 أهلين! كيف فيني أساعدك اليوم؟
               </div>
-              <div className="ml-12 rounded-xl bg-[var(--gn-red)] p-5 text-white">
+              <div className="ml-12 rounded-xl bg-[var(--gn-red)] p-5 text-[var(--gn-on-red)]">
                 I&apos;d like to book a table for tonight.
               </div>
               <div className="micro flex items-center gap-2">
@@ -137,7 +137,6 @@ export default function AIAgentsPage() {
       </section>
 
       <Footer />
-      <AgentLauncher />
     </main>
   )
 }

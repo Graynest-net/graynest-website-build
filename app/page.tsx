@@ -1,6 +1,5 @@
 import { Navigation } from "@/components/Navigation"
 import { Footer } from "@/components/Footer"
-import { AgentLauncher } from "@/components/AgentLauncher"
 import { TwoDoorHero } from "@/components/TwoDoorHero"
 import { ManifestoScrub } from "@/components/ManifestoScrub"
 import { Reveal } from "@/components/Reveal"
@@ -184,7 +183,6 @@ export default function Home() {
       </section>
 
       <Footer />
-      <AgentLauncher />
     </main>
   )
 }

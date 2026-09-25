@@ -3,7 +3,6 @@ import { Footer } from "@/components/Footer"
 import { CoreGlow } from "@/components/CoreGlow"
 import { Reveal } from "@/components/Reveal"
 import { MagneticButton } from "@/components/MagneticButton"
-import { AgentLauncher } from "@/components/AgentLauncher"
 import { HexGrid } from "@/components/HexGrid"
 
 /**
@@ -56,7 +55,6 @@ export default function ContactPage() {
         </div>
       </section>
       <Footer />
-      <AgentLauncher />
     </main>
   )
 }
