@@ -180,7 +180,7 @@ export function OfficeScrollFilm() {
     <section
       ref={sectionRef}
       className="office-film"
-      aria-label="GrayNest office day and night scroll film"
+      aria-label="GrayNest agents office day and night scroll film"
     >
       <div className="office-film-stage" aria-hidden={!availability.day && !availability.night}>
         <div className={`office-film-plate office-film-day ${isLight ? "is-active" : ""}`.trim()}>

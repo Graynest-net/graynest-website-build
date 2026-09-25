@@ -37,7 +37,7 @@ NEXT_PUBLIC_AGENT_WHATSAPP=970...
 
 ### Office scroll film (day / night)
 
-Pinned home section that **scrubs a video while you scroll**. Light mode shows the daylight people plate; dark mode shows the night persona plate. Same camera path on both.
+Pinned `/ai-agents` section that **scrubs a video while you scroll**. Light mode shows the daylight people plate; dark mode shows the night persona plate. Same camera path on both.
 
 Drop masters into `public/media/`:
 

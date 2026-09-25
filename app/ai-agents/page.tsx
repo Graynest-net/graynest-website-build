@@ -6,6 +6,7 @@ import { CoreGlow } from "@/components/CoreGlow"
 import { Reveal } from "@/components/Reveal"
 import { MagneticButton } from "@/components/MagneticButton"
 import { TalkToAgentButton } from "@/components/agent/TalkToAgentButton"
+import { OfficeScrollFilm } from "@/components/OfficeScrollFilm"
 import { HexGrid } from "@/components/HexGrid"
 import Link from "next/link"
 
@@ -50,6 +51,8 @@ export default function AIAgentsPage() {
           </Reveal>
         </div>
       </section>
+
+      <OfficeScrollFilm />
 
       <section className="section-padding relative overflow-hidden border-t border-[var(--gn-line)]">
         <div className="grid-12">

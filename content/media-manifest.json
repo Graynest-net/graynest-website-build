@@ -2,7 +2,7 @@
   "slots": [
     {
       "id": "home.office.day",
-      "page": "/",
+      "page": "/ai-agents",
       "section": "office-scroll-film",
       "type": "video",
       "register": "world",
@@ -20,7 +20,7 @@
     },
     {
       "id": "home.office.night",
-      "page": "/",
+      "page": "/ai-agents",
       "section": "office-scroll-film",
       "type": "video",
       "register": "world",

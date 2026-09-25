@@ -2,7 +2,6 @@ import { Navigation } from "@/components/Navigation"
 import { Footer } from "@/components/Footer"
 import { TwoDoorHero } from "@/components/TwoDoorHero"
 import { ManifestoScrub } from "@/components/ManifestoScrub"
-import { OfficeScrollFilm } from "@/components/OfficeScrollFilm"
 import { Reveal } from "@/components/Reveal"
 import { MagneticButton } from "@/components/MagneticButton"
 import { MediaSlot } from "@/components/MediaSlot"
@@ -102,7 +101,6 @@ export default function Home() {
       <Navigation />
       <TwoDoorHero />
       <ManifestoScrub />
-      <OfficeScrollFilm />
 
       <section className="section-padding section-cinematic relative overflow-hidden">
         <div className="absolute inset-0 falloff-gradient -z-10" />
