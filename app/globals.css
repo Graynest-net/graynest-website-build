@@ -233,8 +233,7 @@ body {
   background: var(--gn-nav-glass);
   -webkit-backdrop-filter: blur(18px) saturate(1.35);
   backdrop-filter: blur(18px) saturate(1.35);
-  border-bottom: 1px solid transparent;
-  transition: opacity var(--gn-dur-s) ease, border-color var(--gn-dur-s) ease;
+  transition: opacity var(--gn-dur-s) ease;
 }
 
 .site-nav-hidden {
@@ -243,7 +242,6 @@ body {
 
 .site-nav-glass::before {
   opacity: 1;
-  border-bottom-color: var(--gn-line);
 }
 
 .site-nav-inner {
@@ -713,17 +711,17 @@ body::before {
 
 .feature-card {
   background-color: var(--gn-ink-800);
-  border: 1px solid var(--gn-line);
+  border: 0;
   border-radius: 20px;
   padding: clamp(24px, 3vw, 36px);
-  transition: border-color var(--gn-dur-s) var(--gn-ease-enter),
-    transform var(--gn-dur-s) var(--gn-ease-enter),
-    box-shadow var(--gn-dur-s) var(--gn-ease-enter);
+  transition: transform var(--gn-dur-s) var(--gn-ease-enter),
+    box-shadow var(--gn-dur-s) var(--gn-ease-enter),
+    background-color var(--gn-dur-s) var(--gn-ease-enter);
 }
 
 .feature-card:hover {
-  border-color: var(--gn-line-2);
   transform: translateY(-4px);
+  background-color: var(--gn-ink-700);
   box-shadow: 0 18px 48px var(--gn-shadow);
 }
 
@@ -937,15 +935,13 @@ body::before {
   overflow: hidden;
   border-radius: 24px;
   background: var(--gn-ink-800);
-  border: 1px solid var(--gn-line);
+  border: 0;
   transition: transform var(--gn-dur-s) var(--gn-ease-enter),
-    border-color var(--gn-dur-s) var(--gn-ease-enter),
     box-shadow var(--gn-dur-s) var(--gn-ease-enter);
 }
 
 .service-cinema-card:hover {
   transform: translateY(-6px);
-  border-color: var(--gn-line-2);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
 }
 
@@ -1095,7 +1091,7 @@ body::before {
   background: var(--gn-drawer-bg);
   -webkit-backdrop-filter: blur(22px) saturate(1.2);
   backdrop-filter: blur(22px) saturate(1.2);
-  border-left: 1px solid var(--gn-line-2);
+  border-left: 0;
   box-shadow: -24px 0 80px var(--gn-shadow);
   transform: translateX(110%);
   transition: transform 0.5s var(--gn-ease-enter);
@@ -1139,7 +1135,7 @@ body::before {
   padding: 4px;
   border-radius: 999px;
   background: rgba(250, 250, 250, 0.04);
-  border: 1px solid var(--gn-line);
+  border: 0;
 }
 
 .agent-mode-tab {
@@ -1183,7 +1179,7 @@ body::before {
   gap: 10px;
   padding: 14px;
   border-radius: 18px;
-  border: 1px solid var(--gn-line);
+  border: 0;
   background: color-mix(in srgb, var(--gn-ink-950) 70%, transparent);
 }
 
@@ -1256,8 +1252,10 @@ body::before {
 
 .agent-drawer-contacts {
   margin-top: auto;
-  padding-top: 8px;
-  border-top: 1px solid var(--gn-line);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .agent-contact-row {
@@ -1269,7 +1267,6 @@ body::before {
 @media (max-width: 768px) {
   .agent-drawer {
     width: 100%;
-    border-left: 0;
   }
 }
 

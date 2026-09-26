@@ -153,7 +153,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-padding relative overflow-hidden border-t border-[var(--gn-line)]">
+      <section className="section-padding relative overflow-hidden">
         <div className="absolute inset-0 falloff-gradient -z-10" />
         <div className="manifesto-haze manifesto-haze-center" aria-hidden="true" />
 
