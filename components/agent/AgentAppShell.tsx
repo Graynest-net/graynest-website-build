@@ -47,7 +47,7 @@ function AgentLauncherButton() {
         aria-label="Ask GrayNest"
         onClick={() => openAgent("talk")}
       >
-        <CoreGlow size={12} pulse={true} />
+        <CoreGlow size={12} />
         Ask GrayNest
       </button>
     </div>

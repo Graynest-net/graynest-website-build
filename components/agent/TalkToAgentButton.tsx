@@ -17,10 +17,7 @@ export function TalkToAgentButton({
   mode = "talk",
   className = "",
   children = (
-    <>
-      Talk to our agent
-      <span aria-hidden="true">→</span>
-    </>
+    <>Talk to our agent</>
   ),
 }: TalkToAgentButtonProps) {
   const { openAgent } = useAgent()

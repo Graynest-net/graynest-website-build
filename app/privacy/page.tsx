@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer"
 
 export default function PrivacyPage() {
   return (
-    <main className="bg-[var(--gn-ink-900)]">
+    <main id="main">
       <Navigation />
       <article className="section-padding max-w-4xl mx-auto px-[var(--gn-gutter-left)]">
         <p className="micro mb-6">GRAYNEST / PRIVACY</p>

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { HexGrid } from "@/components/HexGrid"
+
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -110,7 +110,7 @@ export function ManifestoScrub() {
   return (
     <section ref={sectionRef} className="manifesto-section" aria-label="GrayNest manifesto">
       <div className="absolute inset-0 falloff-gradient" />
-      <HexGrid opacity={0.045} />
+
       <div className="manifesto-haze" aria-hidden="true" />
 
       <div className="grid-12 relative z-10 h-full items-center">

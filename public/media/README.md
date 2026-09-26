@@ -1,6 +1,3 @@
-# Drop generated office film masters here (names must match):
-# - home.office.day.mp4 (+ home.office.day.poster.webp)
-# - home.office.night.mp4 (+ home.office.night.poster.webp)
-#
-# Specs: 1920x1080, ~8s, H.264, same camera path for both.
-# Prompts live in /content/media-manifest.json
+# Delivered media, named by slot id (see /content/media-manifest.json).
+# Images: <slot.id>.webp, registered in /content/media-assets.ts so MediaSlot renders them.
+# Office film: home.office.day.mp4 / home.office.night.mp4 (+ .poster.webp), 1920x1080, ~8s, H.264, same camera path.

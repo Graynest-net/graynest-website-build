@@ -5,7 +5,7 @@ import { ManifestoScrub } from "@/components/ManifestoScrub"
 import { Reveal } from "@/components/Reveal"
 import { MagneticButton } from "@/components/MagneticButton"
 import { MediaSlot } from "@/components/MediaSlot"
-import { HexGrid } from "@/components/HexGrid"
+
 import Link from "next/link"
 
 interface ServiceCard {
@@ -32,9 +32,9 @@ const SERVICE_CARDS: ServiceCard[] = [
       "Books, sells, hands off to your team",
     ],
     href: "/ai-agents",
-    cta: "Explore AI Agents →",
+    cta: "Explore AI Agents",
     mediaId: "home.service.agents.card",
-    alt: "Shop floor after hours with a glowing phone",
+    alt: "A shop owner opening his store in the morning, reading the overnight summary on his phone",
   },
   {
     eyebrow: "02 · SOFTWARE + AI",
@@ -47,11 +47,35 @@ const SERVICE_CARDS: ServiceCard[] = [
       "Senior engineers who ship",
     ],
     href: "/software-engineering",
-    cta: "Explore Software →",
+    cta: "Explore Software",
     mediaId: "home.service.software.card",
-    alt: "Product war room with a red practical light",
+    alt: "Two startup founders late at night, one showing a working app on a phone while the other reacts",
   },
 ]
+
+const PRINCIPLES = [
+  {
+    mediaId: "home.principle.puzzle",
+    eyebrow: "01 · INTEGRATION",
+    title: "Built in, not bolted on.",
+    body: "AI and software designed around how your business already runs, not wedged on top of it.",
+    alt: "Two interlocking off-white hexagon forms fitted together, their seam glowing red-orange",
+  },
+  {
+    mediaId: "home.principle.hourglass",
+    eyebrow: "02 · SPEED",
+    title: "MVP in weeks.",
+    body: "Something real in your hands early, so decisions come from usage instead of guesses.",
+    alt: "A hexagon-panelled hourglass whose lower chamber fills with glowing red-orange hex tiles",
+  },
+  {
+    mediaId: "home.principle.roadmap",
+    eyebrow: "03 · OWNERSHIP",
+    title: "Your roadmap, our problem.",
+    body: "We carry the plan from first commit to launch and stay until it works.",
+    alt: "A winding path of hexagon tiles leading into the dark towards one glowing tile",
+  },
+] as const
 
 /**
  * Renders the house-style accent wrap inside a service card headline.
@@ -97,17 +121,17 @@ function ServiceTitle({
  */
 export default function Home() {
   return (
-    <main id="main" className="bg-[var(--gn-ink-900)]">
+    <main id="main" className="has-dark-hero">
       <Navigation />
       <TwoDoorHero />
       <ManifestoScrub />
 
       <section className="section-padding section-cinematic relative overflow-hidden">
         <div className="absolute inset-0 falloff-gradient -z-10" />
-        <HexGrid opacity={0.03} />
+
 
         <div className="grid-12">
-          <div className="col-span-full mb-14 md:mb-20">
+          <div className="col-span-full mb-10 md:mb-14">
             <Reveal>
               <p className="micro mb-5">TWO DOORS</p>
               <h2 className="h2">TWO WAYS TO WORK.</h2>
@@ -153,30 +177,72 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-padding relative overflow-hidden border-t border-[var(--gn-line)]">
-        <div className="absolute inset-0 falloff-gradient -z-10" />
-        <div className="manifesto-haze manifesto-haze-center" aria-hidden="true" />
-
-        <div className="grid-12 relative z-10">
-          <Reveal className="col-span-full md:col-span-8 md:col-start-3 text-center">
-            <h2 className="h2 mb-8">
-              READY TO
+      <section className="section-padding relative overflow-hidden section-tint">
+        <div className="grid-12">
+          <Reveal className="col-span-full mb-10 md:mb-14">
+            <p className="micro mb-5">HOW WE WORK</p>
+            <h2 className="h2">
+              THREE RULES.
               <br />
-              <span className="accent-word">talk?</span>
+              <span className="accent-word">No exceptions.</span>
             </h2>
-            <p className="body-lg mx-auto mb-12">
-              Start a project, book a demo, or ask our agent a question.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <MagneticButton href="/contact">
-                Start a project
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </MagneticButton>
-              <Link href="/contact" className="btn-glass" data-event="cta_demo">
-                Book a demo
-              </Link>
+          </Reveal>
+
+          {PRINCIPLES.map((principle, index) => (
+            <Reveal
+              key={principle.mediaId}
+              className="col-span-full md:col-span-4"
+              delay={index * 0.1}
+            >
+              <article className="principle-card">
+                <MediaSlot
+                  id={principle.mediaId}
+                  type="image"
+                  aspect="1:1"
+                  register="system"
+                  alt={principle.alt}
+                />
+                <div className="principle-card-copy">
+                  <p className="micro">{principle.eyebrow}</p>
+                  <h3 className="h3">{principle.title}</h3>
+                  <p className="body">{principle.body}</p>
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-padding relative">
+        <div className="grid-12">
+          <Reveal className="col-span-full">
+            <div className="cta-stage" data-theme="dark">
+              <MediaSlot
+                id="home.cta.welcome"
+                type="image"
+                aspect="16:9"
+                register="system"
+                alt="The GrayNest persona with arms open and palms up, a small glowing seed of red light resting between its hands"
+                className="cta-stage-media"
+              />
+              <div className="cta-stage-copy">
+                <h2 className="h2">
+                  READY TO
+                  <br />
+                  <span className="accent-word">talk?</span>
+                </h2>
+                <p className="body-lg">
+                  Start a project, book a demo, or ask our agent a question.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                  <MagneticButton href="/contact">
+                    Start a project
+                  </MagneticButton>
+                  <Link href="/contact" className="btn-glass" data-event="cta_demo">
+                    Book a demo
+                  </Link>
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>

@@ -58,6 +58,8 @@ export function Navigation() {
           <img
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Dark%20Mode-Jl3dgrEza60F7WftOu1bn9DbKbFDqu.png"
             alt=""
+            width={28}
+            height={28}
             className="site-nav-mark"
             aria-hidden="true"
           />
@@ -82,9 +84,6 @@ export function Navigation() {
           <ThemeToggle />
           <Link href="/contact" className="btn-primary nav-cta site-nav-cta">
             Start a project
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
           </Link>
           <button
             type="button"

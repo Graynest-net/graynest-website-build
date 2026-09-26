@@ -1,4 +1,4 @@
-"use client"
+import { MEDIA_ASSETS } from "@/content/media-assets"
 
 export interface MediaSlotProps {
   id: string
@@ -7,10 +7,11 @@ export interface MediaSlotProps {
   alt?: string
   register?: "world" | "system"
   className?: string
+  priority?: boolean
 }
 
 /**
- * Branded media placeholder resolved by slot id. Real assets drop in later without layout changes.
+ * Media resolved by slot id: the delivered asset when one exists, otherwise a branded placeholder.
  */
 export function MediaSlot({
   id,
@@ -19,6 +20,7 @@ export function MediaSlot({
   alt = `Media: ${id}`,
   register = "world",
   className = "",
+  priority = false,
 }: MediaSlotProps) {
   const [width, height] = aspect.split(":").map(Number)
   const aspectRatio = width / height
@@ -27,22 +29,41 @@ export function MediaSlot({
     throw new Error(`MediaSlot received invalid aspect ratio: ${aspect}`)
   }
 
+  const asset = MEDIA_ASSETS[id]
+  const frameClassName = [
+    "media-slot relative overflow-hidden rounded-2xl",
+    register === "system" ? "media-slot-system" : "media-slot-world",
+    asset ? "has-asset" : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ")
+
+  if (asset) {
+    return (
+      <div className={frameClassName} style={{ aspectRatio: `${aspectRatio} / 1` }}>
+        <img
+          src={asset.src}
+          alt={alt}
+          width={asset.width}
+          height={asset.height}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding="async"
+          className="media-slot-img"
+          style={asset.position ? { objectPosition: asset.position } : undefined}
+        />
+      </div>
+    )
+  }
+
   return (
     <div
-      className={[
-        "media-slot relative overflow-hidden rounded-2xl",
-        register === "system" ? "media-slot-system" : "media-slot-world",
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
-      style={{
-        aspectRatio: `${aspectRatio} / 1`,
-      }}
+      className={frameClassName}
+      style={{ aspectRatio: `${aspectRatio} / 1` }}
       role="img"
       aria-label={alt}
     >
-      <div className="media-slot-lattice" aria-hidden="true" />
       <div className="media-slot-glow" aria-hidden="true" />
 
       <div className="absolute top-4 right-4 z-10">

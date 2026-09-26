@@ -16,14 +16,14 @@ const DOORS: DoorPanel[] = [
   {
     id: "agents",
     href: "/ai-agents",
-    label: "01 · AI AGENTS →",
+    label: "01 · AI AGENTS",
     mediaId: "home.hero.agents",
     alt: "Ramallah shop after closing, phone lighting up on the counter",
   },
   {
     id: "software",
     href: "/software-engineering",
-    label: "02 · SOFTWARE + AI →",
+    label: "02 · SOFTWARE + AI",
     mediaId: "home.hero.software",
     alt: "Glass-walled war room at 2 a.m. with a red LED practical",
   },
@@ -73,7 +73,7 @@ export function TwoDoorHero() {
 
       <div className="two-door-overlay">
         <div className="hero-copy two-door-copy">
-          <p className="glass-pill eyebrow-pill">SOFTWARE HOUSE · AI WHERE IT PAYS OFF</p>
+          <p className="micro">SOFTWARE HOUSE · AI WHERE IT PAYS OFF</p>
           <h1 className="two-door-headline">
             <span className="display-line">WE SHIP SOFTWARE.</span>
             <span className="display-line">

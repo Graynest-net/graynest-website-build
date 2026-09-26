@@ -16,9 +16,9 @@ export function Headline({ line1, line2, accent, className = "" }: HeadlineProps
   const accentIndex = line2.toLowerCase().indexOf(accent.toLowerCase())
 
   return (
-    <div className={`headline-block ${className}`.trim()}>
-      <h1 className="display-line">{line1}</h1>
-      <h1 className="display-line">
+    <h1 className={`headline-block ${className}`.trim()}>
+      <span className="display-line">{line1}</span>
+      <span className="display-line">
         {accentIndex < 0 ? (
           line2
         ) : (
@@ -30,7 +30,7 @@ export function Headline({ line1, line2, accent, className = "" }: HeadlineProps
             {line2.slice(accentIndex + accent.length)}
           </>
         )}
-      </h1>
-    </div>
+      </span>
+    </h1>
   )
 }

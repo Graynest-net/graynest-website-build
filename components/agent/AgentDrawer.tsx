@@ -159,7 +159,7 @@ function AgentSession({ agentId, mode }: AgentSessionProps) {
   return (
     <div className="agent-session">
       <div className="agent-session-status">
-        <CoreGlow size={10} pulse={isConnected || isStarting} />
+        <CoreGlow size={10} />
         <span className="micro">{statusLabel}</span>
       </div>
 
