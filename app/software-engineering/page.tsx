@@ -43,7 +43,7 @@ export default function SoftwareEngineeringPage() {
         </div>
       </section>
 
-      <section className="section-padding relative overflow-hidden border-t border-[var(--gn-line)]">
+      <section className="section-padding relative overflow-hidden">
         <div className="grid-12 items-start">
           <Reveal className="col-span-full lg:col-span-5">
             <p className="micro mb-6">THE BUILD / 01</p>
@@ -53,7 +53,7 @@ export default function SoftwareEngineeringPage() {
               <span className="accent-word">commit.</span>
             </h2>
           </Reveal>
-          <div className="col-span-full lg:col-span-7 grid sm:grid-cols-2 gap-4 mt-12 lg:mt-0">
+          <div className="col-span-full lg:col-span-7 grid sm:grid-cols-2 gap-6 md:gap-8 mt-12 lg:mt-0">
             {CAPABILITIES.map((item, index) => (
               <Reveal key={item} delay={index * 0.08}>
                 <div className="feature-card h-full">
@@ -86,12 +86,11 @@ export default function SoftwareEngineeringPage() {
             </p>
           </Reveal>
           <Reveal className="col-span-full lg:col-span-5 mt-12 lg:mt-0" delay={0.1}>
-            <div className="feature-card space-y-8">
+            <div className="feature-card space-y-6">
               <div className="flex items-center gap-3">
                 <CoreGlow size={18} />
                 <span className="micro">A PRACTICAL SYSTEM</span>
               </div>
-              <div className="h-px bg-[var(--gn-line)]" />
               <p className="h3">Clear thinking in. Useful software out.</p>
               <p className="body">
                 Discovery, design, engineering, and launch in one accountable team.

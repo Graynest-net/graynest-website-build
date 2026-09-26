@@ -5,7 +5,7 @@ import Link from "next/link"
  */
 export function Footer() {
   return (
-    <footer className="site-footer relative overflow-hidden border-t border-[var(--gn-line)]">
+    <footer className="site-footer relative overflow-hidden">
       <div className="absolute inset-0 opacity-5" aria-hidden="true">
         <svg className="w-full h-full" preserveAspectRatio="xMidYMid slice">
           <defs>
@@ -31,7 +31,7 @@ export function Footer() {
           </h2>
         </div>
 
-        <div className="col-span-full grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+        <div className="col-span-full grid grid-cols-1 md:grid-cols-3 gap-12 mb-[clamp(48px,8vw,80px)]">
           <div>
             <p className="micro mb-6">Services</p>
             <ul className="space-y-3">
@@ -81,7 +81,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="col-span-full border-t border-[var(--gn-line)] pt-12 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="col-span-full flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-sm text-[var(--gn-text-3)]">© GrayNest. All rights reserved.</p>
 
           <div className="flex gap-6">

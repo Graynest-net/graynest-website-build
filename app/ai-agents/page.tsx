@@ -54,7 +54,7 @@ export default function AIAgentsPage() {
 
       <OfficeScrollFilm />
 
-      <section className="section-padding relative overflow-hidden border-t border-[var(--gn-line)]">
+      <section className="section-padding relative overflow-hidden">
         <div className="grid-12">
           <Reveal className="col-span-full lg:col-span-5">
             <p className="micro mb-6">THE SYSTEM / 02</p>
@@ -64,7 +64,7 @@ export default function AIAgentsPage() {
               <span className="accent-word">Always human.</span>
             </h2>
           </Reveal>
-          <div className="col-span-full lg:col-span-7 grid sm:grid-cols-2 gap-4 mt-12 lg:mt-0">
+          <div className="col-span-full lg:col-span-7 grid sm:grid-cols-2 gap-6 md:gap-8 mt-12 lg:mt-0">
             {CHANNELS.map((item, index) => (
               <Reveal key={item} delay={index * 0.08}>
                 <div className="feature-card h-full">
