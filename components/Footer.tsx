@@ -101,7 +101,7 @@ export function Footer() {
               Privacy
             </Link>
             <img
-              src="/brand/logo_icon.png"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Dark%20Mode-Jl3dgrEza60F7WftOu1bn9DbKbFDqu.png"
               alt="GrayNest"
               className="h-6 w-6 opacity-30"
             />

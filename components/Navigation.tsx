@@ -55,7 +55,12 @@ export function Navigation() {
     >
       <div className="site-nav-inner">
         <Link href="/" className="site-nav-brand">
-          <img src="/icon.svg" alt="" className="site-nav-mark" aria-hidden="true" />
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Dark%20Mode-Jl3dgrEza60F7WftOu1bn9DbKbFDqu.png"
+            alt=""
+            className="site-nav-mark"
+            aria-hidden="true"
+          />
           <span className="site-nav-wordmark">GrayNest</span>
         </Link>
 
