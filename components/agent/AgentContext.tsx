@@ -5,11 +5,13 @@ import {
   useCallback,
   useContext,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react"
 
 export type AgentMode = "talk" | "chat"
+export type AgentCallState = "idle" | "listening" | "speaking"
 
 interface AgentContextValue {
   isOpen: boolean
@@ -18,6 +20,11 @@ interface AgentContextValue {
   openAgent: (mode?: AgentMode) => void
   closeAgent: () => void
   setMode: (mode: AgentMode) => void
+  callState: AgentCallState
+  setCallState: (state: AgentCallState) => void
+  /** Registers the live audio level source (0–1) for the speaking orb. */
+  setLevelSource: (source: (() => number) | null) => void
+  readLevel: () => number
 }
 
 const AgentContext = createContext<AgentContextValue | null>(null)
@@ -33,6 +40,20 @@ export function AgentProvider({ children }: AgentProviderProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [mode, setMode] = useState<AgentMode>("talk")
   const [hasOpened, setHasOpened] = useState(false)
+  const [callState, setCallState] = useState<AgentCallState>("idle")
+  const levelSource = useRef<(() => number) | null>(null)
+
+  const setLevelSource = useCallback((source: (() => number) | null) => {
+    levelSource.current = source
+  }, [])
+
+  const readLevel = useCallback(() => {
+    try {
+      return levelSource.current?.() ?? 0
+    } catch {
+      return 0
+    }
+  }, [])
 
   const openAgent = useCallback((nextMode: AgentMode = "talk") => {
     setMode(nextMode)
@@ -52,8 +73,12 @@ export function AgentProvider({ children }: AgentProviderProps) {
       openAgent,
       closeAgent,
       setMode,
+      callState,
+      setCallState,
+      setLevelSource,
+      readLevel,
     }),
-    [closeAgent, hasOpened, isOpen, mode, openAgent]
+    [callState, closeAgent, hasOpened, isOpen, mode, openAgent, readLevel, setLevelSource]
   )
 
   return <AgentContext.Provider value={value}>{children}</AgentContext.Provider>

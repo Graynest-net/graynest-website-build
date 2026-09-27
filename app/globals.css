@@ -744,7 +744,6 @@ body::before {
   background: var(--gn-ink-800);
   border: 1px solid var(--gn-line);
   border-radius: 24px;
-  padding: clamp(24px, 3vw, 36px);
   transition: border-color var(--gn-dur-s) var(--gn-ease-enter);
 }
 
@@ -1101,6 +1100,106 @@ body::before {
 
 .agent-launcher-btn {
   gap: 8px;
+  background: var(--gn-nav-glass);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  backdrop-filter: blur(20px) saturate(1.6);
+  transition: padding var(--gn-dur-s) var(--gn-ease-enter),
+    gap var(--gn-dur-s) var(--gn-ease-enter),
+    border-color var(--gn-dur-s) var(--gn-ease-enter);
+}
+
+.agent-launcher-label {
+  display: inline-block;
+  max-width: 9em;
+  overflow: hidden;
+  transition: max-width var(--gn-dur-s) var(--gn-ease-enter), opacity 0.2s ease;
+}
+
+/* Scrolling down: collapse to a round button holding just the core glow. */
+.agent-launcher-btn.is-compact {
+  gap: 0;
+  padding: 0 17px;
+}
+
+.agent-launcher-btn.is-compact .agent-launcher-label {
+  max-width: 0;
+  opacity: 0;
+}
+
+.agent-launcher-orb {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  padding: 0;
+  border: 1px solid var(--gn-glass-border);
+  border-radius: 999px;
+  background: var(--gn-nav-glass);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  backdrop-filter: blur(20px) saturate(1.6);
+  cursor: pointer;
+}
+
+/* Speaking orb: --orb-level (0–1) is fed from the live call audio. */
+.agent-orb {
+  --orb-level: 0;
+  position: relative;
+  display: inline-block;
+  flex: none;
+}
+
+.agent-orb-halo,
+.agent-orb-ring,
+.agent-orb-core {
+  position: absolute;
+  border-radius: 999px;
+}
+
+.agent-orb-halo {
+  inset: -28%;
+  background: radial-gradient(circle, var(--gn-red-glow) 0%, transparent 62%);
+  opacity: calc(0.35 + var(--orb-level) * 0.65);
+  transform: scale(calc(0.75 + var(--orb-level) * 0.55));
+}
+
+.agent-orb-ring {
+  inset: 6%;
+  border: 1px solid var(--gn-red);
+  opacity: 0;
+  animation: agent-orb-ring 2.4s var(--gn-ease-enter) infinite;
+}
+
+.agent-orb-core {
+  inset: 18%;
+  background: radial-gradient(circle at 34% 30%, #ff9a70 0%, var(--gn-red-hot) 28%, var(--gn-red) 58%, #8a1c00 100%);
+  box-shadow: 0 0 calc(10px + var(--orb-level) * 36px) var(--gn-red-glow);
+  transform: scale(calc(0.84 + var(--orb-level) * 0.32));
+}
+
+.agent-orb.is-listening .agent-orb-core {
+  animation: agent-orb-breathe 3.2s ease-in-out infinite;
+}
+
+.agent-orb.is-listening .agent-orb-ring {
+  animation-duration: 3.6s;
+}
+
+@keyframes agent-orb-ring {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+@keyframes agent-orb-breathe {
+  0%, 100% { filter: brightness(0.92); }
+  50% { filter: brightness(1.08); }
+}
+
+.agent-call-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0 6px;
 }
 
 .agent-launcher-pulse {
@@ -1633,6 +1732,11 @@ body::before {
     font-size: 13px;
   }
 
+  .agent-launcher-orb {
+    width: 64px;
+    height: 64px;
+  }
+
   .h2 {
     font-size: clamp(28px, 7.6vw, 40px);
   }
@@ -1652,7 +1756,6 @@ body::before {
   }
 
   .feature-card {
-    padding: 24px;
     border-radius: 16px;
   }
 
@@ -1867,6 +1970,8 @@ body::before {
   .hero-copy,
   .hero-copy > *,
   .agent-launcher-pulse,
+  .agent-orb-ring,
+  .agent-orb-core,
   .service-cinema-slot {
     animation: none !important;
     transition: none !important;

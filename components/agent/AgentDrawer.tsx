@@ -14,6 +14,7 @@ import {
   getElevenLabsAgentId,
 } from "@/lib/agent-config"
 import { useAgent, type AgentMode } from "@/components/agent/AgentContext"
+import { AgentOrb } from "@/components/agent/AgentOrb"
 
 interface TranscriptEntry {
   id: string
@@ -147,6 +148,27 @@ function AgentSession({ agentId, mode }: AgentSessionProps) {
   }, [conversation, draft])
 
   const isConnected = conversation.status === "connected"
+  const { setCallState, setLevelSource } = useAgent()
+  const isVoiceCall = mode === "talk" && isConnected
+
+  // Share the live call with the launcher so it can become the speaking orb.
+  useEffect(() => {
+    if (!isVoiceCall) {
+      setCallState("idle")
+      setLevelSource(null)
+      return
+    }
+
+    setCallState(conversation.isSpeaking ? "speaking" : "listening")
+    setLevelSource(conversation.isSpeaking ? conversation.getOutputVolume : conversation.getInputVolume)
+  }, [conversation.getInputVolume, conversation.getOutputVolume, conversation.isSpeaking, isVoiceCall, setCallState, setLevelSource])
+
+  useEffect(() => {
+    return () => {
+      setCallState("idle")
+      setLevelSource(null)
+    }
+  }, [setCallState, setLevelSource])
   const statusLabel = isStarting
     ? "Connecting…"
     : isConnected
@@ -159,10 +181,17 @@ function AgentSession({ agentId, mode }: AgentSessionProps) {
 
   return (
     <div className="agent-session">
-      <div className="agent-session-status">
-        <CoreGlow size={10} />
-        <span className="micro">{statusLabel}</span>
-      </div>
+      {isVoiceCall ? (
+        <div className="agent-call-stage">
+          <AgentOrb size={132} />
+          <span className="micro">{statusLabel}</span>
+        </div>
+      ) : (
+        <div className="agent-session-status">
+          <CoreGlow size={10} />
+          <span className="micro">{statusLabel}</span>
+        </div>
+      )}
 
       <div ref={listRef} className="agent-transcript" aria-live="polite">
         {transcript.length === 0 ? (

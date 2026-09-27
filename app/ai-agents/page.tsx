@@ -6,7 +6,6 @@ import { AgentProofPanel } from "@/components/agent/AgentProofPanel"
 import { Reveal } from "@/components/Reveal"
 import { AnimatedSpine } from "@/components/AnimatedSpine"
 import { MagneticButton } from "@/components/MagneticButton"
-import { OfficeScrollFilm } from "@/components/OfficeScrollFilm"
 import { SceneCard } from "@/components/SceneCard"
 
 import { Icon } from "@/components/Icon"
@@ -125,8 +124,6 @@ export default function AIAgentsPage() {
         </div>
       </section>
 
-      <OfficeScrollFilm />
-
       <section className="section-padding relative overflow-hidden">
         <div className="grid-12">
           <Reveal className="col-span-full mb-10 md:mb-14">
@@ -214,7 +211,7 @@ export default function AIAgentsPage() {
             </p>
           </Reveal>
           <Reveal className="col-span-full lg:col-span-6 mt-12 lg:mt-0" delay={0.1}>
-            <div className="feature-card space-y-5">
+            <div className="feature-card space-y-5 p-6 md:p-[clamp(24px,3vw,36px)]">
               <div className="flex justify-between micro">
                 <span>SAMPLE CONVERSATION</span>
                 <span>AR / EN</span>
