@@ -60,6 +60,8 @@ export default function ContactPage() {
 }
 
 export const metadata = {
-  title: "Start a Project – GrayNest",
-  description: "Start a software or AI agents project with GrayNest.",
+  title: "Contact GrayNest – Start a Software or AI Agent Project",
+  description:
+    "Tell us what you're building: an AI agent for your calls and messages, or custom software. Email hello@graynest.co or talk to our agent now.",
+  alternates: { canonical: "/contact" },
 }

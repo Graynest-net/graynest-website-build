@@ -53,6 +53,8 @@ export default function PrivacyPage() {
 }
 
 export const metadata = {
-  title: "Privacy – GrayNest",
-  description: "GrayNest privacy policy.",
+  title: "Privacy Policy – GrayNest",
+  description:
+    "What GrayNest collects when you use the contact form, email us, or talk to the GrayNest agent, and how to reach us with privacy requests.",
+  alternates: { canonical: "/privacy" },
 }

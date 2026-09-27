@@ -1,0 +1,28 @@
+# GrayNest
+
+> GrayNest builds AI voice and chat agents and custom software for
+> businesses and startups in Palestine. The agents speak Palestinian
+> Arabic and English. Not related to Gray Nest, the vintage market in
+> Illinois (graynest.com).
+
+## AI agents
+- Answer phone calls, WhatsApp, Instagram and Facebook messages, and website chat
+- Book, reschedule and confirm appointments; qualify leads and book meetings
+- Hand the conversation to a person on your team when one is needed
+- Built for e-commerce and retail, clinics and practices, hotels,
+  restaurants and venues, customer support, and inbound sales
+
+## Software engineering
+- Web products, iOS and Android apps, backend systems and APIs, internal tools
+- Five phases: discovery, architecture, build, ship, maintain
+- MVPs for startups in weeks
+
+## Contact
+- Email: hello@graynest.co
+- Instagram: https://instagram.com/graynestcomp
+- Start a project: https://www.graynest.co/contact
+
+## Key pages
+- AI agents: https://www.graynest.co/ai-agents
+- Software engineering: https://www.graynest.co/software-engineering
+- Privacy: https://www.graynest.co/privacy

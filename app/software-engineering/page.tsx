@@ -263,6 +263,8 @@ export default function SoftwareEngineeringPage() {
 }
 
 export const metadata = {
-  title: "Software Engineering – GrayNest",
-  description: "Custom software engineering with AI integration.",
+  title: "Custom Software & MVP Development – GrayNest",
+  description:
+    "Web apps, iOS and Android apps, backend systems and internal tools, built by senior engineers from discovery to launch. MVPs in weeks.",
+  alternates: { canonical: "/software-engineering" },
 }

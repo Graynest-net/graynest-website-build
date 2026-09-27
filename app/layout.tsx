@@ -6,8 +6,59 @@ import { ThemeProvider, themeInitScript } from "@/components/theme/ThemeProvider
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "GrayNest – Software, AI Agents",
-  description: "Voice and chat agents, and custom software, for businesses and startups in Palestine.",
+  metadataBase: new URL("https://www.graynest.co"),
+  title: "GrayNest – AI Voice Agents & Custom Software, Palestine",
+  description:
+    "Arabic and English voice and chat agents that answer your calls and WhatsApp, plus custom software for businesses and startups in Palestine.",
+  alternates: { canonical: "/" },
+}
+
+// Organization facts for search engines and assistants. Only list what the site states.
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.graynest.co/#organization",
+      name: "GrayNest",
+      url: "https://www.graynest.co",
+      logo: "https://www.graynest.co/icon.png",
+      email: "hello@graynest.co",
+      description:
+        "GrayNest builds voice and chat AI agents that answer calls and messages in Palestinian Arabic and English, and custom software for businesses and startups in Palestine.",
+      areaServed: { "@type": "Country", name: "Palestine" },
+      knowsLanguage: ["ar", "en"],
+      sameAs: ["https://instagram.com/graynestcomp"],
+      makesOffer: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "AI voice and chat agents",
+            url: "https://www.graynest.co/ai-agents",
+            serviceType: "AI phone and messaging agents",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Custom software engineering",
+            url: "https://www.graynest.co/software-engineering",
+            serviceType: "Web, mobile, backend and internal tools development",
+          },
+        },
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.graynest.co/#website",
+      url: "https://www.graynest.co",
+      name: "GrayNest",
+      publisher: { "@id": "https://www.graynest.co/#organization" },
+      inLanguage: "en",
+    },
+  ],
 }
 
 export const viewport: Viewport = {
@@ -47,6 +98,10 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd).replace(/</g, "\\u003c") }}
+        />
         <a href="#main" className="skip-link">
           Skip to content
         </a>

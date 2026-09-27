@@ -266,6 +266,8 @@ export default function AIAgentsPage() {
 }
 
 export const metadata = {
-  title: "AI Agents – GrayNest",
-  description: "Voice and chat AI agents for businesses in Palestine.",
+  title: "AI Voice & Chat Agents in Arabic and English – GrayNest",
+  description:
+    "Agents that answer phone calls, WhatsApp, Instagram and website chat in Palestinian Arabic or English, and hand over to your team when a person is needed.",
+  alternates: { canonical: "/ai-agents" },
 }
