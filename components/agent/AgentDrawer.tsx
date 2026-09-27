@@ -6,6 +6,7 @@ import {
   useConversation,
 } from "@elevenlabs/react"
 import { CoreGlow } from "@/components/CoreGlow"
+import { Icon } from "@/components/Icon"
 import {
   getAgentPhoneHref,
   getAgentPhoneLabel,
@@ -206,21 +207,21 @@ function AgentSession({ agentId, mode }: AgentSessionProps) {
             aria-label="Message GrayNest"
           />
           <button className="btn-primary" type="submit" disabled={!isConnected || draft.trim().length === 0}>
-            Send
+            <Icon name="send" /> Send
           </button>
         </form>
       ) : (
         <p className="agent-talk-hint body">
           {isConnected
-            ? "Mic is live. Interrupt anytime — the agent will listen again."
-            : "Uses your browser microphone. Nothing is recorded by GrayNest beyond the live session."}
+            ? "Mic is live. Interrupt anytime and the agent will listen again."
+            : "Uses your browser microphone. Audio is processed by our voice provider to run the conversation. GrayNest does not store recordings."}
         </p>
       )}
 
       <div className="agent-session-actions">
         {isConnected ? (
           <button type="button" className="btn-glass" onClick={stop} data-event="agent_end">
-            End session
+            <Icon name="x" /> End session
           </button>
         ) : (
           <button
@@ -232,7 +233,7 @@ function AgentSession({ agentId, mode }: AgentSessionProps) {
             disabled={isStarting}
             data-event={mode === "talk" ? "agent_call" : "agent_open"}
           >
-            {isStarting ? "Connecting…" : mode === "talk" ? "Start talking" : "Start chat"}
+            {mode === "talk" ? <Icon name="phone" /> : <Icon name="message" />} {isStarting ? "Connecting…" : mode === "talk" ? "Start talking" : "Start chat"}
           </button>
         )}
       </div>
@@ -342,14 +343,14 @@ export function AgentDrawer() {
           <div className="agent-contact-row">
             {phoneHref !== "tel:" ? (
               <a className="btn-glass" href={phoneHref} data-event="agent_call">
-                {phoneLabel}
+                <Icon name="phone" /> {phoneLabel}
               </a>
             ) : null}
             <a className="btn-glass" href={whatsappHref} data-event="whatsapp_click">
-              WhatsApp
+              <Icon name="message" /> WhatsApp
             </a>
             <a className="btn-glass" href="mailto:hello@graynest.co">
-              Email
+              <Icon name="mail" /> Email
             </a>
           </div>
         </div>

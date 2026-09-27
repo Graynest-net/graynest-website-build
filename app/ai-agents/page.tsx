@@ -1,53 +1,85 @@
 import { Navigation } from "@/components/Navigation"
 import { Footer } from "@/components/Footer"
-import { Headline } from "@/components/Headline"
 import { MediaSlot } from "@/components/MediaSlot"
 import { CoreGlow } from "@/components/CoreGlow"
+import { AgentProofPanel } from "@/components/agent/AgentProofPanel"
 import { Reveal } from "@/components/Reveal"
+import { AnimatedSpine } from "@/components/AnimatedSpine"
 import { MagneticButton } from "@/components/MagneticButton"
-import { TalkToAgentButton } from "@/components/agent/TalkToAgentButton"
 import { OfficeScrollFilm } from "@/components/OfficeScrollFilm"
 import { SceneCard } from "@/components/SceneCard"
 
+import { Icon } from "@/components/Icon"
 import Link from "next/link"
 
-const CHANNELS = ["Phone calls", "WhatsApp", "Instagram + Facebook", "Website chat"] as const
+const CHANNELS = [
+  {
+    title: "Phone calls",
+    body: "Picks up on the first ring. Every ring, including the ones that arrive at the same moment.",
+  },
+  {
+    title: "WhatsApp",
+    body: "Replies in the thread your customers already use, and keeps the history in one place.",
+  },
+  {
+    title: "Instagram + Facebook",
+    body: "Works comments and DMs, and moves the serious ones into a real conversation.",
+  },
+  {
+    title: "Website chat",
+    body: "Greets visitors, answers what your product actually does, and qualifies before they leave.",
+  },
+] as const
+
+/** Where the four inbound channels end up. This is the point of the section. */
+const SYSTEM_OUTCOMES = [
+  {
+    title: "One agent, one history",
+    body: "Every channel lands in the same conversation, so nobody has to repeat themselves to you.",
+    variant: "merge",
+  },
+  {
+    title: "Then a person",
+    body: "Anything it should not answer goes to your team, with the whole thread attached.",
+    variant: "handoff",
+  },
+] as const
 
 const USE_CASES = [
   {
     mediaId: "agents.uc.retail.scene",
-    eyebrow: "01 · RETAIL",
-    title: "Retail stores",
-    body: "Answers stock and price questions after closing, and reserves the item for the morning.",
-    alt: "A shop assistant in a Palestinian appliance store handing a reserved box to a smiling customer",
+    eyebrow: "01 · E-COMMERCE",
+    title: "E-commerce and retail",
+    body: "Answers pre-sale questions, tracks orders, and handles returns around the clock — no queue, no wait.",
+    alt: "A warehouse operations screen glowing at night with incoming order notifications stacking up",
   },
   {
     mediaId: "agents.uc.clinic.scene",
-    eyebrow: "02 · CLINICS & SALONS",
-    title: "Clinics and salons",
-    body: "Books, moves, and confirms appointments so the day starts already full.",
-    alt: "An empty clinic reception desk early in the morning with a tablet showing a full day of bookings",
+    eyebrow: "02 · HEALTHCARE",
+    title: "Clinics and practices",
+    body: "Books, reschedules, and confirms appointments so the front desk starts full, not catching up.",
+    alt: "A medical practice reception at dawn with a screen showing the day's bookings already confirmed",
   },
   {
     mediaId: "agents.uc.bakery.scene",
-    eyebrow: "03 · FOOD",
-    title: "Restaurants, cafés, bakeries",
-    body: "Takes orders and table bookings while your hands are busy.",
-    alt: "A baker shaping dough at dawn while a phone on the shelf beside him lights up with incoming orders",
+    eyebrow: "03 · HOSPITALITY",
+    title: "Hotels, restaurants, venues",
+    body: "Takes reservations, answers availability, and handles group inquiries across locations.",
+    alt: "A restaurant host station after hours with a tablet lighting up with reservation confirmations",
   },
   {
     mediaId: "agents.uc.support.scene",
     eyebrow: "04 · SUPPORT",
-    title: "Customer support and after-sales",
-    body: "Tracks orders, handles returns, and answers the same question for the hundredth time, politely.",
-    alt: "A courier loading parcels into a van at dusk while checking his phone for the next delivery",
+    title: "Customer support",
+    body: "Resolves the repeatable questions instantly, and routes the rest to your team with full context.",
+    alt: "A support dashboard at night showing resolved tickets climbing while the team is offline",
   },
   {
     mediaId: "agents.uc.leads.scene",
     eyebrow: "05 · SALES",
-    title: "Lead follow-up",
-    body: "Qualifies new enquiries and books the visit before they go cold.",
-    alt: "A salesperson in a car showroom at night greeting a couple who arrive for a booked visit",
+    title: "Inbound sales",
+    body: "Qualifies leads, books meetings, and follows up — before the inquiry goes cold.",
+    alt: "A CRM screen showing a new lead converted to a booked meeting within minutes of first contact",
   },
 ]
 
@@ -56,48 +88,40 @@ const USE_CASES = [
  */
 export default function AIAgentsPage() {
   return (
-    <main id="main" className="has-dark-hero page-stack">
+    <main id="main" className="page-stack">
       <Navigation />
 
-      <section className="hero-section hero-plate" data-theme="dark">
-        <MediaSlot
-          id="agents.hero.bg"
-          type="image"
-          aspect="16:9"
-          register="world"
-          alt="Inside a closed shop at night, a phone on the counter lighting up while the wet street glows through the shutter"
-          className="hero-plate-media"
-          priority
-        />
+      <section className="hero-section relative overflow-hidden">
+        <div className="absolute inset-0 falloff-gradient -z-10" />
 
-        <div className="grid-12 items-center">
+        <div className="grid-12 items-center relative z-10">
           <div className="col-span-full lg:col-span-7 hero-copy">
             <p className="micro flex items-center gap-3">
               <CoreGlow size={12} /> AI AGENTS / 01
             </p>
-            <Headline line1="YOUR PHONE" line2="JUST GOT a team." accent="a team." />
-            <p className="body-lg">
-              Voice and chat agents for retail, clinics, restaurants, and small companies in Palestine.
-              They speak your language and never miss a call.
+            <h1>
+              <span className="display-line">EVERY CALL.</span>
+              <span className="display-line">
+                EVEN <span className="accent-word">at 2 a.m.</span>
+              </span>
+            </h1>
+            <p className="body-lg mt-8 max-w-[54ch]">
+              Voice and chat agents that answer every call, message, and chat in Palestinian
+              Arabic or English. They carry the volume your team shouldn&apos;t have to, and
+              hand over the moment a person is needed.
             </p>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-4">
-              <TalkToAgentButton />
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-10">
+              <MagneticButton href="/contact">
+                <Icon name="calendar" /> Book a demo
+              </MagneticButton>
               <Link href="/contact" className="btn-glass">
-                Book a demo
+                <Icon name="message" /> Talk to our agent
               </Link>
             </div>
           </div>
-          <Reveal className="col-span-full lg:col-span-5 mt-14 lg:mt-0" delay={0.12}>
-            <MediaSlot
-              id="agents.meet.persona"
-              type="image"
-              aspect="1:1"
-              register="system"
-              alt="The GrayNest agent persona with one hand raised mid-sentence, hexagonal sound rings rippling from its glowing chest core"
-              className="scene-frame"
-              priority
-            />
-          </Reveal>
+          <div className="col-span-full lg:col-span-5 mt-14 lg:mt-0 hero-panel">
+            <AgentProofPanel />
+          </div>
         </div>
       </section>
 
@@ -127,26 +151,22 @@ export default function AIAgentsPage() {
 
       <section className="section-padding relative overflow-hidden border-t border-[var(--gn-line)]">
         <div className="grid-12">
-          <Reveal className="col-span-full lg:col-span-5">
+          <Reveal className="col-span-full lg:col-span-5 lg:self-center">
             <p className="micro mb-6">THE SYSTEM / 03</p>
             <h2 className="h2">
               ALWAYS ON.
               <br />
-              <span className="accent-word">Always human.</span>
+              <span className="accent-word">Always a person behind it.</span>
             </h2>
+            <p className="body-lg mt-8">The channels are separate. The conversation is not.</p>
           </Reveal>
-          <div className="col-span-full lg:col-span-7 grid sm:grid-cols-2 gap-4 mt-12 lg:mt-0">
-            {CHANNELS.map((item, index) => (
-              <Reveal key={item} delay={index * 0.08}>
-                <div className="feature-card h-full">
-                  <CoreGlow size={18} />
-                  <h3 className="h3 mt-8">{item}</h3>
-                  <p className="body mt-3">
-                    A consistent answer, on the channel your customers already use.
-                  </p>
-                </div>
-              </Reveal>
-            ))}
+          <div className="col-span-full lg:col-span-7 mt-14 lg:mt-0">
+            <AnimatedSpine
+              steps={[
+                ...CHANNELS.map((c) => ({ title: c.title, body: c.body })),
+                ...SYSTEM_OUTCOMES.map((o) => ({ title: o.title, body: o.body, variant: o.variant })),
+              ]}
+            />
           </div>
         </div>
       </section>
@@ -159,7 +179,7 @@ export default function AIAgentsPage() {
               type="image"
               aspect="4:5"
               register="world"
-              alt="A shop owner opening his store in the morning, reading the overnight summary on his phone with a half-smile"
+              alt="Someone arriving at work in the morning, reading the overnight summary on their phone with a half-smile"
               className="scene-frame"
             />
           </Reveal>
@@ -196,7 +216,7 @@ export default function AIAgentsPage() {
           <Reveal className="col-span-full lg:col-span-6 mt-12 lg:mt-0" delay={0.1}>
             <div className="feature-card space-y-5">
               <div className="flex justify-between micro">
-                <span>LIVE DEMO</span>
+                <span>SAMPLE CONVERSATION</span>
                 <span>AR / EN</span>
               </div>
               <div dir="rtl" lang="ar" className="rounded-2xl glass p-5 text-lg">
@@ -205,10 +225,9 @@ export default function AIAgentsPage() {
               <div className="ml-12 rounded-xl bg-[var(--gn-red)] p-5 text-[var(--gn-on-red)]">
                 I&apos;d like to book a table for tonight.
               </div>
-              <div className="micro flex items-center gap-2">
-                <span className="inline-block h-2 w-2 rounded-full bg-[var(--gn-red)]" />
-                typing...
-              </div>
+              <p className="micro">
+                Ask GrayNest to hear the real thing.
+              </p>
             </div>
           </Reveal>
         </div>
@@ -236,7 +255,7 @@ export default function AIAgentsPage() {
                   The same agent that answers this site can answer yours.
                 </p>
                 <MagneticButton href="/contact">
-                  Book a demo
+                  <Icon name="calendar" /> Book a demo
                 </MagneticButton>
               </div>
             </div>

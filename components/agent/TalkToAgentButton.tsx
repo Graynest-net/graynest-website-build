@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react"
 import { MagneticButton } from "@/components/MagneticButton"
+import { Icon } from "@/components/Icon"
 import { useAgent, type AgentMode } from "@/components/agent/AgentContext"
 
 interface TalkToAgentButtonProps {
@@ -17,7 +18,7 @@ export function TalkToAgentButton({
   mode = "talk",
   className = "",
   children = (
-    <>Talk to our agent</>
+    <><Icon name="message" /> Talk to our agent</>
   ),
 }: TalkToAgentButtonProps) {
   const { openAgent } = useAgent()

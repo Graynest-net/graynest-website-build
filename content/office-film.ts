@@ -54,8 +54,8 @@ export const OFFICE_FILM_BEATS: OfficeFilmBeat[] = [
   {
     progress: 0.78,
     eyebrow: "GRAYNEST",
-    line1: "ONE CAMERA.",
-    line2: "Two realities.",
-    accent: "realities.",
+    line1: "ONE TEAM.",
+    line2: "Two shifts.",
+    accent: "Two shifts.",
   },
 ]

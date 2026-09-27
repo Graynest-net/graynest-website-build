@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { ThemeToggle } from "@/components/theme/ThemeToggle"
+import { Icon } from "@/components/Icon"
 
 /**
  * Fixed site header with brand gutters, theme toggle, and iOS safe-area insets.
@@ -83,7 +84,7 @@ export function Navigation() {
         <div className="site-nav-actions">
           <ThemeToggle />
           <Link href="/contact" className="btn-primary nav-cta site-nav-cta">
-            Start a project
+            Start a project <Icon name="arrow-right" />
           </Link>
           <button
             type="button"

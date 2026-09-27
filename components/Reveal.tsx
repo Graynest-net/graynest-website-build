@@ -54,6 +54,7 @@ export function Reveal({
           trigger: element,
           start: "top 88%",
           toggleActions: once ? "play none none none" : "play reverse play reverse",
+          onEnter: () => element.classList.add("is-revealed"),
         },
       }
     )

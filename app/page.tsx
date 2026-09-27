@@ -1,186 +1,139 @@
 import { Navigation } from "@/components/Navigation"
 import { Footer } from "@/components/Footer"
-import { TwoDoorHero } from "@/components/TwoDoorHero"
-import { ManifestoScrub } from "@/components/ManifestoScrub"
 import { Reveal } from "@/components/Reveal"
 import { MagneticButton } from "@/components/MagneticButton"
 import { MediaSlot } from "@/components/MediaSlot"
-
+import { CoreGlow } from "@/components/CoreGlow"
+import { Icon } from "@/components/Icon"
+import { HeroFilm } from "@/components/HeroFilm"
 import Link from "next/link"
 
-interface ServiceCard {
-  eyebrow: string
-  titleLine1: string
-  titleLine2: string
-  accent: string
-  bullets: string[]
-  href: string
-  cta: string
-  mediaId: string
-  alt: string
-}
-
-const SERVICE_CARDS: ServiceCard[] = [
+const SERVICES = [
   {
     eyebrow: "01 · AI AGENTS",
-    titleLine1: "YOUR SHOP CLOSES AT 9.",
-    titleLine2: "Your agent doesn't.",
-    accent: "doesn't.",
-    bullets: [
-      "Palestinian Arabic & English",
-      "Phone, WhatsApp, Instagram, web",
-      "Books, sells, hands off to your team",
-    ],
+    title: "Agents that answer for you",
+    body: "Voice and chat across every channel — phone, WhatsApp, Instagram, website. They qualify, book, sell, and hand off the moment a person is needed.",
+    capabilities: ["Phone calls", "WhatsApp", "Instagram & Facebook", "Website chat"],
     href: "/ai-agents",
-    cta: "Explore AI Agents",
-    mediaId: "home.service.agents.card",
-    alt: "A shop owner opening his store in the morning, reading the overnight summary on his phone",
+    cta: "See how the agent works",
   },
   {
     eyebrow: "02 · SOFTWARE + AI",
-    titleLine1: "THE BRIEF STOPS HERE.",
-    titleLine2: "The build starts.",
-    accent: "starts.",
-    bullets: [
-      "Web, mobile, backend, internal tools",
-      "AI where it earns its keep",
-      "Senior engineers who ship",
-    ],
+    title: "Software built to ship",
+    body: "Web, mobile, backend, and internal tools. AI where it earns its place. Senior engineers who own the plan from first commit through launch and whatever comes after.",
+    capabilities: ["Web & mobile apps", "Backend & APIs", "Internal tools", "AI integration"],
     href: "/software-engineering",
-    cta: "Explore Software",
-    mediaId: "home.service.software.card",
-    alt: "Two startup founders late at night, one showing a working app on a phone while the other reacts",
+    cta: "See what we build",
   },
-]
+] as const
 
 const PRINCIPLES = [
   {
     mediaId: "home.principle.puzzle",
     eyebrow: "01 · INTEGRATION",
     title: "Built in, not bolted on.",
-    body: "AI and software designed around how your business already runs, not wedged on top of it.",
+    body: "The agent connects to your real systems. The software is designed around how your team already works — not wedged on top of it.",
     alt: "Two interlocking off-white hexagon forms fitted together, their seam glowing red-orange",
   },
   {
     mediaId: "home.principle.hourglass",
     eyebrow: "02 · SPEED",
     title: "MVP in weeks.",
-    body: "Something real in your hands early, so decisions come from usage instead of guesses.",
+    body: "Something working in your hands early, so product decisions come from real usage, not slide decks.",
     alt: "A hexagon-panelled hourglass whose lower chamber fills with glowing red-orange hex tiles",
   },
   {
     mediaId: "home.principle.roadmap",
     eyebrow: "03 · OWNERSHIP",
-    title: "Your roadmap, our problem.",
-    body: "We carry the plan from first commit to launch and stay until it works.",
+    title: "We stay until it works.",
+    body: "No handoff at launch. The plan is ours to carry, from architecture through production and whatever comes after.",
     alt: "A winding path of hexagon tiles leading into the dark towards one glowing tile",
   },
 ] as const
 
-/**
- * Renders the house-style accent wrap inside a service card headline.
- */
-function ServiceTitle({
-  line1,
-  line2,
-  accent,
-}: {
-  line1: string
-  line2: string
-  accent: string
-}) {
-  const accentIndex = line2.toLowerCase().indexOf(accent.toLowerCase())
-
-  if (accentIndex < 0) {
-    return (
-      <h3 className="service-card-title">
-        <span>{line1}</span>
-        <span>{line2}</span>
-      </h3>
-    )
-  }
-
-  const before = line2.slice(0, accentIndex)
-  const matched = line2.slice(accentIndex, accentIndex + accent.length)
-  const after = line2.slice(accentIndex + accent.length)
-
-  return (
-    <h3 className="service-card-title">
-      <span>{line1}</span>
-      <span>
-        {before}
-        <span className="accent-word">{matched}</span>
-        {after}
-      </span>
-    </h3>
-  )
-}
-
-/**
- * Home page: two-door hero, manifesto scrub, cinematic service doors, closing CTA.
- */
 export default function Home() {
   return (
-    <main id="main" className="has-dark-hero">
+    <main id="main">
       <Navigation />
-      <TwoDoorHero />
-      <ManifestoScrub />
 
-      <section className="section-padding section-cinematic relative overflow-hidden">
-        <div className="absolute inset-0 falloff-gradient -z-10" />
+      {/* ── Hero ── */}
+      <section className="hero-section hero-with-film relative overflow-hidden">
+        <HeroFilm />
 
-
-        <div className="grid-12">
-          <div className="col-span-full mb-10 md:mb-14">
-            <Reveal>
-              <p className="micro mb-5">TWO DOORS</p>
-              <h2 className="h2">TWO WAYS TO WORK.</h2>
-            </Reveal>
+        <div className="grid-12 relative z-10">
+          <div className="col-span-full lg:col-span-7 hero-copy">
+            <p className="micro flex items-center gap-3">
+              <CoreGlow size={12} /> SOFTWARE HOUSE · AI WHERE IT PAYS OFF
+            </p>
+            <h1>
+              <span className="display-line">WE BUILD</span>
+              <span className="display-line">
+                SOFTWARE <span className="accent-word">that works.</span>
+              </span>
+            </h1>
+            <p className="body-lg mt-8 max-w-[54ch]">
+              Two things under one roof: AI agents that answer every call and message,
+              and product engineering that ships fast and stays shipped.
+            </p>
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-10">
+              <MagneticButton href="/contact">
+                Start a project <Icon name="arrow-right" />
+              </MagneticButton>
+              <Link href="/contact" className="btn-glass" data-event="cta_demo">
+                <Icon name="calendar" /> Book a demo
+              </Link>
+            </div>
           </div>
-
-          {SERVICE_CARDS.map((card, index) => (
-            <Reveal
-              key={card.href}
-              className="col-span-full md:col-span-6"
-              delay={index * 0.12}
-            >
-              <article className="service-cinema-card group">
-                <div className="service-cinema-media">
-                  <MediaSlot
-                    id={card.mediaId}
-                    type="image"
-                    aspect="4:5"
-                    register="world"
-                    alt={card.alt}
-                    className="service-cinema-slot"
-                  />
-                  <div className="service-cinema-body">
-                    <p className="micro">{card.eyebrow}</p>
-                    <ServiceTitle
-                      line1={card.titleLine1}
-                      line2={card.titleLine2}
-                      accent={card.accent}
-                    />
-                    <ul className="service-cinema-bullets">
-                      {card.bullets.map((bullet) => (
-                        <li key={bullet}>{bullet}</li>
-                      ))}
-                    </ul>
-                    <Link href={card.href} className="btn-glass service-cinema-cta">
-                      {card.cta}
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            </Reveal>
-          ))}
         </div>
       </section>
 
+      {/* ── Services ── */}
+      <section className="section-padding relative overflow-hidden border-t border-[var(--gn-line)]">
+        <div className="grid-12">
+          <Reveal className="col-span-full lg:col-span-5 lg:self-start">
+            <p className="micro mb-6 flex items-center gap-3">
+              <CoreGlow size={12} /> WHAT WE BUILD
+            </p>
+            <h2 className="h2">
+              TWO KINDS
+              <br />
+              <span className="accent-word">of work.</span>
+            </h2>
+            <p className="body-lg mt-8 max-w-[48ch]">
+              Most companies don&apos;t need more software. They need the right software, shipped,
+              and AI only where it earns its keep.
+            </p>
+          </Reveal>
+
+          <div className="col-span-full lg:col-span-7 mt-14 lg:mt-0 space-y-0">
+            {SERVICES.map((service, index) => (
+              <Reveal key={service.href} delay={index * 0.12}>
+                <article className={`service-row ${index > 0 ? "border-t border-[var(--gn-line)]" : ""}`}>
+                  <p className="micro mb-4">{service.eyebrow}</p>
+                  <h3 className="h3 mb-3">{service.title}</h3>
+                  <p className="body text-[var(--gn-text-secondary)] mb-6 max-w-[52ch]">
+                    {service.body}
+                  </p>
+                  <div className="service-row-caps mb-6">
+                    {service.capabilities.map((cap) => (
+                      <span key={cap} className="service-cap">{cap}</span>
+                    ))}
+                  </div>
+                  <Link href={service.href} className="btn-glass">
+                    {service.cta} <Icon name="arrow-right" />
+                  </Link>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Principles ── */}
       <section className="section-padding relative overflow-hidden section-tint">
         <div className="grid-12">
           <Reveal className="col-span-full mb-10 md:mb-14">
-            <p className="micro mb-5">HOW WE WORK</p>
+            <p className="micro mb-6">HOW WE WORK</p>
             <h2 className="h2">
               THREE RULES.
               <br />
@@ -213,6 +166,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── CTA ── */}
       <section className="section-padding relative">
         <div className="grid-12">
           <Reveal className="col-span-full">
@@ -227,19 +181,19 @@ export default function Home() {
               />
               <div className="cta-stage-copy">
                 <h2 className="h2">
-                  READY TO
+                  START WITH
                   <br />
-                  <span className="accent-word">talk?</span>
+                  <span className="accent-word">a conversation.</span>
                 </h2>
                 <p className="body-lg">
-                  Start a project, book a demo, or ask our agent a question.
+                  Tell us what you need. We&apos;ll tell you what it takes.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                   <MagneticButton href="/contact">
-                    Start a project
+                    Start a project <Icon name="arrow-right" />
                   </MagneticButton>
                   <Link href="/contact" className="btn-glass" data-event="cta_demo">
-                    Book a demo
+                    <Icon name="calendar" /> Book a demo
                   </Link>
                 </div>
               </div>

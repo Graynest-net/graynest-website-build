@@ -201,7 +201,7 @@ body {
   transition: background-color var(--gn-dur-s) ease, color var(--gn-dur-s) ease;
 }
 
-/* Fixed ambient light that the glass surfaces refract */
+/* Fixed ambient light — promoted to own compositor layer */
 body::after {
   content: "";
   position: fixed;
@@ -209,6 +209,7 @@ body::after {
   z-index: -1;
   pointer-events: none;
   background: var(--gn-ambient);
+  will-change: transform;
 }
 
 :focus-visible {
@@ -217,11 +218,8 @@ body::after {
 }
 
 .glass {
-  background: var(--gn-glass-fill);
-  border: 1px solid var(--gn-glass-border);
-  box-shadow: var(--gn-glass-highlight), var(--gn-glass-shadow);
-  -webkit-backdrop-filter: blur(var(--gn-glass-blur)) saturate(1.6);
-  backdrop-filter: blur(var(--gn-glass-blur)) saturate(1.6);
+  background: var(--gn-ink-800);
+  border: 1px solid var(--gn-line);
 }
 
 .section-tint {
@@ -422,7 +420,7 @@ body::after {
   }
 }
 
-/* Film grain overlay */
+/* Film grain — disabled during scroll via GPU-layer isolation */
 body::before {
   content: "";
   position: fixed;
@@ -432,8 +430,8 @@ body::before {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><filter id='noise'><feTurbulence baseFrequency='0.9' numOctaves='4' seed='1' /></filter><rect width='100' height='100' fill='white' filter='url(%23noise)' opacity='0.05'/></svg>");
   pointer-events: none;
   z-index: 9999;
-  mix-blend-mode: overlay;
   opacity: var(--gn-grain-opacity);
+  will-change: transform;
 }
 
 /* Display line */
@@ -609,21 +607,18 @@ body::before {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  height: 52px;
-  padding: 0 28px;
+  height: 48px;
+  padding: 0 24px;
   background-color: var(--gn-red);
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 55%);
   color: var(--gn-on-red);
   font-family: var(--font-satoshi);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 15px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 8px 24px rgba(234, 46, 0, 0.22);
+  border: none;
   cursor: pointer;
   text-decoration: none;
   transition: background-color var(--gn-dur-s) var(--gn-ease-enter),
-    box-shadow var(--gn-dur-s) var(--gn-ease-enter),
     transform var(--gn-dur-s) var(--gn-ease-enter);
   white-space: nowrap;
   will-change: transform;
@@ -631,19 +626,16 @@ body::before {
 
 .btn-primary:hover {
   background-color: var(--gn-red-hot);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 12px 36px var(--gn-red-glow);
 }
 
 .btn-primary:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  box-shadow: none;
 }
 
 .magnetic-cta {
   transition: transform 0.2s var(--gn-ease-move),
-    background-color var(--gn-dur-s) var(--gn-ease-enter),
-    box-shadow var(--gn-dur-s) var(--gn-ease-enter);
+    background-color var(--gn-dur-s) var(--gn-ease-enter);
 }
 
 .btn-glass {
@@ -651,13 +643,10 @@ body::before {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 52px;
+  min-height: 48px;
   padding: 0 24px;
-  background: var(--gn-glass-fill);
+  background: transparent;
   border: 1px solid var(--gn-glass-border);
-  box-shadow: var(--gn-glass-highlight);
-  -webkit-backdrop-filter: blur(var(--gn-glass-blur)) saturate(1.6);
-  backdrop-filter: blur(var(--gn-glass-blur)) saturate(1.6);
   color: var(--gn-bone-50);
   font-family: var(--font-satoshi);
   font-weight: 600;
@@ -667,12 +656,12 @@ body::before {
   text-decoration: none;
   white-space: nowrap;
   transition: border-color var(--gn-dur-s) var(--gn-ease-enter),
-    background-color var(--gn-dur-s) var(--gn-ease-enter);
+    color var(--gn-dur-s) var(--gn-ease-enter);
 }
 
 .btn-glass:hover {
   border-color: var(--gn-glass-border-hover);
-  background: var(--gn-glass-fill-strong);
+  color: var(--gn-bone-100);
 }
 
 .glass-pill {
@@ -752,21 +741,15 @@ body::before {
 }
 
 .feature-card {
-  background: var(--gn-glass-fill);
-  border: 1px solid var(--gn-glass-border);
+  background: var(--gn-ink-800);
+  border: 1px solid var(--gn-line);
   border-radius: 24px;
-  box-shadow: var(--gn-glass-highlight), var(--gn-glass-shadow);
-  -webkit-backdrop-filter: blur(var(--gn-glass-blur)) saturate(1.6);
-  backdrop-filter: blur(var(--gn-glass-blur)) saturate(1.6);
   padding: clamp(24px, 3vw, 36px);
-  transition: border-color var(--gn-dur-s) var(--gn-ease-enter),
-    background-color var(--gn-dur-s) var(--gn-ease-enter),
-    transform var(--gn-dur-s) var(--gn-ease-enter);
+  transition: border-color var(--gn-dur-s) var(--gn-ease-enter);
 }
 
 .feature-card:hover {
-  border-color: var(--gn-glass-border-hover);
-  transform: translateY(-4px);
+  border-color: var(--gn-line-strong);
 }
 
 /* Two-door hero */
@@ -1063,6 +1046,42 @@ body::before {
 .service-cinema-cta {
   margin-top: auto;
   width: fit-content;
+}
+
+/* Service rows (home page, text-led) */
+.service-row {
+  padding: clamp(32px, 4vw, 48px) 0;
+}
+
+.service-row:first-child {
+  padding-top: 0;
+}
+
+.service-row-caps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.service-cap {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--gn-glass-border);
+  font-family: var(--font-satoshi);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--gn-text-3);
+  transition: border-color var(--gn-dur-s) var(--gn-ease-enter),
+    color var(--gn-dur-s) var(--gn-ease-enter);
+}
+
+.service-cap:hover {
+  border-color: var(--gn-glass-border-hover);
+  color: var(--gn-text-2);
 }
 
 /* Agent launcher */
@@ -1917,4 +1936,492 @@ body::before {
 .has-dark-hero .site-nav:not(.site-nav-glass) .site-nav-menu-btn,
 .has-dark-hero .site-nav:not(.site-nav-glass) .theme-toggle {
   color: #fafafa;
+}
+
+/* Agents hero: the live agent panel, and the hero copy stagger it follows */
+.hero-copy > :nth-child(4) { animation-delay: 240ms; }
+
+.hero-panel {
+  animation: hero-rise var(--gn-dur-m) 300ms var(--gn-ease-enter) both;
+}
+
+.agent-proof {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: clamp(20px, 2.4vw, 28px);
+  border-radius: 28px;
+  border: 1px solid var(--gn-glass-border);
+  background: color-mix(in srgb, var(--gn-ink-950) 88%, transparent);
+  box-shadow: var(--gn-glass-highlight), var(--gn-glass-shadow);
+  -webkit-backdrop-filter: blur(36px) saturate(1.8);
+  backdrop-filter: blur(36px) saturate(1.8);
+}
+
+.agent-proof ::selection {
+  background: var(--gn-red);
+  color: var(--gn-on-red);
+}
+
+.agent-proof-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.agent-proof-avatar {
+  width: 68px;
+  flex-shrink: 0;
+  border: 1px solid var(--gn-glass-border);
+}
+
+/* The persona render is full-figure; frame it on the head and chest core. */
+.agent-proof-avatar .media-slot-img {
+  transform: scale(2.1);
+  transform-origin: 50% 24%;
+}
+
+.agent-proof-name {
+  font-family: var(--font-satoshi);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--gn-bone-50);
+}
+
+.agent-proof-tongue {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--gn-text-2);
+}
+
+.agent-proof-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.agent-proof-dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: var(--gn-text-3);
+}
+
+.agent-proof-status.is-live .agent-proof-dot {
+  background: var(--gn-red);
+  box-shadow: 0 0 12px var(--gn-red-glow);
+}
+
+.agent-proof-wave {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: clamp(48px, 9vw, 72px);
+}
+
+.agent-proof-bar {
+  flex: 1;
+  min-width: 2px;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--gn-bone-300);
+  opacity: 0.4;
+  transform: scaleY(var(--level, 0.06));
+  transform-origin: center;
+}
+
+.agent-proof-wave.is-live .agent-proof-bar {
+  background: var(--gn-red);
+  opacity: 1;
+}
+
+.agent-proof-transcript {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 104px;
+  max-height: 136px;
+  padding-top: 14px;
+  border-top: 1px solid var(--gn-line);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gn-line-2) transparent;
+}
+
+.agent-proof-transcript::-webkit-scrollbar {
+  width: 6px;
+}
+
+.agent-proof-transcript::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--gn-line-2);
+}
+
+.agent-proof-empty {
+  max-width: 34ch;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--gn-text-2);
+}
+
+.agent-proof-line {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--gn-bone-50);
+  text-wrap: pretty;
+}
+
+.agent-proof-line-user {
+  color: var(--gn-text-2);
+}
+
+.agent-proof-speaker {
+  margin-right: 8px;
+  font-family: var(--font-satoshi);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gn-text-3);
+}
+
+.agent-proof-error {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--gn-red-hot);
+}
+
+.agent-proof-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.agent-proof-alt {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: var(--font-satoshi);
+  font-size: 14px;
+  color: var(--gn-text-2);
+  text-decoration: underline;
+  text-decoration-color: var(--gn-line-2);
+  text-underline-offset: 4px;
+  cursor: pointer;
+  transition: color var(--gn-dur-s) ease, text-decoration-color var(--gn-dur-s) ease;
+}
+
+.agent-proof-alt:hover {
+  color: var(--gn-bone-50);
+  text-decoration-color: var(--gn-red);
+}
+
+.agent-proof-note {
+  max-width: 42ch;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--gn-text-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-panel {
+    animation: none;
+  }
+
+  .agent-proof-bar {
+    transition: none;
+  }
+}
+
+/**
+ * The agents hero sets its display lines in a 7-column well, so they cap well
+ * below the full-bleed home scale and stay on one line each.
+ */
+.agents-hero-copy .display-line {
+  font-size: clamp(40px, 5.6vw, 84px);
+}
+
+.agents-hero-copy {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2.2vw, 28px);
+}
+
+/**
+ * Channel spine: the four inbound channels, the conversation they merge into,
+ * and the human handoff, drawn as one route instead of four separate cards.
+ */
+.channel-spine {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.channel-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 18px;
+  padding-block: clamp(18px, 2vw, 26px);
+}
+
+.channel-row + .channel-row {
+  border-top: 1px solid var(--gn-line);
+}
+
+/* The route changes character here: inbound channels above, outcomes below. */
+.channel-row-merge {
+  padding-top: clamp(30px, 3.4vw, 44px);
+}
+
+/* The route itself: a hairline running through every node. */
+.channel-row::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 14px;
+  width: 1px;
+  background: var(--gn-line-2);
+}
+
+.channel-row:first-child::before {
+  top: 50%;
+}
+
+.channel-row:last-child::before {
+  bottom: 50%;
+}
+
+.channel-node {
+  justify-self: center;
+  align-self: start;
+  position: relative;
+  z-index: 1;
+  width: 12px;
+  height: 13px;
+  margin-top: 8px;
+  background: var(--gn-text-3);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+
+.channel-node-merge {
+  width: 16px;
+  height: 18px;
+  margin-top: 6px;
+  background: var(--gn-bone-300);
+}
+
+.channel-node-handoff {
+  width: 16px;
+  height: 18px;
+  margin-top: 6px;
+  background: var(--gn-red);
+  filter: drop-shadow(0 0 12px var(--gn-red-glow));
+}
+
+.channel-title {
+  font-family: var(--font-satoshi);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--gn-bone-50);
+}
+
+.channel-body {
+  margin-top: 6px;
+  max-width: 52ch;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--gn-text-2);
+  text-wrap: pretty;
+}
+
+.channel-row-handoff .channel-body {
+  color: var(--gn-bone-50);
+}
+
+/* ── Motion: CoreGlow pulse ── */
+.core-glow-pulse .core-glow-halo {
+  animation: glow-breathe 2.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.2; r: 8; }
+  50% { opacity: 0.45; r: 10; }
+}
+
+/* ── Motion: Animated spine ── */
+.animated-spine {
+  position: relative;
+}
+
+.animated-spine .channel-row::before {
+  display: none;
+}
+
+.spine-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 14px;
+  width: 1px;
+  background: var(--gn-line-2);
+  transform-origin: top center;
+  will-change: transform;
+}
+
+.spine-row {
+  will-change: opacity, transform;
+}
+
+.spine-node {
+  will-change: transform;
+}
+
+/* ── Motion: Parallax wrap ── */
+.parallax-wrap {
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.parallax-inner {
+  will-change: transform;
+}
+
+/* ── Motion: Service pill stagger ── */
+.reveal-ready.is-revealed .service-row-caps .service-cap {
+  animation: pill-slide 0.4s var(--gn-ease-enter) both;
+}
+
+.reveal-ready.is-revealed .service-row-caps .service-cap:nth-child(1) { animation-delay: 0.05s; }
+.reveal-ready.is-revealed .service-row-caps .service-cap:nth-child(2) { animation-delay: 0.1s; }
+.reveal-ready.is-revealed .service-row-caps .service-cap:nth-child(3) { animation-delay: 0.15s; }
+.reveal-ready.is-revealed .service-row-caps .service-cap:nth-child(4) { animation-delay: 0.2s; }
+.reveal-ready.is-revealed .service-row-caps .service-cap:nth-child(5) { animation-delay: 0.25s; }
+
+@keyframes pill-slide {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Motion: Scene card image drift ── */
+.scene-card-media .media-slot-img {
+  transition: transform 0.6s var(--gn-ease-enter);
+}
+
+.scene-card:hover .scene-card-media .media-slot-img {
+  transform: scale(1.04);
+}
+
+/* ── Motion: CTA stage glow ── */
+.cta-stage::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 50%;
+  height: 70%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(234, 46, 0, 0.12) 0%, transparent 70%);
+  animation: cta-glow-drift 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes cta-glow-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  33% { transform: translate(8%, 12%) scale(1.1); opacity: 0.9; }
+  66% { transform: translate(-4%, 6%) scale(0.95); opacity: 0.7; }
+}
+
+/* ── Motion: Feature card hover lift ── */
+.feature-card {
+  transition: border-color var(--gn-dur-s) var(--gn-ease-enter),
+    transform var(--gn-dur-s) var(--gn-ease-enter),
+    box-shadow var(--gn-dur-s) var(--gn-ease-enter);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Motion: Principle card hover ── */
+.principle-card {
+  transition: border-color var(--gn-dur-s) var(--gn-ease-enter),
+    transform var(--gn-dur-s) var(--gn-ease-enter);
+}
+
+.principle-card:hover {
+  transform: translateY(-4px);
+}
+
+.principle-card .media-slot-img {
+  transition: transform 0.6s var(--gn-ease-enter);
+}
+
+.principle-card:hover .media-slot-img {
+  transform: scale(1.03);
+}
+
+/* ── Homepage hero film: full-bleed background ── */
+.hero-with-film {
+  isolation: isolate;
+}
+
+.hero-film {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: #ece6de;
+}
+
+.hero-film-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Push the tile cluster into the right half so the headline sits on clean surface. */
+  transform: translateX(22%) scale(1.05);
+}
+
+/* Veil blends the film into the page and keeps the headline on an even field. */
+.hero-film::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--gn-ink-900) 0%, var(--gn-ink-900) 22%, color-mix(in srgb, var(--gn-ink-900) 70%, transparent) 42%, transparent 62%),
+    linear-gradient(180deg, transparent 70%, var(--gn-ink-900) 100%);
+}
+
+[data-theme="dark"] .hero-film-media {
+  filter: brightness(0.32) contrast(1.15);
+}
+
+[data-theme="dark"] .hero-film {
+  background: var(--gn-ink-900);
+}
+
+@media (max-width: 1023px) {
+  .hero-film-media {
+    transform: none;
+    object-position: 50% 100%;
+    top: auto;
+    height: 55%;
+  }
+
+  .hero-film::after {
+    background: linear-gradient(180deg, var(--gn-ink-900) 0%, var(--gn-ink-900) 45%, color-mix(in srgb, var(--gn-ink-900) 40%, transparent) 62%, transparent 80%);
+  }
 }

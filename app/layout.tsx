@@ -7,15 +7,7 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: "GrayNest – Software, AI Agents",
-  description: "AI agents and custom product engineering with AI integration for startups and enterprises.",
-  generator: "v0.app",
-  icons: {
-    icon: [
-      { url: "/icon-light-32x32.png", media: "(prefers-color-scheme: light)" },
-      { url: "/icon-dark-32x32.png", media: "(prefers-color-scheme: dark)" },
-    ],
-    apple: "/apple-icon.png",
-  },
+  description: "Voice and chat agents, and custom software, for businesses and startups in Palestine.",
 }
 
 export const viewport: Viewport = {
@@ -39,8 +31,20 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preload"
+          href="/fonts/Satoshi-Black.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Satoshi-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
       </head>
       <body>
         <a href="#main" className="skip-link">

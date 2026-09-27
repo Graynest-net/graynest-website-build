@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/Navigation"
 import { Footer } from "@/components/Footer"
 import { MediaSlot } from "@/components/MediaSlot"
+import { Icon } from "@/components/Icon"
 import Link from "next/link"
 
 export default function NotFound() {
@@ -27,7 +28,7 @@ export default function NotFound() {
             </h1>
             <p className="body-lg mt-8">But it is not here.</p>
             <Link href="/" className="btn-primary mt-10">
-              Back home
+              <Icon name="arrow-left" /> Back home
             </Link>
           </div>
         </div>

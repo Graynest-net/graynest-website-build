@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer"
 import { CoreGlow } from "@/components/CoreGlow"
 import { Reveal } from "@/components/Reveal"
 import { MagneticButton } from "@/components/MagneticButton"
+import { Icon } from "@/components/Icon"
 
 
 /**
@@ -47,7 +48,7 @@ export default function ContactPage() {
                 <textarea className="contact-input min-h-36" name="message" placeholder="A brief on what you need…" required />
               </label>
               <MagneticButton type="submit">
-                Send inquiry
+                <Icon name="send" /> Send inquiry
               </MagneticButton>
             </form>
           </Reveal>

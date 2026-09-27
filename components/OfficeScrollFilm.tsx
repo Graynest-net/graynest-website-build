@@ -258,7 +258,8 @@ export function OfficeScrollFilm() {
             </span>
           </h2>
           <p className="body office-film-support">
-            Scroll to move the camera. Flip theme to change the shift — people by day, the persona by night.
+            People run the day. The agent takes the night, on the same floor, answering the same
+            questions. Switch the theme to change shift.
           </p>
         </div>
       </div>
