@@ -2530,3 +2530,31 @@ body::before {
     background: linear-gradient(180deg, var(--gn-ink-900) 0%, var(--gn-ink-900) 45%, color-mix(in srgb, var(--gn-ink-900) 40%, transparent) 62%, transparent 80%);
   }
 }
+
+/* Clinic one-pager (app/clinics): a print sheet, so no grain, ambient light or agent launcher */
+body:has([data-sheet])::before,
+body:has([data-sheet])::after,
+body:has([data-sheet]) .agent-launcher {
+  display: none;
+}
+
+body:has([data-sheet]) {
+  background: #efece5;
+}
+
+@page clinic-sheet {
+  size: A4;
+  margin: 0;
+}
+
+/* Clinic one-pager: scale the fixed A4 sheet down to viewport width on the
+   prospect view (module @media does not resolve, so it lives here on the real
+   [data-sheet] attribute). zoom reflows the box, so no sideways scroll and no
+   dead space below. The exporter renders full size via [data-export]. */
+[data-sheet]:not([data-export]) { zoom: 1; }
+@media (max-width: 858px) { [data-sheet]:not([data-export]) { zoom: 0.86; } }
+@media (max-width: 720px) { [data-sheet]:not([data-export]) { zoom: 0.72; } }
+@media (max-width: 600px) { [data-sheet]:not([data-export]) { zoom: 0.58; } }
+@media (max-width: 500px) { [data-sheet]:not([data-export]) { zoom: 0.46; } }
+@media (max-width: 420px) { [data-sheet]:not([data-export]) { zoom: 0.38; } }
+@media (max-width: 360px) { [data-sheet]:not([data-export]) { zoom: 0.32; } }
