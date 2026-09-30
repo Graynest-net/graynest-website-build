@@ -1,4 +1,8 @@
+import { TalkToAgentButton } from "@/components/agent/TalkToAgentButton"
+import { MethodSections } from "@/components/MethodSections"
+import { ProofStrip } from "@/components/ProofStrip"
 import { Navigation } from "@/components/Navigation"
+import { PromoBar } from "@/components/PromoBar"
 import { Footer } from "@/components/Footer"
 import { Reveal } from "@/components/Reveal"
 import { MagneticButton } from "@/components/MagneticButton"
@@ -54,6 +58,7 @@ const PRINCIPLES = [
 export default function Home() {
   return (
     <main id="main">
+      <PromoBar />
       <Navigation />
 
       {/* ── Hero ── */}
@@ -76,12 +81,12 @@ export default function Home() {
               and product engineering that ships fast and stays shipped.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-10">
-              <MagneticButton href="/contact">
+              <MagneticButton href="/contact" event="cta_project">
                 Start a project <Icon name="arrow-right" />
               </MagneticButton>
-              <Link href="/contact" className="btn-glass" data-event="cta_demo">
-                <Icon name="calendar" /> Book a demo
-              </Link>
+              <TalkToAgentButton variant="glass">
+                <Icon name="message" /> Try the agent
+              </TalkToAgentButton>
             </div>
           </div>
         </div>
@@ -128,6 +133,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <MethodSections />
+      <ProofStrip />
 
       {/* ── Principles ── */}
       <section className="section-padding relative overflow-hidden section-tint">
@@ -189,12 +197,12 @@ export default function Home() {
                   Tell us what you need. We&apos;ll tell you what it takes.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                  <MagneticButton href="/contact">
+                  <MagneticButton href="/contact" event="cta_project">
                     Start a project <Icon name="arrow-right" />
                   </MagneticButton>
-                  <Link href="/contact" className="btn-glass" data-event="cta_demo">
-                    <Icon name="calendar" /> Book a demo
-                  </Link>
+                  <TalkToAgentButton variant="glass">
+                    <Icon name="message" /> Try the agent
+                  </TalkToAgentButton>
                 </div>
               </div>
             </div>

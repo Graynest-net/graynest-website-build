@@ -1,3 +1,4 @@
+import { TalkToAgentButton } from "@/components/agent/TalkToAgentButton"
 import { Navigation } from "@/components/Navigation"
 import { Footer } from "@/components/Footer"
 import { MediaSlot } from "@/components/MediaSlot"
@@ -110,11 +111,11 @@ export default function AIAgentsPage() {
               hand over the moment a person is needed.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-10">
-              <MagneticButton href="/contact">
-                <Icon name="calendar" /> Book a demo
-              </MagneticButton>
-              <Link href="/contact" className="btn-glass">
+              <TalkToAgentButton>
                 <Icon name="message" /> Talk to our agent
+              </TalkToAgentButton>
+              <Link href="/contact" className="btn-glass" data-event="cta_contact">
+                Talk to us
               </Link>
             </div>
           </div>
@@ -251,9 +252,9 @@ export default function AIAgentsPage() {
                 <p className="body-lg">
                   The same agent that answers this site can answer yours.
                 </p>
-                <MagneticButton href="/contact">
-                  <Icon name="calendar" /> Book a demo
-                </MagneticButton>
+                <TalkToAgentButton>
+                  <Icon name="message" /> Talk to our agent
+                </TalkToAgentButton>
               </div>
             </div>
           </Reveal>

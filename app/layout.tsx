@@ -1,6 +1,7 @@
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata, Viewport } from "next"
 import { SmoothScroll } from "@/components/SmoothScroll"
+import { EventTracker } from "@/components/EventTracker"
 import { AgentAppShell } from "@/components/agent/AgentAppShell"
 import { ThemeProvider, themeInitScript } from "@/components/theme/ThemeProvider"
 import "./globals.css"
@@ -110,7 +111,12 @@ export default function RootLayout({
             <SmoothScroll>{children}</SmoothScroll>
           </AgentAppShell>
         </ThemeProvider>
-        {process.env.NODE_ENV === "production" && <Analytics />}
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <Analytics />
+            <EventTracker />
+          </>
+        )}
       </body>
     </html>
   )

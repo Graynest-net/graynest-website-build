@@ -7,6 +7,8 @@ type MagneticButtonBaseProps = {
   children: ReactNode
   className?: string
   strength?: number
+  /** Analytics event name, read by EventTracker. */
+  event?: string
 }
 
 type MagneticAnchorProps = MagneticButtonBaseProps & {
@@ -54,7 +56,7 @@ function applyMagneticPull(
  * Primary CTA that gently pulls toward the cursor (desktop only).
  */
 export function MagneticButton(props: MagneticButtonProps) {
-  const { children, className = "", strength = 8 } = props
+  const { children, className = "", strength = 8, event } = props
   const ref = useRef<HTMLAnchorElement | HTMLButtonElement | null>(null)
 
   if (strength < 0 || strength > 24) {
@@ -85,6 +87,7 @@ export function MagneticButton(props: MagneticButtonProps) {
         href={props.href}
         ref={ref as RefObject<HTMLAnchorElement>}
         className={sharedClassName}
+        data-event={event}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
       >
@@ -98,6 +101,7 @@ export function MagneticButton(props: MagneticButtonProps) {
       ref={ref as RefObject<HTMLButtonElement>}
       type={props.type ?? "button"}
       className={sharedClassName}
+      data-event={event}
       onClick={props.onClick}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}

@@ -7,6 +7,7 @@ import { useAgent, type AgentMode } from "@/components/agent/AgentContext"
 
 interface TalkToAgentButtonProps {
   mode?: AgentMode
+  variant?: "primary" | "glass"
   className?: string
   children?: ReactNode
 }
@@ -16,12 +17,26 @@ interface TalkToAgentButtonProps {
  */
 export function TalkToAgentButton({
   mode = "talk",
+  variant = "primary",
   className = "",
   children = (
     <><Icon name="message" /> Talk to our agent</>
   ),
 }: TalkToAgentButtonProps) {
   const { openAgent } = useAgent()
+
+  if (variant === "glass") {
+    return (
+      <button
+        type="button"
+        className={`btn-glass ${className}`.trim()}
+        data-event="agent_open"
+        onClick={() => openAgent(mode)}
+      >
+        {children}
+      </button>
+    )
+  }
 
   return (
     <MagneticButton

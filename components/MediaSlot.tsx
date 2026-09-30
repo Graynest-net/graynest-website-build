@@ -66,16 +66,18 @@ export function MediaSlot({
     >
       <div className="media-slot-glow" aria-hidden="true" />
 
-      <div className="absolute top-4 right-4 z-10">
-        <span className="glass-pill">
-          {type} · {aspect}
-        </span>
-      </div>
-
+      {/* Dev-only labels: visitors must never see "image · 16:9" on an undelivered slot. */}
       {process.env.NODE_ENV === "development" ? (
-        <div className="absolute bottom-4 left-4 z-10 max-w-[70%]">
-          <p className="micro truncate text-[10px] opacity-70">{id}</p>
-        </div>
+        <>
+          <div className="absolute top-4 right-4 z-10">
+            <span className="glass-pill">
+              {type} · {aspect}
+            </span>
+          </div>
+          <div className="absolute bottom-4 left-4 z-10 max-w-[70%]">
+            <p className="micro truncate text-[10px] opacity-70">{id}</p>
+          </div>
+        </>
       ) : null}
     </div>
   )

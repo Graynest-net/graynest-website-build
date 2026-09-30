@@ -244,6 +244,128 @@ body::after {
   top: calc(16px + var(--gn-safe-top));
 }
 
+/* Clinics offer strip — pinned above the header, drops the nav below itself */
+.gn-promo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  color: var(--gn-on-red);
+  background: linear-gradient(180deg, var(--gn-red-hot) 0%, var(--gn-red) 100%);
+  padding-top: var(--gn-safe-top);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.16), 0 8px 24px -12px var(--gn-red-glow);
+  animation: gn-promo-in var(--gn-dur-s) var(--gn-ease-enter) both;
+}
+
+@keyframes gn-promo-in {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+.gn-promo-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 44px;
+  margin-inline: auto;
+  padding: 8px var(--gn-gutter-right) 8px var(--gn-gutter-left);
+  box-sizing: border-box;
+}
+
+.gn-promo-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: clamp(0.8rem, 0.72rem + 0.3vw, 0.9rem);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+.gn-promo-text strong {
+  font-weight: 700;
+}
+
+.gn-promo-badge {
+  flex: none;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+}
+
+.gn-promo-regions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  flex-wrap: wrap;
+}
+
+.gn-promo-region {
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--gn-on-red);
+  text-decoration: none;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+  transition: background var(--gn-dur-s) ease, transform var(--gn-dur-s) var(--gn-ease-enter);
+}
+
+.gn-promo-region:hover {
+  background: rgba(255, 255, 255, 0.24);
+  transform: translateY(-1px);
+}
+
+.gn-promo-region:focus-visible {
+  outline: 2px solid var(--gn-on-red);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gn-promo { animation: none; }
+  .gn-promo-region { transition: background var(--gn-dur-s) ease; }
+  .gn-promo-region:hover { transform: none; }
+}
+
+@media (max-width: 600px) {
+  .gn-promo-regions {
+    order: 3;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .gn-promo-regions::-webkit-scrollbar { display: none; }
+  .gn-promo-region { flex: none; }
+}
+
+/* Nav sits below the offer strip while it is present (the strip owns the safe area).
+   The 44px fallback keeps first paint aligned until PromoBar measures its height. */
+body:has(.gn-promo) .site-nav {
+  top: var(--gn-promo-h, 44px);
+  padding-top: 0;
+  min-height: var(--gn-nav-height);
+}
+
+body:has(.gn-promo) .hero-section {
+  padding-top: calc(var(--gn-nav-height) + var(--gn-safe-top) + var(--gn-promo-h, 44px) + 32px);
+}
+
 /* Site header */
 .site-nav {
   position: fixed;
@@ -364,8 +486,41 @@ body::after {
   color: var(--gn-text-3);
 }
 
+/* The header CTA lives in a collapsing grid track. While the hero (with its own
+   primary CTA) is on screen the track is 0fr — zero width, no space taken — so the
+   header shows a single primary action. Past the hero it opens to 1fr, growing
+   horizontally and pushing the rest of the header actions aside as it appears. */
+.site-nav-cta-slot {
+  display: grid;
+  grid-template-columns: minmax(0, 0fr);
+  min-width: 0;
+  overflow: hidden;
+  transition: grid-template-columns var(--gn-dur-s) var(--gn-ease-enter);
+}
+
+.site-nav-cta-slot.is-open {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .site-nav-cta {
-  flex-shrink: 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--gn-dur-s) var(--gn-ease-enter);
+}
+
+.site-nav-cta-slot.is-open .site-nav-cta {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav-cta-slot,
+  .site-nav-cta {
+    transition: none;
+  }
 }
 
 .site-nav-actions {
@@ -1098,32 +1253,38 @@ body::before {
   transform: translateY(8px);
 }
 
+/* inline-grid so the label rides its own track: collapsing the track (not
+   padding/gap/width) is what shrinks the button, keeping the collapse off the
+   layout-thrash properties. Padding is fixed at the compact size in both states,
+   so the glow never shifts sideways during the transition. */
 .agent-launcher-btn {
-  gap: 8px;
+  display: inline-grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0;
+  padding: 0 17px;
   background: var(--gn-nav-glass);
   -webkit-backdrop-filter: blur(20px) saturate(1.6);
   backdrop-filter: blur(20px) saturate(1.6);
-  transition: padding var(--gn-dur-s) var(--gn-ease-enter),
-    gap var(--gn-dur-s) var(--gn-ease-enter),
+  transition: grid-template-columns var(--gn-dur-s) var(--gn-ease-enter),
     border-color var(--gn-dur-s) var(--gn-ease-enter);
 }
 
 .agent-launcher-label {
-  display: inline-block;
-  max-width: 9em;
   overflow: hidden;
-  transition: max-width var(--gn-dur-s) var(--gn-ease-enter), opacity 0.2s ease;
+  white-space: nowrap;
+  padding-left: 8px; /* the spacing that used to be the flex gap */
+  transition: opacity 0.2s ease, transform var(--gn-dur-s) var(--gn-ease-enter);
 }
 
-/* Scrolling down: collapse to a round button holding just the core glow. */
+/* Scrolling down: collapse the label track so only the core glow remains. */
 .agent-launcher-btn.is-compact {
-  gap: 0;
-  padding: 0 17px;
+  grid-template-columns: auto 0fr;
 }
 
 .agent-launcher-btn.is-compact .agent-launcher-label {
-  max-width: 0;
   opacity: 0;
+  transform: translateX(-6px);
 }
 
 .agent-launcher-orb {
@@ -1766,12 +1927,17 @@ body::before {
     align-items: flex-start;
   }
 
+  body:has(.gn-promo) .hero-section {
+    padding-top: calc(var(--gn-nav-height) + var(--gn-safe-top) + var(--gn-promo-h, 44px) + 48px);
+  }
+
   .btn-primary {
     width: 100%;
   }
 
   .nav-cta,
-  .site-nav-cta {
+  .site-nav-cta,
+  .site-nav-cta-slot {
     display: none !important;
   }
 
@@ -2531,30 +2697,112 @@ body::before {
   }
 }
 
-/* Clinic one-pager (app/clinics): a print sheet, so no grain, ambient light or agent launcher */
-body:has([data-sheet])::before,
-body:has([data-sheet])::after,
-body:has([data-sheet]) .agent-launcher {
+/* Clinics offer (app/clinics): its own light world, so no grain, ambient light or agent launcher */
+body:has([data-clinic])::before,
+body:has([data-clinic])::after,
+body:has([data-clinic]) .agent-launcher {
   display: none;
 }
 
-body:has([data-sheet]) {
+body:has([data-clinic]) {
   background: #efece5;
 }
 
-@page clinic-sheet {
-  size: A4;
-  margin: 0;
+/* Contact form: interest chips + spam honeypot */
+.contact-chip {
+  position: relative;
+  cursor: pointer;
 }
 
-/* Clinic one-pager: scale the fixed A4 sheet down to viewport width on the
-   prospect view (module @media does not resolve, so it lives here on the real
-   [data-sheet] attribute). zoom reflows the box, so no sideways scroll and no
-   dead space below. The exporter renders full size via [data-export]. */
-[data-sheet]:not([data-export]) { zoom: 1; }
-@media (max-width: 858px) { [data-sheet]:not([data-export]) { zoom: 0.86; } }
-@media (max-width: 720px) { [data-sheet]:not([data-export]) { zoom: 0.72; } }
-@media (max-width: 600px) { [data-sheet]:not([data-export]) { zoom: 0.58; } }
-@media (max-width: 500px) { [data-sheet]:not([data-export]) { zoom: 0.46; } }
-@media (max-width: 420px) { [data-sheet]:not([data-export]) { zoom: 0.38; } }
-@media (max-width: 360px) { [data-sheet]:not([data-export]) { zoom: 0.32; } }
+.contact-chip input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.contact-chip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--gn-glass-border);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gn-text-2);
+  transition: border-color var(--gn-dur-s) var(--gn-ease-enter),
+    color var(--gn-dur-s) var(--gn-ease-enter),
+    background var(--gn-dur-s) var(--gn-ease-enter);
+}
+
+.contact-chip:hover span {
+  border-color: var(--gn-glass-border-hover);
+}
+
+.contact-chip input:checked + span {
+  color: var(--gn-on-red);
+  background: var(--gn-red);
+  border-color: var(--gn-red);
+}
+
+.contact-chip input:focus-visible + span {
+  outline: 2px solid var(--gn-red-hot);
+  outline-offset: 2px;
+}
+
+.contact-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Anchored sections sit below the fixed header (and the offer strip) */
+#scope,
+#phase-1,
+#work {
+  scroll-margin-top: calc(var(--gn-nav-height) + var(--gn-promo-h, 44px) + 8px);
+}
+
+.method-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.method-point {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 22px 0;
+  border-top: 1px solid var(--gn-line);
+}
+
+.method-point:last-child {
+  border-bottom: 1px solid var(--gn-line);
+}
+
+.proof-card {
+  padding: clamp(24px, 3vw, 40px);
+}
+
+/* Header fit: four links plus the revealed CTA need room. */
+@media (max-width: 1099px) {
+  .site-nav-pill {
+    gap: 10px;
+    padding: 0 16px;
+  }
+
+  .site-nav-link {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 899px) {
+  .site-nav-cta-slot {
+    display: none;
+  }
+}

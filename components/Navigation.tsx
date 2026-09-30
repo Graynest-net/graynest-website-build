@@ -13,6 +13,9 @@ export function Navigation() {
   const [hidden, setHidden] = useState(false)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
+  // Keep the hero's own "Start a project" as the only primary CTA on screen;
+  // reveal the header CTA once the hero has scrolled out of view.
+  const [pastHero, setPastHero] = useState(false)
 
   useEffect(() => {
     /**
@@ -43,6 +46,21 @@ export function Navigation() {
       document.body.style.overflow = ""
     }
   }, [menuOpen])
+
+  useEffect(() => {
+    const hero = document.querySelector(".hero-section")
+    // Pages without a hero (e.g. legal) keep the header CTA visible.
+    if (!hero) {
+      setPastHero(true)
+      return
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => setPastHero(!entry.isIntersecting),
+      { threshold: 0 },
+    )
+    observer.observe(hero)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <header
@@ -78,14 +96,34 @@ export function Navigation() {
             <Link href="/software-engineering" className="site-nav-link">
               Software
             </Link>
+            <span className="site-nav-dot" aria-hidden="true">
+              ·
+            </span>
+            <Link href="/#scope" className="site-nav-link">
+              Scope Before Spend
+            </Link>
+            <span className="site-nav-dot" aria-hidden="true">
+              ·
+            </span>
+            <Link href="/#phase-1" className="site-nav-link">
+              Phase-1 Ship
+            </Link>
           </div>
         </div>
 
         <div className="site-nav-actions">
           <ThemeToggle />
-          <Link href="/contact" className="btn-primary nav-cta site-nav-cta">
-            Start a project <Icon name="arrow-right" />
-          </Link>
+          <div className={`site-nav-cta-slot ${pastHero ? "is-open" : ""}`.trim()}>
+            <Link
+              href="/contact"
+              className="btn-primary nav-cta site-nav-cta"
+              data-event="cta_project"
+              aria-hidden={!pastHero}
+              tabIndex={pastHero ? undefined : -1}
+            >
+              Talk to us <Icon name="arrow-right" />
+            </Link>
+          </div>
           <button
             type="button"
             className="site-nav-menu-btn"
@@ -115,8 +153,14 @@ export function Navigation() {
           <Link href="/software-engineering" onClick={() => setMenuOpen(false)}>
             Software
           </Link>
+          <Link href="/#scope" onClick={() => setMenuOpen(false)}>
+            Scope Before Spend
+          </Link>
+          <Link href="/#phase-1" onClick={() => setMenuOpen(false)}>
+            Phase-1 Ship
+          </Link>
           <Link href="/contact" onClick={() => setMenuOpen(false)}>
-            Start a project
+            Talk to us
           </Link>
         </div>
         <div className="mobile-menu-footer">
