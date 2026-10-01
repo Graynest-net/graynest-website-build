@@ -549,6 +549,34 @@
       "negative": "text, letters, headline, badge, pill, watermark, face, eyes, mouth, skin, photographic texture, film grain, cartoon proportions, rounded low-poly blob, extra glowing parts, glowing head, red background, red fill, busy background, flat background, hard edges at frame border",
       "component": "app/ai-agents/page.tsx",
       "asset": "/media/agents.meet.persona.webp"
+    },
+    {
+      "id": "work.nutrifit.web",
+      "page": "/ and /software-engineering",
+      "section": "Shipped, NutriFit web app",
+      "type": "image",
+      "register": "system",
+      "status": "ready",
+      "source": "Shots Mockups (1).png",
+      "aspect": "4:3",
+      "size": "1600x1200",
+      "alt": "The NutriFit web app open on a consultation record: a nutritionist's body composition measurements beside the patient's health context",
+      "asset": "/media/work.nutrifit.web.webp",
+      "frameNote": "product shot supplied by the owner"
+    },
+    {
+      "id": "work.nutrifit.mobile",
+      "page": "/ and /software-engineering",
+      "section": "Shipped, NutriFit mobile app",
+      "type": "image",
+      "register": "system",
+      "status": "ready",
+      "source": "Shots Mockups.png",
+      "aspect": "4:3",
+      "size": "1600x1200",
+      "alt": "Two phones showing the NutriFit mobile app home screen, one in Arabic and one in English, with the day's meal plan marked done",
+      "asset": "/media/work.nutrifit.mobile.webp",
+      "frameNote": "product shot supplied by the owner"
     }
   ],
   "deferred": [

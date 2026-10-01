@@ -2789,6 +2789,17 @@ body:has([data-clinic]) {
   padding: clamp(24px, 3vw, 40px);
 }
 
+.proof-shot .media-slot {
+  border: 1px solid var(--gn-glass-border);
+}
+
+.proof-shot-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
+}
+
 /* Header fit: four links plus the revealed CTA need room. */
 @media (max-width: 1099px) {
   .site-nav-pill {
