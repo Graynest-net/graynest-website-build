@@ -2807,7 +2807,7 @@ body:has([data-clinic]) {
   }
 }
 
-/* Track record: a quiet typographic band under the hero, not a logo wall. */
+/* Team experience: a quiet typographic band under the hero, not a logo wall. */
 .track-record {
   padding-block: clamp(40px, 6vw, 72px);
 }

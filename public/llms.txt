@@ -17,9 +17,10 @@
 - Five phases: discovery, architecture, build, ship, maintain
 - MVPs for startups in weeks
 
-## Track record
-- The GrayNest team has shipped software for Nokia, Red Hat, Stella Stays,
-  and more than 20 startups, new and established
+## Team experience
+- Individually, GrayNest's engineers have built software for Nokia, Red Hat,
+  Stella Stays, and more than 20 startups, new and established. These were
+  not GrayNest projects
 
 ## Contact
 - Email: hello@graynest.co
