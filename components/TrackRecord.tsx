@@ -9,8 +9,9 @@ const RECORD = [
 ] as const
 
 /**
- * The team's track record, set in type rather than as a logo wall: the names are
- * where our engineers have shipped, not endorsements, so no brand marks.
+ * The team's experience, set in type rather than as a logo wall. These are brands
+ * our engineers built for individually, not GrayNest clients, so no brand marks
+ * and no copy that implies GrayNest shipped for them.
  */
 export function TrackRecord() {
   return (
@@ -21,11 +22,11 @@ export function TrackRecord() {
       <div className="grid-12">
         <Reveal className="col-span-full lg:col-span-4">
           <p className="micro mb-4 flex items-center gap-3">
-            <CoreGlow size={12} /> TRACK RECORD
+            <CoreGlow size={12} /> TEAM EXPERIENCE
           </p>
           <h2 id="track-record-title" className="body max-w-[38ch]">
-            Our team has shipped software for global brands and for more than twenty
-            startups, from first release to long-running products.
+            Between them, the engineers behind GrayNest have built software for global
+            brands and for more than twenty startups, new and established.
           </h2>
         </Reveal>
 
