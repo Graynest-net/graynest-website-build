@@ -1,6 +1,7 @@
 import { TalkToAgentButton } from "@/components/agent/TalkToAgentButton"
 import { MethodSections } from "@/components/MethodSections"
 import { ProofStrip } from "@/components/ProofStrip"
+import { TrackRecord } from "@/components/TrackRecord"
 import { Navigation } from "@/components/Navigation"
 import { PromoBar } from "@/components/PromoBar"
 import { Footer } from "@/components/Footer"
@@ -91,6 +92,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <TrackRecord />
 
       {/* ── Services ── */}
       <section className="section-padding relative overflow-hidden border-t border-[var(--gn-line)]">

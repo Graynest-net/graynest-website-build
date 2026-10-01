@@ -2806,3 +2806,42 @@ body:has([data-clinic]) {
     display: none;
   }
 }
+
+/* Track record: a quiet typographic band under the hero, not a logo wall. */
+.track-record {
+  padding-block: clamp(40px, 6vw, 72px);
+}
+
+.track-record-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--gn-line);
+}
+
+.track-record-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 16px 20px 0;
+  border-bottom: 1px solid var(--gn-line);
+}
+
+.track-record-name {
+  font-family: var(--font-satoshi);
+  font-weight: 800;
+  font-size: clamp(20px, 2.1vw, 30px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+}
+
+@media (min-width: 768px) {
+  .track-record-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .track-record-item + .track-record-item {
+    padding-left: 20px;
+    border-left: 1px solid var(--gn-line);
+  }
+}

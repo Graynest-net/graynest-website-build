@@ -1,4 +1,5 @@
 import { ProofStrip } from "@/components/ProofStrip"
+import { TrackRecord } from "@/components/TrackRecord"
 import { Navigation } from "@/components/Navigation"
 import { Footer } from "@/components/Footer"
 import { CoreGlow } from "@/components/CoreGlow"
@@ -118,6 +119,8 @@ export default function SoftwareEngineeringPage() {
           </div>
         </div>
       </section>
+
+      <TrackRecord />
 
       {/* ── What we build ── */}
       <section className="section-padding relative overflow-hidden border-t border-[var(--gn-line)]">
