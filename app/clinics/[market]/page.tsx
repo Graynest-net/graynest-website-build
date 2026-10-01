@@ -1,25 +1,11 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { IBM_Plex_Sans_Arabic } from "next/font/google"
-import {
-  BellRing,
-  CalendarCheck,
-  CalendarX2,
-  Clock3,
-  Globe,
-  Mail,
-  MessageCircle,
-  MessageCircleQuestion,
-  MessageSquareReply,
-  MoonStar,
-  Repeat2,
-  ShieldCheck,
-  UserRoundCheck,
-  Zap,
-} from "lucide-react"
+import { ArrowRight, Globe, Mail, MessageCircle, ShieldCheck } from "lucide-react"
 import { CONTACT, COPY, MARKETS, firstMonthPrice, formatPrice, type Market } from "@/content/clinics-onepager"
-import { SheetFit } from "./SheetFit"
-import styles from "./sheet.module.css"
+import { ChatDemo } from "./ChatDemo"
+import { Reveal } from "./Reveal"
+import styles from "./page.module.css"
 
 const plexArabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
@@ -27,16 +13,6 @@ const plexArabic = IBM_Plex_Sans_Arabic({
   display: "swap",
   variable: "--font-plex-arabic",
 })
-
-const MARKET_LABELS: Record<Market, string> = {
-  ps: "Palestine · ILS",
-  jo: "Jordan · JOD",
-  tr: "Türkiye · TRY",
-  en: "English · USD",
-}
-
-const PROBLEM_ICONS = [MoonStar, CalendarX2, Repeat2]
-const DOES_ICONS = [CalendarCheck, BellRing, MessageCircleQuestion, MessageSquareReply, UserRoundCheck, Clock3]
 
 export const dynamicParams = false
 
@@ -54,242 +30,264 @@ export async function generateMetadata({ params }: { params: Promise<{ market: s
   const copy = COPY[MARKETS[market].lang]
 
   return {
-    title: `GrayNest – ${copy.tag}`,
+    title: `GrayNest — ${copy.headline.join(" ")} ${copy.headlineAccent}`,
     description: copy.subhead,
     alternates: { canonical: `/clinics/${market}` },
-    // Sales collateral with dated local prices: shared by link, kept out of search.
+    // Sales page with dated local prices: shared by link, kept out of search.
     robots: { index: false, follow: false },
   }
 }
 
-/**
- * Clinic one-pager: a single A4 sheet per market, printable and exportable.
- */
-export default async function ClinicSheetPage({
+export default async function ClinicOfferPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ market: string }>
-  searchParams: Promise<{ export?: string; tools?: string }>
 }) {
   const { market } = await params
   if (!isMarket(market)) notFound()
 
   const config = MARKETS[market]
   const copy = COPY[config.lang]
-  const sp = await searchParams
-  // Bare-sheet mode for the PNG/PDF exporter: no toolbar, no page padding, no scaling.
-  const isExport = sp.export === "1"
-  // The market switcher / download buttons are author tools, hidden from prospects. Add ?tools=1 to show them.
-  const showTools = sp.tools === "1"
   const starter = config.prices.starter
   const firstMonth = firstMonthPrice(market)
-  const starterIncludes = copy.tiers.find((t) => t.id === "starter")?.includes ?? copy.offerIncludes
+  // Hero snapshot: the patient's ask and the agent's instant answer.
+  const teaser = copy.thread.slice(0, 2)
 
   return (
     <main
       id="main"
-      className={`${styles.page} ${isExport ? styles.export : ""} ${plexArabic.variable}`.trim()}
+      className={`${styles.page} ${plexArabic.variable}`.trim()}
+      lang={config.lang}
+      dir={copy.dir}
+      data-lang={config.lang}
+      data-clinic
     >
-      {showTools && (
-      <nav className={styles.toolbar} aria-label="Sheet versions">
-        <ul className={styles.toolbarMarkets}>
-          {(Object.keys(MARKETS) as Market[]).map((m) => (
-            <li key={m}>
-              <a href={`/clinics/${m}`} aria-current={m === market ? "page" : undefined}>
-                {MARKET_LABELS[m]}
-              </a>
-            </li>
+      <div className={styles.field} aria-hidden="true">
+        <svg className={styles.hexField} viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+          {HEXES.map(([cx, cy, r], i) => (
+            <polygon key={i} points={hexPoints(cx, cy, r)} fill="none" stroke="rgba(23,23,27,0.05)" strokeWidth="1" />
+          ))}
+        </svg>
+      </div>
+
+      <header className={styles.header}>
+        <a className={styles.brand} href="https://graynest.co">
+          <img src="/brand/graynest-lockup-light.svg" alt="GrayNest" width={132} height={46} />
+        </a>
+        <span className={styles.tag}>{copy.tag}</span>
+        <a className={styles.headerCta} href={CONTACT.whatsappUrl}>
+          <MessageCircle size={15} strokeWidth={2} aria-hidden="true" />
+          {copy.primaryCta}
+        </a>
+      </header>
+
+      {/* ---------- Hero: the promise ---------- */}
+      <section className={styles.hero}>
+        <div className={styles.heroText}>
+          <h1 className={styles.headline}>
+            {copy.headline.map((line) => (
+              <span key={line} className={styles.headlineLine}>
+                {line}
+              </span>
+            ))}
+            <span className={styles.headlineAccent}>{copy.headlineAccent}</span>
+          </h1>
+          <p className={styles.subhead}>{copy.subhead}</p>
+          <div className={styles.heroActions}>
+            <a className={styles.ctaPrimary} href={CONTACT.whatsappUrl}>
+              {copy.primaryCta}
+              <ArrowRight className={styles.ctaArrow} size={18} strokeWidth={2.25} aria-hidden="true" />
+            </a>
+            <a className={styles.ctaGhost} href="#see-it-working">
+              {copy.secondaryCta}
+            </a>
+          </div>
+          <ul className={styles.proofRow}>
+            {copy.proofChips.map((chip) => (
+              <li key={chip}>{chip}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className={styles.heroCard}>
+          <figure className={styles.chatCard} data-static>
+            <figcaption className={styles.chatBar}>
+              <span className={styles.chatAvatar} aria-hidden="true" />
+              <span className={styles.chatMeta}>
+                <span className={styles.chatName}>GrayNest</span>
+                <span className={styles.chatStatus}>{copy.chatOnline}</span>
+              </span>
+            </figcaption>
+            <div className={styles.chatThread}>
+              {teaser.map((msg, i) => (
+                <p key={i} className={msg.from === "agent" ? styles.bubbleOut : styles.bubbleIn}>
+                  {msg.text}
+                </p>
+              ))}
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      {/* ---------- Problem ---------- */}
+      <Reveal as="section" className={styles.problem}>
+        <h2 className={styles.problemTitle}>{copy.problemTitle}</h2>
+        <ul className={styles.problemList}>
+          {copy.problems.map((problem) => (
+            <li key={problem}>{problem}</li>
           ))}
         </ul>
-        <div className={styles.toolbarFiles}>
-          <a href={`/clinics/graynest-clinics-${market}.pdf`} download>
-            PDF
+      </Reveal>
+
+      {/* ---------- See it working: the demonstration ---------- */}
+      <section className={styles.demo} id="see-it-working">
+        <Reveal className={styles.demoText}>
+          <h2 className={styles.sectionTitle}>
+            {copy.demoTitle} <span className={styles.accent}>{copy.demoTitleAccent}</span>
+          </h2>
+          <p className={styles.demoCaption}>{copy.demoCaption}</p>
+          <p className={styles.demoNote}>{copy.demoNote}</p>
+          <a className={styles.ctaPrimary} href={CONTACT.whatsappUrl}>
+            {copy.primaryCta}
+            <ArrowRight className={styles.ctaArrow} size={18} strokeWidth={2.25} aria-hidden="true" />
           </a>
-          <a href={`/clinics/graynest-clinics-${market}.png`} download>
-            PNG
-          </a>
+        </Reveal>
+        <Reveal className={styles.demoStage}>
+          <ChatDemo
+            thread={copy.thread}
+            name="GrayNest"
+            online={copy.chatOnline}
+            typing={copy.chatTyping}
+            replay={copy.chatReplay}
+          />
+        </Reveal>
+      </section>
+
+      {/* ---------- Outcomes ---------- */}
+      <section className={styles.outcomes}>
+        <Reveal as="h2" className={styles.sectionTitle}>
+          {copy.outcomesLabel}
+        </Reveal>
+        <div className={styles.outcomeGrid}>
+          {copy.outcomes.map((outcome, i) => (
+            <Reveal key={outcome.title} className={styles.outcome} delay={i * 80}>
+              <h3 className={styles.outcomeTitle}>{outcome.title}</h3>
+              <p className={styles.outcomeText}>{outcome.text}</p>
+            </Reveal>
+          ))}
         </div>
-      </nav>
-      )}
+      </section>
 
-      <SheetFit>
-        <article
-          className={styles.sheet}
-          lang={config.lang}
-          dir={copy.dir}
-          data-lang={config.lang}
-          data-sheet
-          data-export={isExport ? "" : undefined}
-        >
-          <div className={styles.backdrop} aria-hidden="true">
-            <svg className={styles.hexField} viewBox="0 0 794 1123" preserveAspectRatio="xMidYMid slice">
-              {HEXES.map(([cx, cy, r], i) => (
-                <polygon key={i} points={hexPoints(cx, cy, r)} fill="none" stroke="rgba(22,22,26,0.05)" strokeWidth="1" />
-              ))}
-            </svg>
+      {/* ---------- How it works ---------- */}
+      <section className={styles.steps}>
+        <Reveal className={styles.stepsHead}>
+          <h2 className={styles.sectionTitle}>{copy.stepsTitle}</h2>
+        </Reveal>
+        <ol className={styles.stepList}>
+          {copy.steps.map((step, i) => (
+            <Reveal as="li" key={step.n} delay={i * 80}>
+              <span className={styles.stepNum}>{step.n}</span>
+              <h3 className={styles.stepTitle}>{step.title}</h3>
+              <p className={styles.stepText}>{step.text}</p>
+            </Reveal>
+          ))}
+        </ol>
+      </section>
+
+      {/* ---------- Proof ---------- */}
+      <Reveal as="section" className={styles.proof}>
+        <h2 className={styles.proofTitle}>
+          {copy.proofTitle} <span className={styles.accent}>{copy.proofTitleAccent}</span>
+        </h2>
+        <p className={styles.proofText}>{copy.proofText}</p>
+        <a className={styles.ctaPrimary} href={CONTACT.whatsappUrl}>
+          {copy.primaryCta}
+          <ArrowRight className={styles.ctaArrow} size={18} strokeWidth={2.25} aria-hidden="true" />
+        </a>
+      </Reveal>
+
+      {/* ---------- Price + guarantee ---------- */}
+      <section className={styles.pricing}>
+        <Reveal className={styles.priceCard}>
+          <div className={styles.priceHead}>
+            <span className={styles.discountBadge}>{copy.discountBadge}</span>
           </div>
-
-          <header className={styles.header}>
-            <img
-              className={styles.logo}
-              src="/brand/graynest-lockup-light.svg"
-              alt="GrayNest"
-              width={150}
-              height={52}
-            />
-            <span className={styles.tag}>{copy.tag}</span>
-          </header>
-
-          <section className={styles.hero}>
-            <div className={styles.heroText}>
-              <h1 className={styles.headline}>
-                {copy.headline.map((line) => (
-                  <span key={line} className={styles.headlineLine}>
-                    {line}
-                  </span>
-                ))}
-                <span className={styles.headlineAccent}>{copy.headlineAccent}</span>
-              </h1>
-              <p className={styles.subhead}>{copy.subhead}</p>
-              <span className={styles.heroFlag}>{copy.discountBadge}</span>
-            </div>
-
-            <figure className={styles.chatCard}>
-              <figcaption className={styles.chatBar}>
-                <span className={styles.chatAvatar} aria-hidden="true" />
-                <span className={styles.chatName}>GrayNest</span>
-                <span className={styles.chatStatus}>online</span>
-              </figcaption>
-              <p className={styles.bubbleIn}>{copy.chat.patient}</p>
-              <p className={styles.bubbleOut}>{copy.chat.agent}</p>
-            </figure>
-          </section>
-
-          <ul className={styles.problems}>
-            {copy.problems.map((problem, i) => {
-              const ProblemIcon = PROBLEM_ICONS[i]
-              return (
-                <li key={problem}>
-                  <ProblemIcon className={styles.problemIcon} size={16} strokeWidth={1.75} aria-hidden="true" />
-                  <span>{problem}</span>
-                </li>
-              )
-            })}
+          <p className={styles.priceAmount}>
+            <span className={styles.priceWas}>{formatPrice(starter.monthly, market)}</span>
+            <span className={styles.priceNow}>{formatPrice(firstMonth, market)}</span>
+            <span className={styles.priceUnit}>{copy.firstMonthLabel}</span>
+          </p>
+          <p className={styles.priceAfter}>
+            {copy.afterLabel} {formatPrice(starter.monthly, market)} {copy.perMonth} · + {formatPrice(starter.setup, market)}{" "}
+            {copy.setupLabel}
+          </p>
+          <ul className={styles.includes}>
+            {copy.includes.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
+          {copy.offerScope ? <p className={styles.priceScope}>{copy.offerScope}</p> : null}
+          <div className={styles.priceMeta}>
+            <span className={styles.offerEnds}>{copy.offerEnds}</span>
+            <span className={styles.validity}>
+              {copy.validity}
+              {copy.priceNote ? ` ${copy.priceNote}` : ""}
+            </span>
+          </div>
+        </Reveal>
 
-          <section className={styles.block}>
-            <h2 className={styles.label}>{copy.doesLabel}</h2>
-            <ul className={styles.does}>
-              {copy.does.map((item, i) => {
-                const DoesIcon = DOES_ICONS[i]
-                return (
-                  <li key={item}>
-                    <DoesIcon className={styles.doesIcon} size={15} strokeWidth={1.75} aria-hidden="true" />
-                    <span>{item}</span>
-                  </li>
-                )
-              })}
-            </ul>
-          </section>
+        <Reveal className={styles.guarantee}>
+          <ShieldCheck className={styles.guaranteeIcon} size={26} strokeWidth={1.75} aria-hidden="true" />
+          <h3 className={styles.guaranteeTitle}>{copy.guaranteeTitle}</h3>
+          <p className={styles.guaranteeText}>{copy.guaranteeText}</p>
+        </Reveal>
+      </section>
 
-          <section className={styles.block}>
-            <h2 className={styles.label}>{copy.startsLabel}</h2>
-            <ol className={styles.steps}>
-              {copy.steps.map((step, i) => (
-                <li key={step.day} data-live={i === copy.steps.length - 1 ? "" : undefined}>
-                  <span className={styles.stepNode} aria-hidden="true" />
-                  <span className={styles.stepDay}>{step.day}</span>
-                  <span className={styles.stepText}>{step.text}</span>
-                </li>
-              ))}
-            </ol>
-          </section>
+      {/* ---------- Final CTA ---------- */}
+      <Reveal as="section" className={styles.final}>
+        <div className={styles.finalText}>
+          <h2 className={styles.finalTitle}>
+            {copy.finalTitle} <span className={styles.accent}>{copy.finalAccent}</span>
+          </h2>
+          <a className={styles.ctaPrimary} href={CONTACT.whatsappUrl}>
+            {copy.finalCta}
+            <ArrowRight className={styles.ctaArrow} size={18} strokeWidth={2.25} aria-hidden="true" />
+          </a>
+          <ul className={styles.contacts}>
+            <li>
+              <Mail size={14} strokeWidth={2} aria-hidden="true" />
+              <a href={`mailto:${CONTACT.email}`} dir="ltr">
+                {CONTACT.email}
+              </a>
+            </li>
+            <li>
+              <Globe size={14} strokeWidth={2} aria-hidden="true" />
+              <a href={`https://${CONTACT.web}`} dir="ltr">
+                {CONTACT.web}
+              </a>
+            </li>
+          </ul>
+        </div>
 
-          <section className={styles.guarantee}>
-            <ShieldCheck className={styles.guaranteeIcon} size={30} strokeWidth={1.5} aria-hidden="true" />
-            <div>
-              <h2 className={styles.guaranteeTitle}>{copy.guaranteeTitle}</h2>
-              <p className={styles.guaranteeText}>{copy.guaranteeText}</p>
-            </div>
-          </section>
+        <a className={styles.qr} href={CONTACT.whatsappUrl} aria-label={`WhatsApp ${CONTACT.whatsappDisplay}`}>
+          <img src="/media/clinics.qr.whatsapp.svg" alt="" width={104} height={104} />
+          <span>{copy.scanLabel}</span>
+        </a>
+      </Reveal>
 
-          <section className={styles.offer} aria-label={copy.discountBadge}>
-            <div className={styles.offerMain}>
-              <span className={styles.discountBadge}>{copy.discountBadge}</span>
-              <p className={styles.offerAmount}>
-                <span className={styles.offerWas}>{formatPrice(starter.monthly, market)}</span>
-                <span className={styles.offerMonthly}>{formatPrice(firstMonth, market)}</span>
-                <span className={styles.offerFirstMonth}>{copy.firstMonthLabel}</span>
-              </p>
-              <p className={styles.offerAfter}>
-                {copy.afterLabel} {formatPrice(starter.monthly, market)} {copy.perMonth} · +{" "}
-                {formatPrice(starter.setup, market)} {copy.setupLabel}
-              </p>
-            </div>
-            <div className={styles.offerDetail}>
-              <span className={styles.offerLive}>
-                <Zap size={13} strokeWidth={2.25} aria-hidden="true" />
-                {copy.liveIn}
-              </span>
-              <p className={styles.offerIncludes}>{starterIncludes}</p>
-              {copy.offerScope ? <p className={styles.offerScope}>{copy.offerScope}</p> : null}
-              <p className={styles.validity}>
-                {copy.validity}
-                {copy.priceNote ? ` ${copy.priceNote}` : ""}
-              </p>
-            </div>
-            <p className={styles.offerEnds}>{copy.offerEnds}</p>
-          </section>
-
-          <footer className={styles.cta}>
-            <div className={styles.ctaText}>
-              <h2 className={styles.ctaTitle}>
-                {copy.ctaTitle} <span className={styles.ctaAccent}>{copy.ctaAccent}</span>
-              </h2>
-              <p>{copy.ctaText}</p>
-              <ul className={styles.contacts}>
-                <li>
-                  <MessageCircle size={14} strokeWidth={2} aria-hidden="true" />
-                  <a href={CONTACT.whatsappUrl} dir="ltr">
-                    {CONTACT.whatsappDisplay}
-                  </a>
-                </li>
-                <li>
-                  <Mail size={14} strokeWidth={2} aria-hidden="true" />
-                  <a href={`mailto:${CONTACT.email}`} dir="ltr">
-                    {CONTACT.email}
-                  </a>
-                </li>
-                <li>
-                  <Globe size={14} strokeWidth={2} aria-hidden="true" />
-                  <a href={`https://${CONTACT.web}`} dir="ltr">
-                    {CONTACT.web}
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <a className={styles.qr} href={CONTACT.whatsappUrl} aria-label={`WhatsApp ${CONTACT.whatsappDisplay}`}>
-              <img src="/media/clinics.qr.whatsapp.svg" alt="" width={92} height={92} />
-              <span>{copy.scanLabel}</span>
-            </a>
-          </footer>
-
-          <p className={styles.smallPrint}>{copy.smallPrint}</p>
-        </article>
-      </SheetFit>
+      <footer className={styles.footer}>
+        <p className={styles.smallPrint}>{copy.smallPrint}</p>
+      </footer>
     </main>
   )
 }
 
-/** Soft background hexes as [cx, cy, radius], placed away from the text column. */
+/** Soft background hexes as [cx, cy, radius], placed toward the corners. */
 const HEXES: [number, number, number][] = [
-  [690, 120, 170],
-  [560, 330, 90],
-  [770, 420, 120],
-  [40, 610, 110],
-  [720, 760, 80],
-  [120, 1020, 150],
+  [1300, 120, 220],
+  [1180, 470, 120],
+  [80, 260, 150],
+  [180, 760, 110],
 ]
 
 function hexPoints(cx: number, cy: number, r: number): string {

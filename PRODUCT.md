@@ -60,7 +60,8 @@ Four claims a neighbouring agency could not truthfully copy, all four binding:
 ## Evidence on Hand
 
 - **Real:** the ElevenLabs Ask GrayNest agent. It works and can be heard and read as the demo; it is the strongest proof the site has.
-- **Real but unpublishable today:** client work, including named clients and case studies. Permission is not cleared. Future work must not publish client names, logos, project details or outcomes until the owner supplies them.
+- **Real and cleared by the owner (2026-10-01):** the team's track record: Nokia, Red Hat, Stella Stays, and 20+ startups (new and established). Shown as type in `components/TrackRecord.tsx`, framed as where the team has shipped, never as logos or endorsements. Add no other names without the owner.
+- **Real but unpublishable today:** other client work, including named clients and case studies. Permission is not cleared. Future work must not publish client names, logos, project details or outcomes until the owner supplies them.
 - **Does not exist — never fabricate:** statistics, user counts, uptime or performance figures, testimonials, press, awards, team headcount, pricing.
 - The static chat card on `/ai-agents` labelled "LIVE DEMO" is a mock; it must not be presented as live (open finding in the audit).
 

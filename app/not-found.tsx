@@ -27,9 +27,20 @@ export default function NotFound() {
               <span className="accent-word">shipped.</span>
             </h1>
             <p className="body-lg mt-8">But it is not here.</p>
-            <Link href="/" className="btn-primary mt-10">
-              <Icon name="arrow-left" /> Back home
-            </Link>
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-10">
+              <Link href="/" className="btn-primary">
+                <Icon name="arrow-left" /> Back home
+              </Link>
+              <Link href="/ai-agents" className="btn-glass">
+                AI Agents
+              </Link>
+              <Link href="/software-engineering" className="btn-glass">
+                Software
+              </Link>
+              <Link href="/contact" className="btn-glass">
+                Contact
+              </Link>
+            </div>
           </div>
         </div>
       </section>

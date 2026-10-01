@@ -1,9 +1,9 @@
 /**
- * Clinic one-pager: copy per language and prices per market.
+ * Clinics offer landing page: copy per language, prices per market.
  *
  * Prices are anchored in USD. Local amounts are the USD equivalent at the rate
  * on ISSUED_ON, rounded to a clean number. To re-issue, update RATES and
- * ISSUED_ON, re-round the local amounts, then re-export the PDF and PNG.
+ * ISSUED_ON, re-round the local amounts in MARKETS, then re-check the page.
  */
 
 export type Lang = "ar" | "en" | "tr"
@@ -70,254 +70,329 @@ export const MARKETS: Record<Market, MarketConfig> = {
   },
 }
 
-interface Tier {
-  id: TierId
-  name: string
-  fit: string
-  includes: string
-}
+export type ChatFrom = "patient" | "agent"
 
-export interface SheetCopy {
+export interface PageCopy {
   dir: "rtl" | "ltr"
   numberLocale: string
   tag: string
+
+  // Hero — the promise
   headline: string[]
   headlineAccent: string
   subhead: string
-  /** Sample exchange shown on the persona's phone. */
-  chat: { patient: string; agent: string }
+  primaryCta: string
+  secondaryCta: string
+  proofChips: string[]
+
+  // Problem
+  problemTitle: string
   problems: string[]
-  doesLabel: string
-  does: string[]
-  startsLabel: string
-  steps: { day: string; text: string }[]
-  guaranteeTitle: string
-  guaranteeText: string
+
+  // See it working — the demonstration
+  demoTitle: string
+  demoTitleAccent: string
+  demoCaption: string
+  thread: { from: ChatFrom; text: string }[]
+  demoNote: string
+  chatOnline: string
+  chatTyping: string
+  chatReplay: string
+
+  // Outcomes
+  outcomesLabel: string
+  outcomes: { title: string; text: string }[]
+
+  // How it works
+  stepsTitle: string
+  steps: { n: string; title: string; text: string }[]
+  liveIn: string
+
+  // Proof
+  proofTitle: string
+  proofTitleAccent: string
+  proofText: string
+
+  // Price
   discountBadge: string
   firstMonthLabel: string
   afterLabel: string
-  offerEnds: string
-  setupLabel: string
   perMonth: string
-  offerIncludes: string
+  setupLabel: string
+  includes: string[]
   offerScope?: string
+  offerEnds: string
   validity: string
   priceNote?: string
-  liveIn: string
-  tiers: Tier[]
-  ctaTitle: string
-  ctaAccent: string
-  ctaText: string
+
+  // Guarantee
+  guaranteeTitle: string
+  guaranteeText: string
+
+  // Final CTA
+  finalTitle: string
+  finalAccent: string
+  finalText: string
+  finalCta: string
   scanLabel: string
+
   smallPrint: string
 }
 
-export const COPY: Record<Lang, SheetCopy> = {
-  ar: {
-    dir: "rtl",
-    numberLocale: "ar-u-nu-arab",
-    tag: "وكلاء ذكاء اصطناعي للعيادات",
-    headline: ["كل مريض يحجز.", "كل موعد يتأكد."],
-    headlineAccent: "على واتساب، ٢٤ ساعة.",
-    subhead:
-      "موظف ذكي يرد على مرضاك بلهجتهم، يحجز المواعيد، ويذكّرهم قبل الموعد. جاهز خلال ٧ أيام.",
-    chat: { patient: "بدي موعد يوم الثلاثاء", agent: "تم ✓ الثلاثاء ٤:٣٠ مساءً. رح أذكّرك قبلها بيوم." },
-    problems: [
-      "رسائل واتساب بدون رد خارج الدوام تعني مريضاً يحجز عند غيرك.",
-      "مواعيد تضيع لأن المريض نسي.",
-      "فريقك مشغول بالرد على نفس الأسئلة كل يوم: كم السعر؟ وين العيادة؟ كيف أتحضّر؟",
-    ],
-    doesLabel: "وكيل واحد، مكتب استقبالك كامل",
-    does: [
-      "يحجز المواعيد ويعيد جدولتها ويلغيها",
-      "يرسل تذكيرات قبل الموعد ويطلب التأكيد",
-      "يجيب عن الأسعار والموقع وساعات الدوام والتحضير للزيارة",
-      "يتابع المريض بعد الزيارة",
-      "يحوّل الحالة لموظف حقيقي عندما يحتاج الأمر إنساناً",
-      "يشتغل ٢٤ ساعة، بلا إجازات",
-    ],
-    startsLabel: "كيف نبدأ",
-    steps: [
-      { day: "اليوم ١", text: "نجلس معك ونحدد خدماتك وأسعارك وأسئلة مرضاك." },
-      { day: "اليوم ٣", text: "نبني الوكيل ونجربه معك على حالات حقيقية." },
-      { day: "اليوم ٧", text: "يبدأ الرد على مرضاك." },
-    ],
-    guaranteeTitle: "نضمن أنه يشتغل.",
-    guaranteeText:
-      "قبل البدء نكتب معك ٤ معايير واضحة (مثلاً: يجيب عن الأسعار بدقة، يحجز بدون تدخل أحد، يحوّل للموظف عند الحاجة). ونعدّل مجاناً إلى أن يحقق كلها.",
-    discountBadge: "خصم ٥٠٪ على أول شهر",
-    firstMonthLabel: "الشهر الأول",
-    afterLabel: "بعدها",
-    offerEnds: "العرض ساري حتى ٣١ كانون الأول ٢٠٢٦ — من ٢٠٢٧ بالسعر الأصلي.",
-    setupLabel: "رسوم إعداد لمرة واحدة",
-    perMonth: "شهرياً",
-    offerIncludes: "الحجز، التذكيرات، التأكيد، الأسئلة الشائعة، ورقم واتساب واحد.",
-    offerScope: "عيادة واحدة. الفروع والتكاملات والمسارات الخاصة نتفق عليها معك.",
-    liveIn: "يشتغل خلال ٧ أيام",
-    validity: "السعر ساري خلال تشرين الأول ٢٠٢٦، بما يعادل السعر بالدولار.",
-    tiers: [
-      {
-        id: "starter",
-        name: "البداية",
-        fit: "طبيب واحد",
-        includes: "الحجز، التذكيرات، الأسئلة الشائعة، رقم واتساب واحد",
-      },
-      {
-        id: "growth",
-        name: "النمو",
-        fit: "عيادة بعدة أطباء",
-        includes: "كل ما في البداية + تقويم لكل طبيب، متابعة بعد الزيارة",
-      },
-      {
-        id: "business",
-        name: "الأعمال",
-        fit: "مجموعات وعدة فروع",
-        includes: "كل ما في النمو + عدة فروع، ربط مع برنامج العيادة، مسارات خاصة، دعم بأولوية",
-      },
-    ],
-    ctaTitle: "لا تصدّقنا.",
-    ctaAccent: "كلّم الوكيل.",
-    ctaText: "الرقم تحت هو الوكيل نفسه، مش رقم مبيعات. راسله على واتساب، وبتجرّب بالضبط اللي رح يعيشه مريضك.",
-    scanLabel: "امسح — هذا هو الوكيل",
-    smallPrint: "يتحدث الوكيل بالعربية (اللهجة الفلسطينية والأردنية) وبالتركية.",
-  },
+export const COPY: Record<Lang, PageCopy> = {
   en: {
     dir: "ltr",
     numberLocale: "en-US",
-    tag: "AI agents for clinics",
+    tag: "Your WhatsApp front desk",
+
     headline: ["Every patient booked.", "Every appointment confirmed."],
-    headlineAccent: "On WhatsApp, 24/7.",
+    headlineAccent: "On WhatsApp, around the clock.",
     subhead:
-      "An AI agent that answers your patients in their own dialect, books appointments and reminds them before the visit. Live in 7 days.",
-    chat: { patient: "Can I book for Tuesday?", agent: "Done ✓ Tuesday, 4:30 PM. I'll remind you the day before." },
+      "Your WhatsApp front desk, on autopilot — answering patients in their own dialect, booking appointments and reminding them before the visit.",
+    primaryCta: "Try the agent",
+    secondaryCta: "See it book a patient",
+    proofChips: ["On WhatsApp", "Answers 24/7", "Their own dialect", "Live in 7 days"],
+
+    problemTitle: "Where clinics lose patients",
     problems: [
-      "Messages left unanswered after hours become patients who book elsewhere.",
-      "Appointments lost to forgetfulness.",
-      "Your team keeps answering the same questions all day: price, location, how to prepare.",
+      "Messages after closing go unanswered — and the patient books at the clinic that replied first.",
+      "Appointments slip because no one confirmed or sent a reminder.",
+      "Your team spends the day on the same questions: price, location, hours, how to prepare.",
     ],
-    doesLabel: "One agent, your whole front desk",
-    does: [
-      "Books, reschedules and cancels appointments",
-      "Sends reminders and asks for confirmation",
-      "Answers questions on prices, location, hours and visit preparation",
-      "Follows up after the visit",
-      "Hands over to a real staff member when a person is needed",
-      "Works 24/7, no days off",
+
+    demoTitle: "Watch it book",
+    demoTitleAccent: "a patient.",
+    demoCaption: "A patient messages. It answers, books, confirms, and reminds — start to finish, no one at the desk.",
+    thread: [
+      { from: "patient", text: "Hi, do you have an appointment this week?" },
+      { from: "agent", text: "We do. I have Tuesday 4:30 PM or Wednesday 11:00 AM free." },
+      { from: "patient", text: "Tuesday works." },
+      { from: "agent", text: "Booked ✓ What name should I put it under?" },
+      { from: "patient", text: "Sara" },
+      { from: "agent", text: "You're set, Sara — Tuesday 4:30 PM. I'll remind you the day before." },
     ],
-    startsLabel: "How it starts",
+    demoNote: "This isn't a recording. The number below is the same agent — message it yourself.",
+    chatOnline: "online",
+    chatTyping: "typing…",
+    chatReplay: "Play again",
+
+    outcomesLabel: "What changes for your clinic",
+    outcomes: [
+      { title: "More bookings", text: "Patients book the moment they message — day, night, or after you've closed." },
+      { title: "Fewer no-shows", text: "Every appointment is confirmed and reminded, automatically." },
+      { title: "Less front-desk work", text: "Routine WhatsApp questions are handled without your team touching them." },
+    ],
+
+    stepsTitle: "Live in seven days.",
     steps: [
-      { day: "Day 1", text: "We sit with you and set your services, prices and common patient questions." },
-      { day: "Day 3", text: "We build the agent and test it with you on real cases." },
-      { day: "Day 7", text: "It starts answering your patients." },
+      { n: "1", title: "We learn your clinic", text: "Your services, prices, hours, and the questions patients actually ask." },
+      { n: "2", title: "We build your agent", text: "Configured for your clinic and tested with you on real cases." },
+      { n: "3", title: "You go live", text: "It starts answering your patients on WhatsApp." },
     ],
+    liveIn: "Live in 7 days",
+
+    proofTitle: "Don't take our word.",
+    proofTitleAccent: "Talk to the agent.",
+    proofText:
+      "The WhatsApp number below isn't a sales line — it's the agent itself. Message it and you'll get exactly what your patients get.",
+
+    discountBadge: "50% off your first month",
+    firstMonthLabel: "first month",
+    afterLabel: "then",
+    perMonth: "/ month",
+    setupLabel: "one-time setup",
+    includes: [
+      "Booking, rescheduling and cancellations",
+      "Reminders and confirmations before every visit",
+      "Answers on price, location, hours and preparation",
+      "Handover to your staff when a person is needed",
+      "One WhatsApp number, answering 24/7",
+    ],
+    offerScope: "For a single clinic. Multi-branch, integrations and custom flows are scoped with you.",
+    offerEnds: "Offer ends 31 December 2026 — standard price from 2027.",
+    validity: "Price valid October 2026.",
+
     guaranteeTitle: "We guarantee it works.",
     guaranteeText:
-      "Before we start, we write down 4 clear checks with you (for example: answers prices correctly, books without anyone stepping in, hands over to staff when needed). We fix it free until it passes all of them.",
-    discountBadge: "50% off your first month",
-    firstMonthLabel: "First month",
-    afterLabel: "then",
-    offerEnds: "Offer ends 31 December 2026 — standard price from 2027.",
-    setupLabel: "one-time setup",
-    perMonth: "/ month",
-    offerIncludes: "Booking, reminders, confirmations, FAQ, and one WhatsApp number.",
-    offerScope: "Single clinic. Multi-branch, integrations and custom flows are scoped with you.",
-    liveIn: "Live in 7 days",
-    validity: "Price valid October 2026.",
-    tiers: [
-      {
-        id: "starter",
-        name: "Starter",
-        fit: "Single practitioner",
-        includes: "Booking, reminders, FAQ, 1 WhatsApp number",
-      },
-      {
-        id: "growth",
-        name: "Growth",
-        fit: "Multi-doctor clinic",
-        includes: "Everything in Starter + multiple doctor calendars, post-visit follow-up",
-      },
-      {
-        id: "business",
-        name: "Business",
-        fit: "Chains and multi-branch",
-        includes: "Everything in Growth + multiple branches, clinic software integration, custom flows, priority support",
-      },
-    ],
-    ctaTitle: "Don't take our word.",
-    ctaAccent: "Talk to the agent.",
-    ctaText: "The WhatsApp number below is the agent — not a sales line. Message it and you are talking to exactly what your patients will.",
-    scanLabel: "Scan — it is the agent",
-    smallPrint: "Agent handles conversations in Arabic (Palestinian/Jordanian dialect) and Turkish.",
+      "Before we start, we agree on clear checks with you — answers prices correctly, books without anyone stepping in, hands over to staff when needed. We fix it free until it passes all of them.",
+
+    finalTitle: "Ready to stop losing patients",
+    finalAccent: "on WhatsApp?",
+    finalText: "Message the agent now, or scan to open it on your phone.",
+    finalCta: "Try the agent",
+    scanLabel: "Scan — it's the agent",
+
+    smallPrint: "The agent handles conversations in Arabic (Palestinian/Jordanian dialect) and Turkish.",
   },
+
+  ar: {
+    dir: "rtl",
+    numberLocale: "ar-u-nu-arab",
+    tag: "مكتب استقبالك على واتساب",
+
+    headline: ["كل مريض يحجز.", "كل موعد يتأكد."],
+    headlineAccent: "على واتساب، ٢٤ ساعة.",
+    subhead:
+      "مكتب استقبالك على واتساب، شغّال لحاله — يرد على مرضاك بلهجتهم، يحجز المواعيد، ويذكّرهم قبل الموعد.",
+    primaryCta: "جرّب الوكيل",
+    secondaryCta: "شوفه يحجز موعد",
+    proofChips: ["على واتساب", "يرد ٢٤ ساعة", "بلهجة مرضاك", "جاهز خلال ٧ أيام"],
+
+    problemTitle: "وين العيادات بتخسر مرضاها",
+    problems: [
+      "رسالة بتيجي بعد الدوام وبتظل بدون رد — والمريض بيحجز عند العيادة اللي ردّت عليه.",
+      "مواعيد بتضيع لأنه ما حدا أكّد الموعد أو ذكّر فيه.",
+      "فريقك بيقضي يومه على نفس الأسئلة: كم السعر؟ وين العيادة؟ إيمتى الدوام؟ كيف أتحضّر؟",
+    ],
+
+    demoTitle: "شوفه يحجز",
+    demoTitleAccent: "موعد مريض.",
+    demoCaption: "المريض بيراسل. الوكيل بيرد، بيحجز، بيأكّد، وبيذكّر — من الأول للآخر، وما حدا على المكتب.",
+    thread: [
+      { from: "patient", text: "مرحبا، في موعد فاضي هالأسبوع؟" },
+      { from: "agent", text: "أكيد. عندي الثلاثاء ٤:٣٠ العصر أو الأربعاء ١١:٠٠ الصبح." },
+      { from: "patient", text: "الثلاثاء مناسب." },
+      { from: "agent", text: "تم الحجز ✓ على أي اسم أسجّله؟" },
+      { from: "patient", text: "سارة" },
+      { from: "agent", text: "تمام يا سارة — الثلاثاء ٤:٣٠ العصر. رح أذكّرك قبلها بيوم." },
+    ],
+    demoNote: "هاي مش تسجيل. الرقم تحت هو نفس الوكيل — راسله وجرّبه بنفسك.",
+    chatOnline: "متصل",
+    chatTyping: "بيكتب…",
+    chatReplay: "شغّلها من جديد",
+
+    outcomesLabel: "شو بيتغيّر في عيادتك",
+    outcomes: [
+      { title: "حجوزات أكثر", text: "المريض بيحجز بنفس اللحظة اللي بيراسل فيها — نهار، ليل، وبعد ما تسكّر." },
+      { title: "غيابات أقل", text: "كل موعد بيتأكّد وبيجيه تذكير، تلقائياً." },
+      { title: "شغل أقل على الاستقبال", text: "أسئلة واتساب المتكررة بتنحل بدون ما يلمسها فريقك." },
+    ],
+
+    stepsTitle: "جاهز خلال سبعة أيام.",
+    steps: [
+      { n: "١", title: "نتعرّف على عيادتك", text: "خدماتك، أسعارك، ساعات دوامك، والأسئلة اللي بيسألها مرضاك فعلاً." },
+      { n: "٢", title: "نبني وكيلك", text: "مضبوط على عيادتك ومجرّب معك على حالات حقيقية." },
+      { n: "٣", title: "تبدأ الخدمة", text: "يبدأ يرد على مرضاك على واتساب." },
+    ],
+    liveIn: "جاهز خلال ٧ أيام",
+
+    proofTitle: "لا تصدّقنا.",
+    proofTitleAccent: "كلّم الوكيل.",
+    proofText:
+      "الرقم تحت مش رقم مبيعات — هو الوكيل نفسه. راسله وبتوصلك بالضبط نفس التجربة اللي رح يعيشها مريضك.",
+
+    discountBadge: "خصم ٥٠٪ على أول شهر",
+    firstMonthLabel: "الشهر الأول",
+    afterLabel: "بعدها",
+    perMonth: "شهرياً",
+    setupLabel: "رسوم إعداد لمرة واحدة",
+    includes: [
+      "الحجز وإعادة الجدولة والإلغاء",
+      "تذكيرات وتأكيد قبل كل موعد",
+      "إجابات عن السعر والموقع والدوام والتحضير",
+      "تحويل الحالة لموظفك لما يحتاج الأمر إنساناً",
+      "رقم واتساب واحد يرد ٢٤ ساعة",
+    ],
+    offerScope: "لعيادة واحدة. الفروع والتكاملات والمسارات الخاصة نتفق عليها معك.",
+    offerEnds: "العرض ساري حتى ٣١ كانون الأول ٢٠٢٦ — من ٢٠٢٧ بالسعر الأصلي.",
+    validity: "السعر ساري خلال تشرين الأول ٢٠٢٦، بما يعادل السعر بالدولار.",
+
+    guaranteeTitle: "نضمن إنه يشتغل.",
+    guaranteeText:
+      "قبل ما نبدأ نتفق معك على معايير واضحة — يجيب عن الأسعار بدقة، يحجز بدون تدخل أحد، يحوّل للموظف عند الحاجة. ونعدّل مجاناً لحدّ ما يحقق كلها.",
+
+    finalTitle: "جاهز توقف خسارة المرضى",
+    finalAccent: "على واتساب؟",
+    finalText: "راسل الوكيل هلأ، أو امسح الرمز تفتحه على تلفونك.",
+    finalCta: "جرّب الوكيل",
+    scanLabel: "امسح — هذا هو الوكيل",
+
+    smallPrint: "يتحدث الوكيل بالعربية (اللهجة الفلسطينية والأردنية) وبالتركية.",
+  },
+
   tr: {
     dir: "ltr",
     numberLocale: "tr-TR",
-    tag: "Klinikler için yapay zeka asistanı",
+    tag: "WhatsApp'taki resepsiyonunuz",
+
     headline: ["Her hasta randevusunu alır.", "Her randevu onaylanır."],
     headlineAccent: "WhatsApp'ta, 7/24.",
     subhead:
-      "Hastalarınıza kendi dilinde yanıt veren, randevuları alan ve randevudan önce hatırlatma yapan yapay zeka asistanı. 7 günde hazır.",
-    chat: { patient: "Salı günü randevu alabilir miyim?", agent: "Tamam ✓ Salı 16:30. Bir gün önce hatırlatacağım." },
+      "WhatsApp'taki resepsiyonunuz, kendi kendine çalışır — hastalarınıza kendi dilinde yanıt verir, randevu alır ve muayeneden önce hatırlatır.",
+    primaryCta: "Asistanı deneyin",
+    secondaryCta: "Randevu alışını izleyin",
+    proofChips: ["WhatsApp'ta", "7/24 yanıt", "Kendi dilinde", "7 günde hazır"],
+
+    problemTitle: "Klinikler hastalarını nerede kaybeder",
     problems: [
-      "Mesai dışında cevapsız kalan WhatsApp mesajları, başka kliniğe giden hastalar demektir.",
-      "Hasta unuttuğu için boşa giden randevular.",
-      "Ekibiniz her gün aynı sorulara yanıt vermekle meşgul: Ücret ne kadar? Klinik nerede? Muayeneye nasıl hazırlanmalı?",
+      "Mesai sonrası gelen mesaj yanıtsız kalır — hasta ise ilk cevap veren kliniğe gider.",
+      "Kimse onaylamadığı ya da hatırlatmadığı için randevular boşa gider.",
+      "Ekibiniz gününü aynı sorulara harcar: ücret, adres, çalışma saatleri, nasıl hazırlanılır.",
     ],
-    doesLabel: "Asistan neler yapar",
-    does: [
-      "Randevu alır, erteler ve iptal eder",
-      "Randevu öncesi hatırlatma gönderir ve onay ister",
-      "Ücret, adres, çalışma saatleri ve muayene hazırlığı sorularını yanıtlar",
-      "Muayene sonrası hastayı takip eder",
-      "İnsan gerektiğinde konuyu klinik çalışanına devreder",
-      "7/24 çalışır, izin yapmaz",
+
+    demoTitle: "Bir hastanın randevusunu",
+    demoTitleAccent: "alışını izleyin.",
+    demoCaption: "Hasta yazar. Asistan yanıtlar, randevu alır, onaylar ve hatırlatır — baştan sona, masada kimse yok.",
+    thread: [
+      { from: "patient", text: "Merhaba, bu hafta randevunuz var mı?" },
+      { from: "agent", text: "Var. Salı 16:30 ya da Çarşamba 11:00 boşta." },
+      { from: "patient", text: "Salı uygun." },
+      { from: "agent", text: "Alındı ✓ Hangi isme kaydedeyim?" },
+      { from: "patient", text: "Sara" },
+      { from: "agent", text: "Hazırsınız Sara — Salı 16:30. Bir gün önce hatırlatacağım." },
     ],
-    startsLabel: "Nasıl başlar",
+    demoNote: "Bu bir kayıt değil. Aşağıdaki numara aynı asistan — kendiniz yazın.",
+    chatOnline: "çevrimiçi",
+    chatTyping: "yazıyor…",
+    chatReplay: "Tekrar oynat",
+
+    outcomesLabel: "Kliniğinizde ne değişir",
+    outcomes: [
+      { title: "Daha çok randevu", text: "Hasta yazdığı anda randevu alır — gündüz, gece, kapandıktan sonra." },
+      { title: "Daha az kaçan randevu", text: "Her randevu otomatik onaylanır ve hatırlatılır." },
+      { title: "Daha az resepsiyon yükü", text: "Sık gelen WhatsApp soruları ekibiniz dokunmadan çözülür." },
+    ],
+
+    stepsTitle: "Yedi günde hazır.",
     steps: [
-      {
-        day: "1. Gün",
-        text: "Sizinle oturup hizmetlerinizi, fiyatlarınızı ve hastaların sık sorduğu soruları belirleriz.",
-      },
-      { day: "3. Gün", text: "Asistanı kurar, gerçek senaryolarla sizinle birlikte test ederiz." },
-      { day: "7. Gün", text: "Hastalarınıza yanıt vermeye başlar." },
+      { n: "1", title: "Kliniğinizi öğreniriz", text: "Hizmetleriniz, fiyatlarınız, saatleriniz ve hastaların gerçekten sorduğu sorular." },
+      { n: "2", title: "Asistanınızı kurarız", text: "Kliniğinize göre yapılandırılır ve gerçek senaryolarla sizinle test edilir." },
+      { n: "3", title: "Yayına geçersiniz", text: "Hastalarınıza WhatsApp'tan yanıt vermeye başlar." },
     ],
-    guaranteeTitle: "Çalıştığını garanti ederiz.",
-    guaranteeText:
-      "Başlamadan önce sizinle 4 net ölçüt yazarız (örneğin: fiyatları doğru söyler, kimse müdahale etmeden randevu alır, gerektiğinde çalışana devreder). Hepsini karşılayana kadar ücretsiz düzeltiriz.",
-    discountBadge: "İlk ay %50 indirim",
-    firstMonthLabel: "İlk ay",
-    afterLabel: "sonra",
-    offerEnds: "Kampanya 31 Aralık 2026'da biter — 2027'de tam fiyat.",
-    setupLabel: "tek seferlik kurulum",
-    perMonth: "/ ay",
-    offerIncludes: "Randevu, hatırlatma, onay, sık sorulan sorular ve 1 WhatsApp numarası.",
     liveIn: "7 günde hazır",
+
+    proofTitle: "Bize inanmayın.",
+    proofTitleAccent: "Asistanla konuşun.",
+    proofText:
+      "Aşağıdaki numara bir satış hattı değil — asistanın kendisi. Yazın ve hastalarınızın alacağı yanıtın aynısını alın.",
+
+    discountBadge: "İlk ay %50 indirim",
+    firstMonthLabel: "ilk ay",
+    afterLabel: "sonra",
+    perMonth: "/ ay",
+    setupLabel: "tek seferlik kurulum",
+    includes: [
+      "Randevu alma, erteleme ve iptal",
+      "Her muayeneden önce hatırlatma ve onay",
+      "Ücret, adres, saat ve hazırlık sorularına yanıt",
+      "Gerektiğinde çalışanınıza devretme",
+      "7/24 yanıt veren tek WhatsApp numarası",
+    ],
+    offerScope: "Tek klinik içindir. Çok şube, entegrasyon ve özel akışlar sizinle planlanır.",
+    offerEnds: "Kampanya 31 Aralık 2026'da biter — 2027'de tam fiyat.",
     validity: "Fiyat Ekim 2026 için geçerlidir.",
     priceNote: "TL fiyat USD karşılığıdır ve sözleşme tarihinde sabitlenir.",
-    tiers: [
-      {
-        id: "starter",
-        name: "Başlangıç",
-        fit: "Tek hekim",
-        includes: "Randevu, hatırlatma, sık sorulan sorular, 1 WhatsApp numarası",
-      },
-      {
-        id: "growth",
-        name: "Büyüme",
-        fit: "Çok hekimli klinik",
-        includes: "Başlangıç'taki her şey + hekim başına takvim, muayene sonrası takip",
-      },
-      {
-        id: "business",
-        name: "Kurumsal",
-        fit: "Zincir ve çok şubeli",
-        includes: "Büyüme'deki her şey + çoklu şube, klinik yazılımı entegrasyonu, özel akışlar, öncelikli destek",
-      },
-    ],
-    ctaTitle: "Asistanı kendi kliniğinizde",
-    ctaAccent: "çalışırken görün.",
-    ctaText: "Hizmetleriniz ve fiyatlarınızla canlı bir demo hazırlarız. WhatsApp'tan bize yazın.",
-    scanLabel: "Sohbet için tarayın",
+
+    guaranteeTitle: "Çalıştığını garanti ederiz.",
+    guaranteeText:
+      "Başlamadan önce sizinle net ölçütlerde anlaşırız — fiyatları doğru söyler, kimse müdahale etmeden randevu alır, gerektiğinde çalışana devreder. Hepsini karşılayana kadar ücretsiz düzeltiriz.",
+
+    finalTitle: "WhatsApp'ta hasta kaybetmeyi",
+    finalAccent: "bırakmaya hazır mısınız?",
+    finalText: "Asistana şimdi yazın ya da telefonunuzda açmak için tarayın.",
+    finalCta: "Asistanı deneyin",
+    scanLabel: "Tarayın — asistan bu",
+
     smallPrint: "Asistan Arapça (Filistin/Ürdün lehçesi) ve Türkçe konuşur.",
   },
 }

@@ -1,3 +1,5 @@
+import { ProofStrip } from "@/components/ProofStrip"
+import { TrackRecord } from "@/components/TrackRecord"
 import { Navigation } from "@/components/Navigation"
 import { Footer } from "@/components/Footer"
 import { CoreGlow } from "@/components/CoreGlow"
@@ -107,16 +109,18 @@ export default function SoftwareEngineeringPage() {
               Web, mobile, backend, and AI where it pays off.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-10">
-              <MagneticButton href="/contact">
+              <MagneticButton href="/contact" event="cta_project">
                 Start a project <Icon name="arrow-right" />
               </MagneticButton>
-              <Link href="/contact" className="btn-glass">
-                <Icon name="phone" /> Book a call
+              <Link href="/contact" className="btn-glass" data-event="cta_contact">
+                <Icon name="message" /> Talk to us
               </Link>
             </div>
           </div>
         </div>
       </section>
+
+      <TrackRecord />
 
       {/* ── What we build ── */}
       <section className="section-padding relative overflow-hidden border-t border-[var(--gn-line)]">
@@ -221,6 +225,8 @@ export default function SoftwareEngineeringPage() {
         </div>
       </section>
 
+      <ProofStrip />
+
       {/* ── CTA ── */}
       <section className="section-padding relative">
         <div className="grid-12">
@@ -244,11 +250,11 @@ export default function SoftwareEngineeringPage() {
                   Tell us what needs to exist next. We&apos;ll tell you what it takes.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                  <MagneticButton href="/contact">
+                  <MagneticButton href="/contact" event="cta_project">
                     Start a project <Icon name="arrow-right" />
                   </MagneticButton>
-                  <Link href="/contact" className="btn-glass" data-event="cta_demo">
-                    <Icon name="calendar" /> Book a call
+                  <Link href="/contact" className="btn-glass" data-event="cta_contact">
+                    <Icon name="message" /> Talk to us
                   </Link>
                 </div>
               </div>
