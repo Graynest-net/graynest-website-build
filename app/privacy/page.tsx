@@ -5,7 +5,7 @@ export default function PrivacyPage() {
   return (
     <main id="main">
       <Navigation />
-      <article className="section-padding max-w-4xl mx-auto px-[var(--gn-gutter-left)]">
+      <article className="legal-page section-padding max-w-4xl mx-auto px-[var(--gn-gutter-left)]">
         <p className="micro mb-6">GRAYNEST / PRIVACY</p>
         <h1 className="display-line mb-12">
           YOUR DATA.

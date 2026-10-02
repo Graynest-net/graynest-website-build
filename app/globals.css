@@ -304,54 +304,51 @@ body::after {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
 }
 
-.gn-promo-regions {
-  display: flex;
+/* The whole strip is one link. */
+.gn-promo-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.gn-promo-link:focus-visible {
+  outline: 2px solid var(--gn-on-red);
+  outline-offset: -4px;
+  border-radius: 6px;
+}
+
+.gn-promo-cta {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   flex: none;
-  flex-wrap: wrap;
-}
-
-.gn-promo-region {
   font-size: 0.78rem;
-  font-weight: 600;
-  line-height: 1;
-  color: var(--gn-on-red);
-  text-decoration: none;
-  padding: 6px 11px;
+  font-weight: 700;
+  padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
-  transition: background var(--gn-dur-s) ease, transform var(--gn-dur-s) var(--gn-ease-enter);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.26);
+  transition: background var(--gn-dur-s) ease;
 }
 
-.gn-promo-region:hover {
-  background: rgba(255, 255, 255, 0.24);
-  transform: translateY(-1px);
+.gn-promo-cta svg {
+  transition: transform var(--gn-dur-s) var(--gn-ease-enter);
 }
 
-.gn-promo-region:focus-visible {
-  outline: 2px solid var(--gn-on-red);
-  outline-offset: 2px;
+.gn-promo-link:hover .gn-promo-cta {
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.gn-promo-link:hover .gn-promo-cta svg {
+  transform: translateX(3px);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .gn-promo { animation: none; }
-  .gn-promo-region { transition: background var(--gn-dur-s) ease; }
-  .gn-promo-region:hover { transform: none; }
+  .gn-promo-link:hover .gn-promo-cta svg { transform: none; }
 }
 
 @media (max-width: 600px) {
-  .gn-promo-regions {
-    order: 3;
-    width: 100%;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .gn-promo-regions::-webkit-scrollbar { display: none; }
-  .gn-promo-region { flex: none; }
+  .gn-promo-cta { display: none; }
 }
 
 /* Nav sits below the offer strip while it is present (the strip owns the safe area).
@@ -364,6 +361,16 @@ body:has(.gn-promo) .site-nav {
 
 body:has(.gn-promo) .hero-section {
   padding-top: calc(var(--gn-nav-height) + var(--gn-safe-top) + var(--gn-promo-h, 44px) + 32px);
+}
+
+/* Pages without a hero still need to clear the strip. */
+body:has(.gn-promo) .legal-page,
+body:has(.gn-promo) [data-clinic] {
+  margin-top: var(--gn-promo-h, 44px);
+}
+
+body:has(.gn-promo) .not-found-stage {
+  padding-top: calc(var(--gn-nav-height) + var(--gn-safe-top) + var(--gn-promo-h, 44px) + clamp(48px, 10vh, 120px));
 }
 
 /* Site header */
