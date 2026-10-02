@@ -549,6 +549,61 @@
       "negative": "text, letters, headline, badge, pill, watermark, face, eyes, mouth, skin, photographic texture, film grain, cartoon proportions, rounded low-poly blob, extra glowing parts, glowing head, red background, red fill, busy background, flat background, hard edges at frame border",
       "component": "app/ai-agents/page.tsx",
       "asset": "/media/agents.meet.persona.webp"
+    },
+    {
+      "id": "work.nutrifit.web",
+      "page": "/ and /software-engineering",
+      "section": "Shipped, NutriFit web app",
+      "type": "image",
+      "register": "system",
+      "status": "ready",
+      "source": "Shots Mockups 1x.png",
+      "aspect": "4:3",
+      "size": "1600x1200",
+      "alt": "The NutriFit platform on a tablet, open on a completed consultation with AI copilot notes and the patient's health context",
+      "asset": "/media/work.nutrifit.web.webp",
+      "frameNote": "product shot supplied by the owner"
+    },
+    {
+      "id": "work.nutrifit.mobile",
+      "page": "/ and /software-engineering",
+      "section": "Shipped, NutriFit mobile app",
+      "type": "image",
+      "register": "system",
+      "status": "ready",
+      "source": "Shots Mockups.png",
+      "aspect": "4:3",
+      "size": "1600x1200",
+      "alt": "Two phones showing the NutriFit mobile app home screen, one in Arabic and one in English, with the day's meal plan marked done",
+      "asset": "/media/work.nutrifit.mobile.webp",
+      "frameNote": "product shot supplied by the owner"
+    },
+    {
+      "id": "method.plan.workflow",
+      "page": "/",
+      "section": "Method, Plan first",
+      "type": "image",
+      "register": "system",
+      "status": "ready",
+      "aspect": "4:3",
+      "size": "1600x1200",
+      "alt": "Three windows from the planning workflow: a design tool with onboarding screens laid out, a knowledge base page explaining how meal plans work, and a weekly plan board for week 41",
+      "asset": "/media/method.plan.workflow.webp",
+      "frameNote": "illustrative UI mockup built in HTML and screenshotted at 2x; generic tools, no real client data or team names"
+    },
+    {
+      "id": "method.ship.web",
+      "page": "/",
+      "section": "Method, Ship phase one (bleeds off the section bottom)",
+      "type": "image",
+      "register": "system",
+      "status": "ready",
+      "source": "Shots Mockups (1).png",
+      "aspect": "1600:1117",
+      "size": "1600x1117",
+      "alt": "The NutriFit web app in a browser, open on a consultation: body composition measurements beside the patient's health context",
+      "asset": "/media/method.ship.web.webp",
+      "frameNote": "owner-supplied product shot, cropped 100px from the top; the window is cut at the bottom and right on purpose"
     }
   ],
   "deferred": [

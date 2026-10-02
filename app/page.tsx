@@ -1,6 +1,7 @@
 import { TalkToAgentButton } from "@/components/agent/TalkToAgentButton"
 import { MethodSections } from "@/components/MethodSections"
 import { ProofStrip } from "@/components/ProofStrip"
+import { ProcessFilm } from "@/components/ProcessFilm"
 import { TrackRecord } from "@/components/TrackRecord"
 import { Navigation } from "@/components/Navigation"
 import { PromoBar } from "@/components/PromoBar"
@@ -12,13 +13,20 @@ import { CoreGlow } from "@/components/CoreGlow"
 import { Icon } from "@/components/Icon"
 import { HeroFilm } from "@/components/HeroFilm"
 import Link from "next/link"
+import { ServiceRowMotion, ServiceMark, CapIcon } from "@/components/ServiceIcons"
 
 const SERVICES = [
   {
     eyebrow: "01 · AI AGENTS",
     title: "Agents that answer for you",
     body: "Voice and chat across every channel — phone, WhatsApp, Instagram, website. They qualify, book, sell, and hand off the moment a person is needed.",
-    capabilities: ["Phone calls", "WhatsApp", "Instagram & Facebook", "Website chat"],
+    icon: "bot-message-square",
+    capabilities: [
+      { label: "Phone calls", icon: "phone-call" },
+      { label: "WhatsApp", icon: "message-circle-more" },
+      { label: "Instagram & Facebook", icon: "message-square-heart" },
+      { label: "Website chat", icon: "message-square-text" },
+    ],
     href: "/ai-agents",
     cta: "See how the agent works",
   },
@@ -26,7 +34,13 @@ const SERVICES = [
     eyebrow: "02 · SOFTWARE + AI",
     title: "Software built to ship",
     body: "Web, mobile, backend, and internal tools. AI where it earns its place. Senior engineers who own the plan from first commit through launch and whatever comes after.",
-    capabilities: ["Web & mobile apps", "Backend & APIs", "Internal tools", "AI integration"],
+    icon: "blocks",
+    capabilities: [
+      { label: "Web & mobile apps", icon: "layout-dashboard" },
+      { label: "Backend & APIs", icon: "terminal" },
+      { label: "Internal tools", icon: "kanban" },
+      { label: "AI integration", icon: "sparkles" },
+    ],
     href: "/software-engineering",
     cta: "See what we build",
   },
@@ -116,27 +130,36 @@ export default function Home() {
           <div className="col-span-full lg:col-span-7 mt-14 lg:mt-0 space-y-0">
             {SERVICES.map((service, index) => (
               <Reveal key={service.href} delay={index * 0.12}>
-                <article className={`service-row ${index > 0 ? "border-t border-[var(--gn-line)]" : ""}`}>
-                  <p className="micro mb-4">{service.eyebrow}</p>
-                  <h3 className="h3 mb-3">{service.title}</h3>
+                <ServiceRowMotion className={`service-row ${index > 0 ? "border-t border-[var(--gn-line)]" : ""}`}>
+                  <div className="service-row-head mb-4">
+                    <ServiceMark name={service.icon} />
+                    <div>
+                      <p className="micro mb-2">{service.eyebrow}</p>
+                      <h3 className="h3">{service.title}</h3>
+                    </div>
+                  </div>
                   <p className="body text-[var(--gn-text-secondary)] mb-6 max-w-[52ch]">
                     {service.body}
                   </p>
                   <div className="service-row-caps mb-6">
                     {service.capabilities.map((cap) => (
-                      <span key={cap} className="service-cap">{cap}</span>
+                      <span key={cap.label} className="service-cap">
+                        <CapIcon name={cap.icon} />
+                        {cap.label}
+                      </span>
                     ))}
                   </div>
                   <Link href={service.href} className="btn-glass">
                     {service.cta} <Icon name="arrow-right" />
                   </Link>
-                </article>
+                </ServiceRowMotion>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
+      <ProcessFilm />
       <MethodSections />
       <ProofStrip />
 

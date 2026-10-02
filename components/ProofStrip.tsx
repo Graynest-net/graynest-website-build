@@ -1,12 +1,28 @@
 import { Reveal } from "@/components/Reveal"
 import { CoreGlow } from "@/components/CoreGlow"
+import { MediaSlot } from "@/components/MediaSlot"
 
 const EXAMPLE = {
   name: "NutriFit",
   kind: "WEB APP · MOBILE APP · WHATSAPP AGENT",
-  body: "A nutrition product built end to end: a web app and a mobile app, with AI and MCP built into both, and a reception agent answering on WhatsApp.",
+  body: "A nutrition product built end to end: a web app where nutritionists run consultations, a mobile app where their clients follow the plan in Arabic or English, AI and MCP built into both, and a reception agent answering on WhatsApp.",
   tags: ["Web app", "Mobile app", "AI built in", "MCP", "WhatsApp reception agent"],
 } as const
+
+const SHOTS = [
+  {
+    mediaId: "work.nutrifit.web",
+    label: "WEB APP · FOR NUTRITIONISTS",
+    caption: "Consultations, AI copilot notes and health context in one record.",
+    alt: "The NutriFit platform on a tablet, open on a completed consultation with AI copilot notes and the patient's health context",
+  },
+  {
+    mediaId: "work.nutrifit.mobile",
+    label: "MOBILE APP · FOR CLIENTS",
+    caption: "The day's plan, meals and journal, in Arabic and English.",
+    alt: "Two phones showing the NutriFit mobile app home screen, one in Arabic and one in English, with the day's meal plan marked done",
+  },
+] as const
 
 /**
  * Shipped-work proof. Framed as an example of range, not a menu of what we sell.
@@ -41,6 +57,22 @@ export function ProofStrip() {
             </div>
           </article>
         </Reveal>
+
+        {SHOTS.map((shot, index) => (
+          <Reveal
+            key={shot.mediaId}
+            className="col-span-full md:col-span-6 mt-10 md:mt-14"
+            delay={index * 0.1}
+          >
+            <figure className="proof-shot">
+              <MediaSlot id={shot.mediaId} type="image" aspect="4:3" register="system" alt={shot.alt} />
+              <figcaption className="proof-shot-caption">
+                <span className="micro">{shot.label}</span>
+                <span className="body">{shot.caption}</span>
+              </figcaption>
+            </figure>
+          </Reveal>
+        ))}
       </div>
     </section>
   )

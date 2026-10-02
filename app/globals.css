@@ -1211,6 +1211,11 @@ body::before {
   padding-top: 0;
 }
 
+/* Each row sits in its own Reveal wrapper, so every row matches :first-child; rows after a divider need their top padding back. */
+.service-row.border-t {
+  padding-top: clamp(32px, 4vw, 48px);
+}
+
 .service-row-caps {
   display: flex;
   flex-wrap: wrap;
@@ -1220,6 +1225,7 @@ body::before {
 .service-cap {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   height: 32px;
   padding: 0 14px;
   border-radius: 999px;
@@ -1231,6 +1237,34 @@ body::before {
   color: var(--gn-text-3);
   transition: border-color var(--gn-dur-s) var(--gn-ease-enter),
     color var(--gn-dur-s) var(--gn-ease-enter);
+}
+
+.service-cap svg {
+  flex: none;
+  color: var(--gn-text-2);
+}
+
+.service-row-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.service-mark {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  border: 1px solid var(--gn-glass-border);
+  background: radial-gradient(circle at 50% 120%, rgba(234, 46, 0, 0.18), transparent 70%);
+  color: var(--gn-red);
+  transition: border-color var(--gn-dur-s) var(--gn-ease-enter);
+}
+
+.service-row:hover .service-mark {
+  border-color: var(--gn-glass-border-hover);
 }
 
 .service-cap:hover {
@@ -2768,7 +2802,6 @@ body:has([data-clinic]) {
 
 .method-points {
   list-style: none;
-  margin: 0;
   padding: 0;
 }
 
@@ -2785,8 +2818,52 @@ body:has([data-clinic]) {
   border-bottom: 1px solid var(--gn-line);
 }
 
+/* Plan steps: a numbered sequence across the width, unlike the stacked ship list. */
+.method-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 24px;
+}
+
+.method-step {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--gn-line-2);
+}
+
+.method-step-index {
+  font-family: var(--font-satoshi);
+  font-weight: 800;
+  font-size: clamp(28px, 2.6vw, 40px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--gn-red);
+}
+
+@media (min-width: 768px) {
+  .method-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, 2vw, 32px);
+  }
+}
+
 .proof-card {
   padding: clamp(24px, 3vw, 40px);
+}
+
+.proof-shot .media-slot {
+  border: 1px solid var(--gn-glass-border);
+}
+
+.proof-shot-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
 }
 
 /* Header fit: four links plus the revealed CTA need room. */
@@ -2844,4 +2921,57 @@ body:has([data-clinic]) {
     padding-left: 20px;
     border-left: 1px solid var(--gn-line);
   }
+}
+
+/* Ship section: the product shot is cut at the bottom, so it sits flush on the section's floor. */
+.method-ship {
+  padding-bottom: 0;
+}
+
+.method-ship-shot .media-slot {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* How-we-work film: a 16:9 frame with an always-visible pause control. */
+.process-film {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid var(--gn-glass-border);
+  background: var(--gn-ink-950);
+  aspect-ratio: 16 / 9;
+}
+
+.process-film-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.process-film-toggle {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(250, 250, 250, 0.22);
+  background: rgba(22, 22, 26, 0.6);
+  backdrop-filter: blur(12px);
+  color: #fafafa;
+  cursor: pointer;
+  transition: border-color var(--gn-dur-s) var(--gn-ease-enter);
+}
+
+.process-film-toggle:hover {
+  border-color: rgba(250, 250, 250, 0.45);
+}
+
+.process-film-toggle:focus-visible {
+  outline: 2px solid var(--gn-red);
+  outline-offset: 3px;
 }
