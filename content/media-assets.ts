@@ -21,6 +21,8 @@ export const MEDIA_ASSETS: Record<string, MediaAsset> = {
   "home.principle.hourglass": { src: "/media/home.principle.hourglass.webp", width: 1024, height: 1024 },
   "home.principle.roadmap": { src: "/media/home.principle.roadmap.webp", width: 1024, height: 1024 },
   "home.cta.welcome": { src: "/media/home.cta.welcome.webp", width: 1344, height: 752, position: "70% 4%" },
+  "method.plan.workflow": { src: "/media/method.plan.workflow.webp", width: 1600, height: 1200 },
+  "method.ship.web": { src: "/media/method.ship.web.webp", width: 1600, height: 1117 },
   "work.nutrifit.web": { src: "/media/work.nutrifit.web.webp", width: 1600, height: 1200 },
   "work.nutrifit.mobile": { src: "/media/work.nutrifit.mobile.webp", width: 1600, height: 1200 },
   "agents.hero.bg": { src: "/media/agents.hero.bg.webp", width: 1344, height: 752, position: "62% 50%" },

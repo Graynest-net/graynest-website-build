@@ -13,8 +13,8 @@ const SHOTS = [
   {
     mediaId: "work.nutrifit.web",
     label: "WEB APP · FOR NUTRITIONISTS",
-    caption: "Consultations, body composition and health context in one record.",
-    alt: "The NutriFit web app open on a consultation record: a nutritionist's body composition measurements beside the patient's health context",
+    caption: "Consultations, AI copilot notes and health context in one record.",
+    alt: "The NutriFit platform on a tablet, open on a completed consultation with AI copilot notes and the patient's health context",
   },
   {
     mediaId: "work.nutrifit.mobile",
