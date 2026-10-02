@@ -87,12 +87,6 @@ export function Navigation() {
 
         <div className="site-nav-center">
           <div className="site-nav-pill">
-            <Link href="/ai-agents" className="site-nav-link">
-              AI Agents
-            </Link>
-            <span className="site-nav-dot" aria-hidden="true">
-              ·
-            </span>
             <Link href="/software-engineering" className="site-nav-link">
               Software
             </Link>
@@ -147,9 +141,6 @@ export function Navigation() {
         aria-hidden={!menuOpen}
       >
         <div className="mobile-menu-links">
-          <Link href="/ai-agents" onClick={() => setMenuOpen(false)}>
-            AI Agents
-          </Link>
           <Link href="/software-engineering" onClick={() => setMenuOpen(false)}>
             Software
           </Link>

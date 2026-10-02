@@ -1,10 +1,10 @@
-const INTERESTS = ["ai-agent", "software", "both", "unsure"] as const
+const INTERESTS = ["new-product", "existing", "internal-tool", "unsure"] as const
 type Interest = (typeof INTERESTS)[number]
 
 const INTEREST_LABEL: Record<Interest, string> = {
-  "ai-agent": "AI agent",
-  software: "Software",
-  both: "Both",
+  "new-product": "New product / MVP",
+  existing: "Existing product",
+  "internal-tool": "Internal tool",
   unsure: "Not sure yet",
 }
 

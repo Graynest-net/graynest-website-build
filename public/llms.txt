@@ -1,26 +1,25 @@
 # GrayNest
 
-> GrayNest builds AI voice and chat agents and custom software for
-> businesses and startups in Palestine. The agents speak Palestinian
-> Arabic and English. Not related to Gray Nest, the vintage market in
-> Illinois (graynest.com).
+> GrayNest is a software house in Palestine. Senior engineers build web and
+> mobile products, backends and internal tools for startups and businesses,
+> with AI integrated only where it pays off. Not related to Gray Nest, the
+> vintage market in Illinois (graynest.com).
 
-## AI agents
-- Answer phone calls, WhatsApp, Instagram and Facebook messages, and website chat
-- Book, reschedule and confirm appointments; qualify leads and book meetings
-- Hand the conversation to a person on your team when one is needed
-- Built for e-commerce and retail, clinics and practices, hotels,
-  restaurants and venues, customer support, and inbound sales
+## What we build
+- Web apps and iOS and Android apps
+- Backend systems, APIs, data models, integrations and payments
+- Internal tools: dashboards, back offices and workflows
+- AI integration inside products: search, assistants and automation
 
-## Software engineering
-- Web products, iOS and Android apps, backend systems and APIs, internal tools
+## How we work
+- Plan first: problem, users and constraints written down; system design reviewed before build
+- Ship phase one in weeks, then decide phase two from real usage
 - Five phases: discovery, architecture, build, ship, maintain
-- MVPs for startups in weeks
 
 ## Team experience
 - Individually, GrayNest's engineers have built software for Nokia, Red Hat,
-  Stella Stays, and more than 20 startups, new and established. These were
-  not GrayNest projects
+  and more than 20 startups, new and established. These were not GrayNest
+  projects
 
 ## Contact
 - Email: hello@graynest.co
@@ -28,6 +27,5 @@
 - Start a project: https://www.graynest.co/contact
 
 ## Key pages
-- AI agents: https://www.graynest.co/ai-agents
 - Software engineering: https://www.graynest.co/software-engineering
 - Privacy: https://www.graynest.co/privacy

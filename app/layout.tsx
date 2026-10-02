@@ -8,9 +8,9 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.graynest.co"),
-  title: "GrayNest – AI Voice Agents & Custom Software, Palestine",
+  title: "GrayNest – Software House for Web, Mobile & AI Products",
   description:
-    "Arabic and English voice and chat agents that answer your calls and WhatsApp, plus custom software for businesses and startups in Palestine.",
+    "Senior engineers building web and mobile products, backends and internal tools, with AI where it pays off. MVPs in weeks, for startups and businesses.",
   alternates: { canonical: "/" },
 }
 
@@ -26,20 +26,11 @@ const orgJsonLd = {
       logo: "https://www.graynest.co/icon.png",
       email: "hello@graynest.co",
       description:
-        "GrayNest builds voice and chat AI agents that answer calls and messages in Palestinian Arabic and English, and custom software for businesses and startups in Palestine.",
+        "GrayNest is a software house in Palestine building web and mobile products, backends and internal tools for startups and businesses, with AI where it pays off.",
       areaServed: { "@type": "Country", name: "Palestine" },
       knowsLanguage: ["ar", "en"],
       sameAs: ["https://instagram.com/graynestcomp"],
       makesOffer: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "AI voice and chat agents",
-            url: "https://www.graynest.co/ai-agents",
-            serviceType: "AI phone and messaging agents",
-          },
-        },
         {
           "@type": "Offer",
           itemOffered: {

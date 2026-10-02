@@ -2898,9 +2898,27 @@ body:has([data-clinic]) {
 .track-record-item {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 20px 16px 20px 0;
+  gap: 12px;
+  padding: 22px 16px 22px 0;
   border-bottom: 1px solid var(--gn-line);
+}
+
+/* Logos and the startup count share one baseline box so the row lines up. */
+.track-record-mark {
+  display: flex;
+  align-items: center;
+  height: clamp(30px, 2.6vw, 40px);
+}
+
+.track-record-logo {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+}
+
+.track-record-item:last-child {
+  grid-column: 1 / -1;
 }
 
 .track-record-name {
@@ -2914,7 +2932,11 @@ body:has([data-clinic]) {
 
 @media (min-width: 768px) {
   .track-record-list {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .track-record-item:last-child {
+    grid-column: auto;
   }
 
   .track-record-item + .track-record-item {
