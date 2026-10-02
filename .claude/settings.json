@@ -1,0 +1,7 @@
+{
+  "enabledPlugins": {
+    "impeccable@impeccable": true,
+    "superpowers@claude-plugins-official": true,
+    "ponytail@ponytail": true
+  }
+}
