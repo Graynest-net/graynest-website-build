@@ -1,4 +1,3 @@
-import { TalkToAgentButton } from "@/components/agent/TalkToAgentButton"
 import { MethodSections } from "@/components/MethodSections"
 import { ProofStrip } from "@/components/ProofStrip"
 import { ProcessFilm } from "@/components/ProcessFilm"
@@ -13,36 +12,32 @@ import { CoreGlow } from "@/components/CoreGlow"
 import { Icon } from "@/components/Icon"
 import { HeroFilm } from "@/components/HeroFilm"
 import Link from "next/link"
-import { ServiceRowMotion, ServiceMark, CapIcon } from "@/components/ServiceIcons"
+import { ServiceRowMotion, ServiceMark } from "@/components/ServiceIcons"
 
 const SERVICES = [
   {
-    eyebrow: "01 · AI AGENTS",
-    title: "Agents that answer for you",
-    body: "Voice and chat across every channel — phone, WhatsApp, Instagram, website. They qualify, book, sell, and hand off the moment a person is needed.",
-    icon: "bot-message-square",
-    capabilities: [
-      { label: "Phone calls", icon: "phone-call" },
-      { label: "WhatsApp", icon: "message-circle-more" },
-      { label: "Instagram & Facebook", icon: "message-square-heart" },
-      { label: "Website chat", icon: "message-square-text" },
-    ],
-    href: "/ai-agents",
-    cta: "See how the agent works",
+    eyebrow: "01 · WEB & MOBILE",
+    title: "Products people use every day",
+    body: "Web apps and iOS and Android apps, designed and built by the same senior team, from the first screen to the store listing.",
+    icon: "layout-dashboard",
   },
   {
-    eyebrow: "02 · SOFTWARE + AI",
-    title: "Software built to ship",
-    body: "Web, mobile, backend, and internal tools. AI where it earns its place. Senior engineers who own the plan from first commit through launch and whatever comes after.",
-    icon: "blocks",
-    capabilities: [
-      { label: "Web & mobile apps", icon: "layout-dashboard" },
-      { label: "Backend & APIs", icon: "terminal" },
-      { label: "Internal tools", icon: "kanban" },
-      { label: "AI integration", icon: "sparkles" },
-    ],
-    href: "/software-engineering",
-    cta: "See what we build",
+    eyebrow: "02 · BACKEND & APIS",
+    title: "The systems underneath",
+    body: "APIs, data models, integrations and payments, built to keep working as usage grows.",
+    icon: "terminal",
+  },
+  {
+    eyebrow: "03 · INTERNAL TOOLS",
+    title: "Tools your team actually uses",
+    body: "Dashboards, back offices and workflows that replace the spreadsheet everyone is afraid to touch.",
+    icon: "kanban",
+  },
+  {
+    eyebrow: "04 · AI INTEGRATION",
+    title: "AI where it earns its place",
+    body: "Search, assistants and automation inside your product, only where it saves real time or money.",
+    icon: "sparkles",
   },
 ] as const
 
@@ -51,7 +46,7 @@ const PRINCIPLES = [
     mediaId: "home.principle.puzzle",
     eyebrow: "01 · INTEGRATION",
     title: "Built in, not bolted on.",
-    body: "The agent connects to your real systems. The software is designed around how your team already works — not wedged on top of it.",
+    body: "What we build connects to your real systems and fits how your team already works, not wedged on top of it.",
     alt: "Two interlocking off-white hexagon forms fitted together, their seam glowing red-orange",
   },
   {
@@ -92,16 +87,16 @@ export default function Home() {
               </span>
             </h1>
             <p className="body-lg mt-8 max-w-[54ch]">
-              Two things under one roof: AI agents that answer every call and message,
-              and product engineering that ships fast and stays shipped.
+              Web and mobile products, backends and internal tools, built by senior engineers
+              who ship fast and stay until it works.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-10">
               <MagneticButton href="/contact" event="cta_project">
                 Start a project <Icon name="arrow-right" />
               </MagneticButton>
-              <TalkToAgentButton variant="glass">
-                <Icon name="message" /> Try the agent
-              </TalkToAgentButton>
+              <Link href="/software-engineering" className="btn-glass">
+                See what we build <Icon name="arrow-right" />
+              </Link>
             </div>
           </div>
         </div>
@@ -117,19 +112,22 @@ export default function Home() {
               <CoreGlow size={12} /> WHAT WE BUILD
             </p>
             <h2 className="h2">
-              TWO KINDS
+              FOUR THINGS
               <br />
-              <span className="accent-word">of work.</span>
+              <span className="accent-word">we build well.</span>
             </h2>
             <p className="body-lg mt-8 max-w-[48ch]">
               Most companies don&apos;t need more software. They need the right software, shipped,
               and AI only where it earns its keep.
             </p>
+            <Link href="/software-engineering" className="btn-glass mt-8">
+              See what we build <Icon name="arrow-right" />
+            </Link>
           </Reveal>
 
           <div className="col-span-full lg:col-span-7 mt-14 lg:mt-0 space-y-0">
             {SERVICES.map((service, index) => (
-              <Reveal key={service.href} delay={index * 0.12}>
+              <Reveal key={service.eyebrow} delay={index * 0.08}>
                 <ServiceRowMotion className={`service-row ${index > 0 ? "border-t border-[var(--gn-line)]" : ""}`}>
                   <div className="service-row-head mb-4">
                     <ServiceMark name={service.icon} />
@@ -138,20 +136,7 @@ export default function Home() {
                       <h3 className="h3">{service.title}</h3>
                     </div>
                   </div>
-                  <p className="body text-[var(--gn-text-secondary)] mb-6 max-w-[52ch]">
-                    {service.body}
-                  </p>
-                  <div className="service-row-caps mb-6">
-                    {service.capabilities.map((cap) => (
-                      <span key={cap.label} className="service-cap">
-                        <CapIcon name={cap.icon} />
-                        {cap.label}
-                      </span>
-                    ))}
-                  </div>
-                  <Link href={service.href} className="btn-glass">
-                    {service.cta} <Icon name="arrow-right" />
-                  </Link>
+                  <p className="body text-[var(--gn-text-secondary)] max-w-[52ch]">{service.body}</p>
                 </ServiceRowMotion>
               </Reveal>
             ))}
@@ -226,9 +211,9 @@ export default function Home() {
                   <MagneticButton href="/contact" event="cta_project">
                     Start a project <Icon name="arrow-right" />
                   </MagneticButton>
-                  <TalkToAgentButton variant="glass">
-                    <Icon name="message" /> Try the agent
-                  </TalkToAgentButton>
+                  <a href="mailto:hello@graynest.co" className="btn-glass">
+                    <Icon name="mail" /> hello@graynest.co
+                  </a>
                 </div>
               </div>
             </div>

@@ -17,11 +17,6 @@ export function Footer() {
             <p className="micro mb-6">Services</p>
             <ul className="space-y-3">
               <li>
-                <Link href="/ai-agents" className="footer-link">
-                  AI Agents
-                </Link>
-              </li>
-              <li>
                 <Link href="/software-engineering" className="footer-link">
                   Software Engineering
                 </Link>

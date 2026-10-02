@@ -7,9 +7,9 @@ import { Icon } from "@/components/Icon"
 import { useAgent } from "@/components/agent/AgentContext"
 
 const INTERESTS = [
-  { value: "ai-agent", label: "AI agent" },
-  { value: "software", label: "Software" },
-  { value: "both", label: "Both" },
+  { value: "new-product", label: "New product / MVP" },
+  { value: "existing", label: "Existing product" },
+  { value: "internal-tool", label: "Internal tool" },
   { value: "unsure", label: "Not sure yet" },
 ] as const
 
@@ -17,7 +17,7 @@ type Status = "idle" | "sending" | "sent" | "error"
 
 /**
  * Lead capture form: posts to /api/contact, then swaps to a confirmation with the
- * reply window and a route to the live agent.
+ * reply window and a route to the site assistant.
  */
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle")
@@ -56,10 +56,11 @@ export function ContactForm() {
         <p className="micro">RECEIVED</p>
         <h2 className="h3">Thanks. We have your brief.</h2>
         <p className="body text-[var(--gn-text-secondary)]">
-          We reply within one business day. Don&apos;t want to wait? The agent is online now.
+          We reply within one business day. Have a quick question before then? Ask GrayNest, our
+          site assistant.
         </p>
-        <button type="button" className="btn-glass" onClick={() => openAgent("talk")}>
-          <Icon name="message" /> Talk to the agent
+        <button type="button" className="btn-glass" onClick={() => openAgent("chat")}>
+          <Icon name="message" /> Ask GrayNest
         </button>
       </div>
     )
