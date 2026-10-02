@@ -244,7 +244,7 @@ body::after {
   top: calc(16px + var(--gn-safe-top));
 }
 
-/* Clinics offer strip — pinned above the header, drops the nav below itself */
+/* Offer strip (PromoBar) — pinned above the header, drops the nav below itself */
 .gn-promo {
   position: fixed;
   top: 0;
@@ -2731,14 +2731,14 @@ body::before {
   }
 }
 
-/* Clinics offer (app/clinics): its own light world, so no grain, ambient light or agent launcher */
-body:has([data-clinic])::before,
-body:has([data-clinic])::after,
-body:has([data-clinic]) .agent-launcher {
+/* Offer pages (app/clinics, app/teardown): their own light world, so no grain, ambient light or agent launcher */
+body:has(:is([data-clinic], [data-teardown]))::before,
+body:has(:is([data-clinic], [data-teardown]))::after,
+body:has(:is([data-clinic], [data-teardown])) .agent-launcher {
   display: none;
 }
 
-body:has([data-clinic]) {
+body:has(:is([data-clinic], [data-teardown])) {
   background: #efece5;
 }
 

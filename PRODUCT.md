@@ -14,7 +14,7 @@ Primary, in order of who the site must win:
 2. **Regional and Gulf businesses.** Arabic-speaking companies beyond Palestine, drawn by a senior team in the same time zone that builds bilingual (Arabic and English) products.
 3. **International / Western clients.** English-first companies buying software engineering and AI work.
 
-**Decision, 2026-10-02:** GrayNest is a software house, not an AI-agent service. The `/ai-agents` page, the agents service row and the site-wide promo bar were removed; `/ai-agents` redirects to `/software-engineering`. The clinics one-pager (`/clinics/…`) stays live as a direct-link sales sheet only (not linked from the site, not in the sitemap). The "Ask GrayNest" assistant stays as a site helper, never as a product demo or "try the agent" call to action.
+**Decision, 2026-10-02:** GrayNest is a software house, not an AI-agent service. The `/ai-agents` page and the agents service row were removed, and the homepage promo bar now advertises the free app teardown instead of the clinics agent; `/ai-agents` redirects to `/software-engineering`. The clinics one-pager (`/clinics/…`) stays live as a direct-link sales sheet only (not linked from the site, not in the sitemap). The "Ask GrayNest" assistant stays as a site helper, never as a product demo or "try the agent" call to action.
 
 ## Product Purpose
 
@@ -45,8 +45,8 @@ Claims a neighbouring agency could not truthfully copy, all binding:
 - Light and dark themes are both first-class, with a user-facing toggle and a pre-hydration theme script.
 - The sitewide **Ask GrayNest** widget runs on `@elevenlabs/react` (Talk = voice, Chat = text) behind `NEXT_PUBLIC_ELEVENLABS_AGENT_ID`. Optional `NEXT_PUBLIC_AGENT_PHONE` and `NEXT_PUBLIC_AGENT_WHATSAPP`.
 - Media is addressed through a manifest (`content/media-manifest.json`, `content/media-assets.ts`) and rendered via `MediaSlot`; unfilled slots fall back to branded placeholders that still animate and theme-switch.
-- Routes: `/`, `/software-engineering`, `/contact`, `/privacy`, plus a 404. `/clinics/[market]` exists as an unlinked sales sheet; `/ai-agents` redirects to `/software-engineering`.
-- **Language:** the site ships in English only. No Arabic RTL version of the site is required; do not build one unless the owner asks.
+- Routes: `/`, `/software-engineering`, `/contact`, `/privacy`, plus a 404; `/ai-agents` redirects to `/software-engineering`. Offer landing pages in their own light world: `/clinics/[market]` (ps/jo/tr/en, unlinked sales sheet, not in the sitemap) and `/teardown/ar` + `/teardown/en` (`/teardown` redirects to Arabic). The homepage offer strip (`components/PromoBar.tsx`) points at the teardown.
+- **Language:** the site ships in English only. No Arabic RTL version of the site is required; do not build one unless the owner asks. The offer landing pages are the exception: they ship in Arabic (right-to-left) as well, because their campaigns run in Arabic.
 - Contact channels are `hello@graynest.co` and `instagram.com/graynestcomp`. Phone and WhatsApp exist only when the env vars are set.
 
 ## Brand Commitments

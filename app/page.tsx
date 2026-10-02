@@ -3,6 +3,7 @@ import { ProofStrip } from "@/components/ProofStrip"
 import { ProcessFilm } from "@/components/ProcessFilm"
 import { TrackRecord } from "@/components/TrackRecord"
 import { Navigation } from "@/components/Navigation"
+import { PromoBar } from "@/components/PromoBar"
 import { Footer } from "@/components/Footer"
 import { Reveal } from "@/components/Reveal"
 import { MagneticButton } from "@/components/MagneticButton"
@@ -67,6 +68,7 @@ const PRINCIPLES = [
 export default function Home() {
   return (
     <main id="main">
+      <PromoBar />
       <Navigation />
 
       {/* ── Hero ── */}

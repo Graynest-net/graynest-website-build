@@ -4,7 +4,7 @@ import { IBM_Plex_Sans_Arabic } from "next/font/google"
 import { ArrowRight, Globe, Mail, MessageCircle, ShieldCheck } from "lucide-react"
 import { CONTACT, COPY, MARKETS, firstMonthPrice, formatPrice, type Market } from "@/content/clinics-onepager"
 import { ChatDemo } from "./ChatDemo"
-import { Reveal } from "./Reveal"
+import { Reveal } from "@/components/offer/Reveal"
 import styles from "./page.module.css"
 
 const plexArabic = IBM_Plex_Sans_Arabic({
