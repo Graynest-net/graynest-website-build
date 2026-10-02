@@ -2,18 +2,7 @@
 
 import Link from "next/link"
 import { useEffect, useRef } from "react"
-import { MARKETS, type Market } from "@/content/clinics-onepager"
-
-/** Order shown left-to-right; labels are the reader's own region, not the currency. */
-const REGIONS: { market: Market; label: string }[] = [
-  { market: "ps", label: "Palestine" },
-  { market: "jo", label: "Jordan" },
-  { market: "tr", label: "Türkiye" },
-  { market: "en", label: "English" },
-]
-
-// Guard against a stray market key drifting out of sync with the content file.
-const KNOWN = REGIONS.filter((r) => r.market in MARKETS)
+import { TEARDOWN_LANGS } from "@/content/teardown"
 
 /**
  * Persistent offer strip pinned above the fixed nav. It measures its own height
@@ -38,20 +27,26 @@ export function PromoBar() {
   }, [])
 
   return (
-    <div ref={barRef} className="gn-promo" role="region" aria-label="Clinics offer">
+    <div ref={barRef} className="gn-promo" role="region" aria-label="Free app teardown offer">
       <div className="gn-promo-inner">
         <p className="gn-promo-text">
-          <span className="gn-promo-badge">New</span>
+          <span className="gn-promo-badge">Free</span>
           <span>
-            A WhatsApp front desk for clinics — books patients 24/7.{" "}
-            <strong>50% off the first month.</strong>
+            Our CTO tears down your app or website in a recorded 15-minute review.{" "}
+            <strong>No sales pitch.</strong>
           </span>
         </p>
 
-        <div className="gn-promo-regions" role="group" aria-label="Open the offer for your region">
-          {KNOWN.map((region) => (
-            <Link key={region.market} href={`/clinics/${region.market}`} className="gn-promo-region">
-              {region.label}
+        <div className="gn-promo-regions" role="group" aria-label="Open the teardown offer in your language">
+          {TEARDOWN_LANGS.map((entry) => (
+            <Link
+              key={entry.lang}
+              href={entry.href}
+              lang={entry.lang}
+              className="gn-promo-region"
+              data-event={`promo_teardown_${entry.lang}`}
+            >
+              {entry.label}
             </Link>
           ))}
         </div>

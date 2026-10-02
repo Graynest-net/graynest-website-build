@@ -46,8 +46,8 @@ Four claims a neighbouring agency could not truthfully copy, all four binding:
 - Light and dark themes are both first-class, with a user-facing toggle and a pre-hydration theme script.
 - The sitewide **Ask GrayNest** widget runs on `@elevenlabs/react` (Talk = voice, Chat = text) behind `NEXT_PUBLIC_ELEVENLABS_AGENT_ID`. Optional `NEXT_PUBLIC_AGENT_PHONE` and `NEXT_PUBLIC_AGENT_WHATSAPP`.
 - Media is addressed through a manifest (`content/media-manifest.json`, `content/media-assets.ts`) and rendered via `MediaSlot`; unfilled slots fall back to branded placeholders that still animate and theme-switch.
-- Routes: `/`, `/ai-agents`, `/software-engineering`, `/contact`, `/privacy`, plus a 404.
-- **Language:** the site ships in English only. The agents are bilingual — Palestinian Arabic and English. No Arabic RTL version of the site is required; do not build one unless the owner asks.
+- Routes: `/`, `/ai-agents`, `/software-engineering`, `/contact`, `/privacy`, plus a 404. Offer landing pages in their own light world: `/clinics/[market]` (ps/jo/tr/en) and `/teardown/ar` + `/teardown/en` (`/teardown` redirects to Arabic). The homepage offer strip (`components/PromoBar.tsx`) currently points at the teardown.
+- **Language:** the site ships in English only. The agents are bilingual — Palestinian Arabic and English. No Arabic RTL version of the site is required; do not build one unless the owner asks. The offer landing pages are the exception: they ship in Arabic (right-to-left) as well, because their campaigns run in Arabic.
 - Contact channels are `hello@graynest.co` and `instagram.com/graynestcomp`. Phone and WhatsApp exist only when the env vars are set.
 
 ## Brand Commitments

@@ -17,6 +17,14 @@
 - Five phases: discovery, architecture, build, ship, maintain
 - MVPs for startups in weeks
 
+## Free app teardown
+- A recorded 15-minute review of a small business's app or website by
+  GrayNest's CTO, with a written summary of three fixes ranked by impact
+- Covers usability, page speed, unanswered customer questions, visible
+  security issues where they apply, and where AI could save work
+- Free, with no commitment and no sales pitch; five reviews a month
+- Delivered on WhatsApp within 48 hours of receiving the link
+
 ## Team experience
 - Individually, GrayNest's engineers have built software for Nokia, Red Hat,
   Stella Stays, and more than 20 startups, new and established. These were
@@ -30,4 +38,6 @@
 ## Key pages
 - AI agents: https://www.graynest.co/ai-agents
 - Software engineering: https://www.graynest.co/software-engineering
+- Free app teardown (Arabic): https://www.graynest.co/teardown/ar
+- Free app teardown (English): https://www.graynest.co/teardown/en
 - Privacy: https://www.graynest.co/privacy
