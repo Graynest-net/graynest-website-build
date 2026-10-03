@@ -1,20 +1,22 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useEffect, useRef } from "react"
-import { TEARDOWN_LANGS } from "@/content/teardown"
 
 /**
- * Persistent offer strip pinned above the fixed nav. It measures its own height
- * into --gn-promo-h so the nav (and the hero) drop below it; the CSS carries a
- * 44px fallback for first paint before this runs.
+ * Site-wide offer strip pinned above the fixed nav, hidden on the teardown pages it
+ * advertises. The whole strip is one link to /teardown, which picks Arabic or English
+ * from the browser's language. It measures its own height into --gn-promo-h so the nav
+ * and page tops drop below it; the CSS carries a 44px fallback for first paint.
  */
 export function PromoBar() {
   const barRef = useRef<HTMLDivElement>(null)
+  const hidden = usePathname()?.startsWith("/teardown") ?? false
 
   useEffect(() => {
     const el = barRef.current
-    if (!el) return
+    if (hidden || !el) return
     const root = document.documentElement
     const measure = () => root.style.setProperty("--gn-promo-h", `${el.offsetHeight}px`)
     measure()
@@ -24,33 +26,27 @@ export function PromoBar() {
       observer.disconnect()
       root.style.removeProperty("--gn-promo-h")
     }
-  }, [])
+  }, [hidden])
+
+  if (hidden) return null
 
   return (
     <div ref={barRef} className="gn-promo" role="region" aria-label="Free app teardown offer">
-      <div className="gn-promo-inner">
-        <p className="gn-promo-text">
+      <Link href="/teardown" className="gn-promo-inner gn-promo-link" data-event="promo_teardown">
+        <span className="gn-promo-text">
           <span className="gn-promo-badge">Free</span>
           <span>
             Our CTO tears down your app or website in a recorded 15-minute review.{" "}
             <strong>No sales pitch.</strong>
           </span>
-        </p>
-
-        <div className="gn-promo-regions" role="group" aria-label="Open the teardown offer in your language">
-          {TEARDOWN_LANGS.map((entry) => (
-            <Link
-              key={entry.lang}
-              href={entry.href}
-              lang={entry.lang}
-              className="gn-promo-region"
-              data-event={`promo_teardown_${entry.lang}`}
-            >
-              {entry.label}
-            </Link>
-          ))}
-        </div>
-      </div>
+        </span>
+        <span className="gn-promo-cta" aria-hidden="true">
+          See the offer
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </span>
+      </Link>
     </div>
   )
 }

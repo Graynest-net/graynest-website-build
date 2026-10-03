@@ -14,7 +14,7 @@ const SHOTS = [
     mediaId: "work.nutrifit.web",
     label: "WEB APP · FOR NUTRITIONISTS",
     caption: "Consultations, AI copilot notes and health context in one record.",
-    alt: "The NutriFit platform on a tablet, open on a completed consultation with AI copilot notes and the patient's health context",
+    alt: "Two tablets showing the NutriFit platform for nutritionists: a consultation with AI copilot notes, and the body composition, health context and clinical notes of the same visit",
   },
   {
     mediaId: "work.nutrifit.mobile",
@@ -61,7 +61,7 @@ export function ProofStrip() {
         {SHOTS.map((shot, index) => (
           <Reveal
             key={shot.mediaId}
-            className="col-span-full md:col-span-6 mt-10 md:mt-14"
+            className="col-span-full md:col-span-6 mt-8 md:mt-10"
             delay={index * 0.1}
           >
             <figure className="proof-shot">

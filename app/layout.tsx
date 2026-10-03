@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { SmoothScroll } from "@/components/SmoothScroll"
 import { EventTracker } from "@/components/EventTracker"
 import { AgentAppShell } from "@/components/agent/AgentAppShell"
+import { PromoBar } from "@/components/PromoBar"
 import { ThemeProvider, themeInitScript } from "@/components/theme/ThemeProvider"
 import "./globals.css"
 
@@ -99,6 +100,7 @@ export default function RootLayout({
         </a>
         <ThemeProvider>
           <AgentAppShell>
+            <PromoBar />
             <SmoothScroll>{children}</SmoothScroll>
           </AgentAppShell>
         </ThemeProvider>

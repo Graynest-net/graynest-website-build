@@ -10,6 +10,18 @@
 
 import { CONTACT } from "@/content/clinics-onepager"
 
+/**
+ * Teardown requests go to the team's own WhatsApp, not the clinics agent line
+ * (messages on the agent number are mostly lost). Email and web stay shared.
+ */
+export const TEARDOWN_CONTACT = {
+  ...CONTACT,
+  whatsapp: "+972598466834",
+  whatsappDisplay: "+972 59 846 6834",
+  whatsappUrl: "https://wa.me/972598466834",
+  qr: "/media/teardown.qr.whatsapp.svg",
+}
+
 export type TeardownLang = "ar" | "en"
 
 export const TEARDOWN_LANGS: { lang: TeardownLang; label: string; href: string }[] = [
@@ -207,5 +219,5 @@ export const TEARDOWN_COPY: Record<TeardownLang, TeardownCopy> = {
 
 /** WhatsApp chat with the request already typed, so the visitor only pastes a link. */
 export function teardownWhatsappUrl(lang: TeardownLang): string {
-  return `${CONTACT.whatsappUrl}?text=${encodeURIComponent(TEARDOWN_COPY[lang].whatsappPrefill)}`
+  return `${TEARDOWN_CONTACT.whatsappUrl}?text=${encodeURIComponent(TEARDOWN_COPY[lang].whatsappPrefill)}`
 }

@@ -73,7 +73,7 @@
   --gn-safe-left: env(safe-area-inset-left, 0px);
   --gn-gutter-left: max(var(--gn-page-gutter), var(--gn-safe-left));
   --gn-gutter-right: max(var(--gn-page-gutter), var(--gn-safe-right));
-  --gn-section-y: clamp(80px, 11vh, 150px);
+  --gn-section-y: clamp(56px, 7.5vh, 104px);
   --gn-stack-tight: clamp(16px, 2vw, 24px);
   --gn-stack: clamp(24px, 3vw, 40px);
   --gn-stack-loose: clamp(40px, 6vw, 72px);
@@ -304,54 +304,51 @@ body::after {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
 }
 
-.gn-promo-regions {
-  display: flex;
+/* The whole strip is one link. */
+.gn-promo-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.gn-promo-link:focus-visible {
+  outline: 2px solid var(--gn-on-red);
+  outline-offset: -4px;
+  border-radius: 6px;
+}
+
+.gn-promo-cta {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   flex: none;
-  flex-wrap: wrap;
-}
-
-.gn-promo-region {
   font-size: 0.78rem;
-  font-weight: 600;
-  line-height: 1;
-  color: var(--gn-on-red);
-  text-decoration: none;
-  padding: 6px 11px;
+  font-weight: 700;
+  padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
-  transition: background var(--gn-dur-s) ease, transform var(--gn-dur-s) var(--gn-ease-enter);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.26);
+  transition: background var(--gn-dur-s) ease;
 }
 
-.gn-promo-region:hover {
-  background: rgba(255, 255, 255, 0.24);
-  transform: translateY(-1px);
+.gn-promo-cta svg {
+  transition: transform var(--gn-dur-s) var(--gn-ease-enter);
 }
 
-.gn-promo-region:focus-visible {
-  outline: 2px solid var(--gn-on-red);
-  outline-offset: 2px;
+.gn-promo-link:hover .gn-promo-cta {
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.gn-promo-link:hover .gn-promo-cta svg {
+  transform: translateX(3px);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .gn-promo { animation: none; }
-  .gn-promo-region { transition: background var(--gn-dur-s) ease; }
-  .gn-promo-region:hover { transform: none; }
+  .gn-promo-link:hover .gn-promo-cta svg { transform: none; }
 }
 
 @media (max-width: 600px) {
-  .gn-promo-regions {
-    order: 3;
-    width: 100%;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .gn-promo-regions::-webkit-scrollbar { display: none; }
-  .gn-promo-region { flex: none; }
+  .gn-promo-cta { display: none; }
 }
 
 /* Nav sits below the offer strip while it is present (the strip owns the safe area).
@@ -364,6 +361,16 @@ body:has(.gn-promo) .site-nav {
 
 body:has(.gn-promo) .hero-section {
   padding-top: calc(var(--gn-nav-height) + var(--gn-safe-top) + var(--gn-promo-h, 44px) + 32px);
+}
+
+/* Pages without a hero still need to clear the strip. */
+body:has(.gn-promo) .legal-page,
+body:has(.gn-promo) [data-clinic] {
+  margin-top: var(--gn-promo-h, 44px);
+}
+
+body:has(.gn-promo) .not-found-stage {
+  padding-top: calc(var(--gn-nav-height) + var(--gn-safe-top) + var(--gn-promo-h, 44px) + clamp(48px, 10vh, 120px));
 }
 
 /* Site header */
@@ -883,7 +890,7 @@ body::before {
 }
 
 .section-cinematic {
-  padding-block: clamp(96px, 13vh, 176px);
+  padding-block: clamp(72px, 10vh, 128px);
 }
 
 .hero-section {
@@ -892,7 +899,7 @@ body::before {
   align-items: center;
   justify-content: center;
   padding-top: calc(var(--gn-nav-height) + var(--gn-safe-top) + 32px);
-  padding-bottom: clamp(72px, 10vh, 120px);
+  padding-bottom: clamp(48px, 7vh, 88px);
 }
 
 .feature-card {
@@ -1204,7 +1211,7 @@ body::before {
 
 /* Service rows (home page, text-led) */
 .service-row {
-  padding: clamp(32px, 4vw, 48px) 0;
+  padding: clamp(22px, 2.6vw, 34px) 0;
 }
 
 .service-row:first-child {
@@ -1213,7 +1220,7 @@ body::before {
 
 /* Each row sits in its own Reveal wrapper, so every row matches :first-child; rows after a divider need their top padding back. */
 .service-row.border-t {
-  padding-top: clamp(32px, 4vw, 48px);
+  padding-top: clamp(22px, 2.6vw, 34px);
 }
 
 .service-row-caps {
@@ -2810,7 +2817,7 @@ body:has(:is([data-clinic], [data-teardown])) {
   grid-template-columns: 40px 1fr;
   gap: 16px;
   align-items: baseline;
-  padding: 22px 0;
+  padding: 16px 0;
   border-top: 1px solid var(--gn-line);
 }
 
@@ -2886,7 +2893,7 @@ body:has(:is([data-clinic], [data-teardown])) {
 
 /* Team experience: a quiet typographic band under the hero, not a logo wall. */
 .track-record {
-  padding-block: clamp(40px, 6vw, 72px);
+  padding-block: clamp(32px, 4.5vw, 56px);
 }
 
 .track-record-list {

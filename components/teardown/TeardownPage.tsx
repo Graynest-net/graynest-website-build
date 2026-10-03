@@ -1,6 +1,5 @@
 import { ArrowRight, Globe, Mail, MessageCircle } from "lucide-react"
-import { CONTACT } from "@/content/clinics-onepager"
-import { TEARDOWN_COPY, TEARDOWN_LANGS, teardownWhatsappUrl, type TeardownLang } from "@/content/teardown"
+import { TEARDOWN_CONTACT as CONTACT, TEARDOWN_COPY, TEARDOWN_LANGS, teardownWhatsappUrl, type TeardownLang } from "@/content/teardown"
 import { Reveal } from "@/components/offer/Reveal"
 import styles from "./TeardownPage.module.css"
 
@@ -204,7 +203,7 @@ export function TeardownPage({ lang, fontClass = "" }: { lang: TeardownLang; fon
         </div>
 
         <a className={styles.qr} href={whatsapp} aria-label={`WhatsApp ${CONTACT.whatsappDisplay}`}>
-          <img src="/media/clinics.qr.whatsapp.svg" alt="" width={104} height={104} />
+          <img src={CONTACT.qr} alt="" width={104} height={104} />
           <span>{copy.scanLabel}</span>
         </a>
       </Reveal>
