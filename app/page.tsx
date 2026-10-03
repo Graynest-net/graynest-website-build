@@ -123,7 +123,7 @@ export default function Home() {
             </Link>
           </Reveal>
 
-          <div className="col-span-full lg:col-span-7 mt-14 lg:mt-0 space-y-0">
+          <div className="col-span-full lg:col-span-7 mt-10 lg:mt-0 space-y-0">
             {SERVICES.map((service, index) => (
               <Reveal key={service.eyebrow} delay={index * 0.08}>
                 <ServiceRowMotion className={`service-row ${index > 0 ? "border-t border-[var(--gn-line)]" : ""}`}>

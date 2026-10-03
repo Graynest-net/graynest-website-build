@@ -61,7 +61,7 @@ export function ProofStrip() {
         {SHOTS.map((shot, index) => (
           <Reveal
             key={shot.mediaId}
-            className="col-span-full md:col-span-6 mt-10 md:mt-14"
+            className="col-span-full md:col-span-6 mt-8 md:mt-10"
             delay={index * 0.1}
           >
             <figure className="proof-shot">

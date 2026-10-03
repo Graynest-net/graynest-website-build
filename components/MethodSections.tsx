@@ -61,7 +61,7 @@ export function MethodSections() {
             <MediaSlot id={PLAN.mediaId} type="image" aspect="4:3" register="system" alt={PLAN.alt} />
           </Reveal>
 
-          <Reveal className="col-span-full mt-12 md:mt-16" delay={0.15}>
+          <Reveal className="col-span-full mt-10 md:mt-12" delay={0.15}>
             <ol className="method-steps">
               {PLAN.points.map((point, i) => (
                 <li key={point} className="method-step">
@@ -103,7 +103,7 @@ export function MethodSections() {
             </ul>
           </Reveal>
 
-          <Reveal className="col-span-full mt-14 md:mt-20" delay={0.15}>
+          <Reveal className="col-span-full mt-10 md:mt-14" delay={0.15}>
             <figure className="method-ship-shot">
               <figcaption className="micro mb-4">{SHIP.caption}</figcaption>
               <MediaSlot id={SHIP.mediaId} type="image" aspect="1600:1117" register="system" alt={SHIP.alt} />

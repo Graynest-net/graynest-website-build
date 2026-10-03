@@ -68,7 +68,7 @@ export function ProcessFilm() {
           </p>
         </Reveal>
 
-        <Reveal className="col-span-full mt-10 md:mt-14" delay={0.12}>
+        <Reveal className="col-span-full mt-8 md:mt-10" delay={0.12}>
           <div className="process-film">
             <video
               ref={videoRef}
