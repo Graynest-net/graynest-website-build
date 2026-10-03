@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { ThemeToggle } from "@/components/theme/ThemeToggle"
 import { Icon } from "@/components/Icon"
+import { LiquidButton } from "@/components/ui/liquid-glass-button"
 
 /**
  * Fixed site header with brand gutters, theme toggle, and iOS safe-area insets.
@@ -87,17 +88,18 @@ export function Navigation() {
         </Link>
 
         <div className="site-nav-center">
-          <div className="site-nav-pill">
-            <Link href="/#scope" className="site-nav-link">
-              Scope Before Spend
-            </Link>
-            <span className="site-nav-dot" aria-hidden="true">
-              ·
-            </span>
-            <Link href="/#phase-1" className="site-nav-link">
-              Phase-1 Ship
-            </Link>
-          </div>
+          <nav className="site-nav-glass-links" aria-label="Primary">
+            <LiquidButton asChild size="default" className="site-nav-link site-nav-glass-btn">
+              <Link href="/#scope">
+                <span className="relative z-10">Scope Before Spend</span>
+              </Link>
+            </LiquidButton>
+            <LiquidButton asChild size="default" className="site-nav-link site-nav-glass-btn">
+              <Link href="/#phase-1">
+                <span className="relative z-10">Phase-1 Ship</span>
+              </Link>
+            </LiquidButton>
+          </nav>
         </div>
 
         <div className="site-nav-actions">
@@ -113,15 +115,16 @@ export function Navigation() {
               Start a project <Icon name="arrow-right" />
             </Link>
           </div>
-          <button
+          <LiquidButton
             type="button"
-            className="site-nav-menu-btn"
+            size="icon"
+            className="site-nav-menu-btn site-nav-glass-btn"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
           >
-            {menuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
-          </button>
+            {menuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
+          </LiquidButton>
         </div>
       </div>
 
