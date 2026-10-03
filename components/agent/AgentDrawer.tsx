@@ -5,7 +5,7 @@ import {
   ConversationProvider,
   useConversation,
 } from "@elevenlabs/react"
-import { CoreGlow } from "@/components/CoreGlow"
+import { ThinkingOrb, type OrbState } from "thinking-orbs"
 import { Icon } from "@/components/Icon"
 import {
   getAgentPhoneHref,
@@ -14,7 +14,6 @@ import {
   getElevenLabsAgentId,
 } from "@/lib/agent-config"
 import { useAgent, type AgentMode } from "@/components/agent/AgentContext"
-import { AgentOrb } from "@/components/agent/AgentOrb"
 
 interface TranscriptEntry {
   id: string
@@ -25,12 +24,13 @@ interface TranscriptEntry {
 interface AgentSessionProps {
   agentId: string
   mode: AgentMode
+  onEnd: () => void
 }
 
 /**
  * Active ElevenLabs session UI for Talk (voice) and Chat (text) modes.
  */
-function AgentSession({ agentId, mode }: AgentSessionProps) {
+function AgentSession({ agentId, mode, onEnd }: AgentSessionProps) {
   const [transcript, setTranscript] = useState<TranscriptEntry[]>([])
   const [draft, setDraft] = useState("")
   const [error, setError] = useState<string | null>(null)
@@ -45,6 +45,7 @@ function AgentSession({ agentId, mode }: AgentSessionProps) {
     },
     onDisconnect: () => {
       setIsStarting(false)
+      onEnd()
     },
     onError: (message) => {
       setError(message)
@@ -124,6 +125,16 @@ function AgentSession({ agentId, mode }: AgentSessionProps) {
     conversation.endSession()
   }, [conversation])
 
+  // The landing choice already picked the mode, so connect on mount.
+  const started = useRef(false)
+  useEffect(() => {
+    if (started.current) {
+      return
+    }
+    started.current = true
+    void start()
+  }, [start])
+
   /**
    * Sends the chat draft to the agent and mirrors it into the transcript.
    */
@@ -178,27 +189,27 @@ function AgentSession({ agentId, mode }: AgentSessionProps) {
           ? "Listening"
           : "Online"
       : "Ready"
+  const orbState: OrbState = isStarting
+    ? "connecting"
+    : !isConnected
+      ? "breathing"
+      : conversation.isSpeaking
+        ? "composing"
+        : mode === "talk"
+          ? "listening"
+          : "breathing"
 
   return (
     <div className="agent-session">
-      {isVoiceCall ? (
-        <div className="agent-call-stage">
-          <AgentOrb size={132} />
-          <span className="micro">{statusLabel}</span>
-        </div>
-      ) : (
-        <div className="agent-session-status">
-          <CoreGlow size={10} />
-          <span className="micro">{statusLabel}</span>
-        </div>
-      )}
+      <div className="agent-session-status">
+        <ThinkingOrb state={orbState} size={64} theme="auto" />
+        <span className="micro">{statusLabel}</span>
+      </div>
 
       <div ref={listRef} className="agent-transcript" aria-live="polite">
         {transcript.length === 0 ? (
-          <p className="agent-transcript-empty">
-            {mode === "talk"
-              ? "Start a call and speak naturally. The agent answers in Palestinian Arabic or English."
-              : "Start a chat, then type your question. Same agent, text mode."}
+          <p className="agent-transcript-empty" aria-label={mode === "talk" ? "Speak naturally" : "Type your question"}>
+            <Icon name={mode === "talk" ? "phone" : "message"} size={28} />
           </p>
         ) : (
           transcript.map((entry) => (
@@ -235,36 +246,20 @@ function AgentSession({ agentId, mode }: AgentSessionProps) {
             disabled={!isConnected}
             aria-label="Message GrayNest"
           />
-          <button className="btn-primary" type="submit" disabled={!isConnected || draft.trim().length === 0}>
-            <Icon name="send" /> Send
+          <button className="btn-primary" type="submit" aria-label="Send" disabled={!isConnected || draft.trim().length === 0}>
+            <Icon name="send" size={18} />
           </button>
         </form>
       ) : (
-        <p className="agent-talk-hint body">
-          {isConnected
-            ? "Mic is live. Interrupt anytime and the agent will listen again."
-            : "Uses your browser microphone. Audio is processed by our voice provider to run the conversation. GrayNest does not store recordings."}
+        <p className="agent-talk-hint" aria-label="Mic is live. Interrupt anytime.">
+          <Icon name="phone" size={18} />
         </p>
       )}
 
       <div className="agent-session-actions">
-        {isConnected ? (
-          <button type="button" className="btn-glass" onClick={stop} data-event="agent_end">
-            <Icon name="x" /> End session
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="btn-primary"
-            onClick={() => {
-              void start()
-            }}
-            disabled={isStarting}
-            data-event={mode === "talk" ? "agent_call" : "agent_open"}
-          >
-            {mode === "talk" ? <Icon name="phone" /> : <Icon name="message" />} {isStarting ? "Connecting…" : mode === "talk" ? "Start talking" : "Start chat"}
-          </button>
-        )}
+        <button type="button" className="btn-glass" onClick={stop} data-event="agent_end" aria-label="End session" title="End session" disabled={!isConnected}>
+          <Icon name="phone-off" size={20} />
+        </button>
       </div>
     </div>
   )
@@ -275,6 +270,7 @@ function AgentSession({ agentId, mode }: AgentSessionProps) {
  */
 export function AgentDrawer() {
   const { isOpen, mode, setMode, closeAgent } = useAgent()
+  const [started, setStarted] = useState(false)
   const titleId = useId()
   const agentId = getElevenLabsAgentId()
   const phoneHref = getAgentPhoneHref()
@@ -322,9 +318,6 @@ export function AgentDrawer() {
       >
         <div className="agent-drawer-header">
           <div>
-            <p className="micro flex items-center gap-2">
-              <CoreGlow size={10} /> LIVE AGENT
-            </p>
             <h2 id={titleId} className="agent-drawer-title">
               Ask <span className="accent-word">GrayNest</span>
             </h2>
@@ -334,52 +327,51 @@ export function AgentDrawer() {
           </button>
         </div>
 
-        <div className="agent-mode-tabs" role="tablist" aria-label="Agent mode">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={mode === "talk"}
-            className={`agent-mode-tab ${mode === "talk" ? "is-active" : ""}`.trim()}
-            onClick={() => setMode("talk")}
-          >
-            Talk
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={mode === "chat"}
-            className={`agent-mode-tab ${mode === "chat" ? "is-active" : ""}`.trim()}
-            onClick={() => setMode("chat")}
-          >
-            Chat
-          </button>
-        </div>
-
         {agentId.length === 0 ? (
           <div className="agent-missing">
             <p className="body">
               Set <code>NEXT_PUBLIC_ELEVENLABS_AGENT_ID</code> to connect the live GrayNest agent.
             </p>
           </div>
-        ) : (
+        ) : started ? (
           <ConversationProvider key={`${mode}-${agentId}`}>
-            <AgentSession agentId={agentId} mode={mode} />
+            <AgentSession agentId={agentId} mode={mode} onEnd={() => setStarted(false)} />
           </ConversationProvider>
+        ) : (
+          <div className="agent-landing">
+            <ThinkingOrb state="breathing" size={64} theme="auto" />
+            <div className="agent-landing-actions">
+              {(["talk", "chat"] as const).map((m) => (
+                <button
+                  key={m}
+                  type="button"
+                  className={`agent-tile ${m === "talk" ? "btn-primary" : "btn-glass"}`}
+                  data-event={m === "talk" ? "agent_call" : "agent_open"}
+                  onClick={() => {
+                    setMode(m)
+                    setStarted(true)
+                  }}
+                >
+                  <Icon name={m === "talk" ? "phone" : "message"} size={20} />
+                  <span>{m === "talk" ? "Talk" : "Type"}</span>
+                </button>
+              ))}
+            </div>
+          </div>
         )}
 
         <div className="agent-drawer-contacts">
-          <p className="micro mb-3">Or reach us directly</p>
           <div className="agent-contact-row">
             {phoneHref !== "tel:" ? (
-              <a className="btn-glass" href={phoneHref} data-event="agent_call">
-                <Icon name="phone" /> {phoneLabel}
+              <a className="btn-glass" href={phoneHref} data-event="agent_call" aria-label={phoneLabel} title={phoneLabel}>
+                <Icon name="phone" size={20} />
               </a>
             ) : null}
-            <a className="btn-glass" href={whatsappHref} data-event="whatsapp_click">
-              <Icon name="message" /> WhatsApp
+            <a className="btn-glass" href={whatsappHref} data-event="whatsapp_click" aria-label="WhatsApp" title="WhatsApp">
+              <Icon name="whatsapp" size={20} />
             </a>
-            <a className="btn-glass" href="mailto:hello@graynest.co">
-              <Icon name="mail" /> Email
+            <a className="btn-glass" href="mailto:hello@graynest.co" aria-label="Email" title="Email">
+              <Icon name="mail" size={20} />
             </a>
           </div>
         </div>
