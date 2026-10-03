@@ -34,8 +34,7 @@ const RECORD: Array<{ key: string; mark: ReactNode; note: string }> = [
   { key: "redhat", mark: <RedHatLogo />, note: "Enterprise open source" },
   { key: "monmedx", mark: <Wordmark name="MonMedX" />, note: "Healthcare platform" },
   { key: "notegen", mark: <Wordmark name="Notegen.ai" />, note: "Clinical AI notes" },
-  { key: "litelink", mark: <Wordmark name="Litelink Labs" />, note: "Logistics and payments" },
-  { key: "1shift", mark: <Wordmark name="1-Shift" />, note: "Startup" },
+  { key: "1shift", mark: <Wordmark name="1-Shift" />, note: "Logistics startup" },
   { key: "startups", mark: <span className="track-record-name">20+ startups</span>, note: "New and established" },
 ]
 

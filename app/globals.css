@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Tailwind `dark:` follows the site theme toggle, not the OS setting. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /* GrayNest Design System — dark (default tokens) */
 :root,
 [data-theme="dark"] {
@@ -491,6 +494,33 @@ body:has(.gn-promo) .not-found-stage {
 
 .site-nav-dot {
   color: var(--gn-text-3);
+}
+
+/* Liquid-glass nav buttons (components/ui/liquid-glass-button). A faint fill keeps
+   the glass legible where backdrop-filter: url() isn't supported (Safari, Firefox).
+   No backdrop-filter on the button itself: it would stop the inner glass layer from
+   sampling the page behind it. */
+.site-nav-glass-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.site-nav .site-nav-glass-btn {
+  border-radius: 999px;
+  background: var(--gn-glass-fill);
+}
+
+.site-nav-glass-links .site-nav-glass-btn {
+  height: 42px;
+  padding-inline: 20px;
+  font-size: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav-glass-btn:hover {
+    transform: none;
+  }
 }
 
 /* The header CTA lives in a collapsing grid track. While the hero (with its own
