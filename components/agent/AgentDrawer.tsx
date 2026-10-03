@@ -269,8 +269,15 @@ function AgentSession({ agentId, mode, onEnd }: AgentSessionProps) {
  * Drawer shell with Talk / Chat modes and contact fallbacks.
  */
 export function AgentDrawer() {
-  const { isOpen, mode, setMode, closeAgent } = useAgent()
+  const { isOpen, mode, setMode, closeAgent, autoStart } = useAgent()
   const [started, setStarted] = useState(false)
+
+  // Opened from the invite card: the mode is already chosen, skip the landing.
+  useEffect(() => {
+    if (isOpen && autoStart) {
+      setStarted(true)
+    }
+  }, [autoStart, isOpen])
   const titleId = useId()
   const agentId = getElevenLabsAgentId()
   const phoneHref = getAgentPhoneHref()

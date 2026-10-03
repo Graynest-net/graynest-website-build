@@ -10,7 +10,6 @@ import { MediaSlot } from "@/components/MediaSlot"
 import { CoreGlow } from "@/components/CoreGlow"
 import { Icon } from "@/components/Icon"
 import { HeroFilm } from "@/components/HeroFilm"
-import Link from "next/link"
 import { ServiceRowMotion, ServiceMark } from "@/components/ServiceIcons"
 
 const SERVICES = [
@@ -36,7 +35,7 @@ const SERVICES = [
     eyebrow: "04 · AI INTEGRATION",
     title: "AI where it earns its place",
     body: "Search, assistants and automation inside your product, only where it saves real time or money.",
-    icon: "sparkles",
+    icon: "workflow",
   },
 ] as const
 
@@ -92,9 +91,6 @@ export default function Home() {
               <MagneticButton href="/contact" event="cta_project">
                 Start a project <Icon name="arrow-right" />
               </MagneticButton>
-              <Link href="/software-engineering" className="btn-glass">
-                See what we build <Icon name="arrow-right" />
-              </Link>
             </div>
           </div>
         </div>
@@ -118,19 +114,16 @@ export default function Home() {
               Most companies don&apos;t need more software. They need the right software, shipped,
               and AI only where it earns its keep.
             </p>
-            <Link href="/software-engineering" className="btn-glass mt-8">
-              See what we build <Icon name="arrow-right" />
-            </Link>
           </Reveal>
 
           <div className="col-span-full lg:col-span-7 mt-10 lg:mt-0 space-y-0">
             {SERVICES.map((service, index) => (
               <Reveal key={service.eyebrow} delay={index * 0.08}>
                 <ServiceRowMotion className={`service-row ${index > 0 ? "border-t border-[var(--gn-line)]" : ""}`}>
-                  <div className="service-row-head mb-4">
-                    <ServiceMark name={service.icon} />
-                    <div>
-                      <p className="micro mb-2">{service.eyebrow}</p>
+                  <div className="mb-4">
+                    <p className="micro mb-2">{service.eyebrow}</p>
+                    <div className="service-row-head">
+                      <ServiceMark name={service.icon} />
                       <h3 className="h3">{service.title}</h3>
                     </div>
                   </div>

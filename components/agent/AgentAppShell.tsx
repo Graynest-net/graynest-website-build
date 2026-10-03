@@ -2,8 +2,9 @@
 
 import dynamic from "next/dynamic"
 import { useEffect, useState, type ReactNode } from "react"
-import { CoreGlow } from "@/components/CoreGlow"
 import { AgentProvider, useAgent } from "@/components/agent/AgentContext"
+import { ThinkingOrb } from "thinking-orbs"
+import { Icon } from "@/components/Icon"
 import { AgentOrb } from "@/components/agent/AgentOrb"
 
 const AgentDrawer = dynamic(
@@ -63,6 +64,28 @@ function AgentLauncherButton() {
   const [pulseOnce, setPulseOnce] = useState(false)
   const compact = useCompactOnScroll()
   const inCall = callState !== "idle"
+  const [inviteReady, setInviteReady] = useState(false)
+  const [dismissed, setDismissed] = useState(true)
+  const [hovered, setHovered] = useState(false)
+
+  // Invite once per session, a few seconds after arrival.
+  useEffect(() => {
+    let seen = false
+    try {
+      seen = window.sessionStorage.getItem("gn-invite-dismissed") === "1"
+    } catch {}
+    setDismissed(seen)
+    const timer = window.setTimeout(() => setInviteReady(true), 4000)
+    return () => window.clearTimeout(timer)
+  }, [])
+
+  const dismissInvite = () => {
+    setDismissed(true)
+    try {
+      window.sessionStorage.setItem("gn-invite-dismissed", "1")
+    } catch {}
+  }
+  const showInvite = !isOpen && !compact && (hovered || (inviteReady && !dismissed))
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -97,7 +120,48 @@ function AgentLauncherButton() {
   }
 
   return (
-    <div className={`agent-launcher ${isOpen ? "is-hidden" : ""}`.trim()}>
+    <div
+      className={`agent-launcher ${isOpen ? "is-hidden" : ""}`.trim()}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className={`agent-invite ${showInvite ? "is-visible" : ""}`.trim()} aria-hidden={!showInvite}>
+        <ThinkingOrb state="listening" size={64} theme="auto" />
+        <div className="agent-invite-body">
+          <p className="agent-invite-title">Got a question? Instant answers.</p>
+          <div className="agent-invite-actions">
+            <button
+              type="button"
+              className="btn-primary"
+              data-event="agent_call"
+              tabIndex={showInvite ? 0 : -1}
+              onClick={() => openAgent("talk", true)}
+            >
+              <Icon name="phone" size={16} /> Talk
+            </button>
+            <button
+              type="button"
+              className="btn-glass"
+              data-event="agent_open"
+              aria-label="Type instead"
+              title="Type instead"
+              tabIndex={showInvite ? 0 : -1}
+              onClick={() => openAgent("chat", true)}
+            >
+              <Icon name="message" size={16} />
+            </button>
+          </div>
+        </div>
+        <button
+          type="button"
+          className="agent-invite-close"
+          aria-label="Dismiss"
+          tabIndex={showInvite ? 0 : -1}
+          onClick={dismissInvite}
+        >
+          <Icon name="x" size={14} />
+        </button>
+      </div>
       <button
         type="button"
         className={`btn-glass agent-launcher-btn ${compact ? "is-compact" : ""} ${pulseOnce ? "agent-launcher-pulse" : ""}`.trim()}
@@ -105,7 +169,7 @@ function AgentLauncherButton() {
         aria-label="Ask GrayNest"
         onClick={() => openAgent("talk")}
       >
-        <CoreGlow size={12} />
+        <Icon name="message" size={20} />
         <span className="agent-launcher-label">Ask GrayNest</span>
       </button>
     </div>

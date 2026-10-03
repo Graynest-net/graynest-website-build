@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { Pause, Play } from "lucide-react"
 import { Reveal } from "@/components/Reveal"
 import { CoreGlow } from "@/components/CoreGlow"
 
@@ -91,16 +92,7 @@ export function ProcessFilm() {
               onClick={toggle}
               aria-label={playing ? "Pause video" : "Play video"}
             >
-              {playing ? (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <rect x="6" y="4" width="4" height="16" rx="1" />
-                  <rect x="14" y="4" width="4" height="16" rx="1" />
-                </svg>
-              ) : (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M7 4l13 8-13 8z" />
-                </svg>
-              )}
+              {playing ? <Pause size={18} fill="currentColor" aria-hidden="true" /> : <Play size={18} fill="currentColor" aria-hidden="true" />}
             </button>
           </div>
         </Reveal>
