@@ -3136,6 +3136,32 @@ body:has(:is([data-clinic], [data-teardown])) {
   object-fit: contain;
 }
 
+.track-record-svg-text {
+  font-family: var(--font-satoshi);
+}
+
+/* The cross is much taller than the wordmark, so MonMedX gets extra height to keep
+   its letters level with the other names. */
+.track-record-logo--monmedx {
+  height: 128%;
+}
+
+/* MonMedX keeps its two-tone wordmark as full and muted ink... */
+.track-record-logo--monmedx .mx-accent {
+  fill: currentColor;
+  transition: fill var(--gn-dur-s, 0.2s) ease, opacity var(--gn-dur-s, 0.2s) ease;
+}
+
+.track-record-logo--monmedx .mx-muted {
+  opacity: 0.55;
+}
+
+/* ...and shows its brand teal while the row is paused under the pointer. */
+.track-record-item:hover .track-record-logo--monmedx .mx-accent {
+  fill: #00b8b2;
+  opacity: 1;
+}
+
 .track-record-name {
   font-family: var(--font-satoshi);
   font-weight: 800;
