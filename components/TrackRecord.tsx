@@ -17,42 +17,32 @@ const RedHatLogo = () => (
   </svg>
 )
 
+// Logos without a vector mark yet render as a wordmark. To use the real file, put it in
+// /public/logos and set `src` (an SVG or a transparent PNG, ideally one colour).
+const Wordmark = ({ name, src }: { name: string; src?: string }) =>
+  src ? (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} alt={name} className="track-record-logo track-record-logo--img" />
+  ) : (
+    <span className="track-record-name track-record-name--brand" role="img" aria-label={name}>
+      {name}
+    </span>
+  )
+
 const RECORD: Array<{ key: string; mark: ReactNode; note: string }> = [
   { key: "nokia", mark: <NokiaLogo />, note: "Telecom" },
   { key: "redhat", mark: <RedHatLogo />, note: "Enterprise open source" },
+  { key: "monmedx", mark: <Wordmark name="MonMedX" />, note: "Healthcare platform" },
+  { key: "notegen", mark: <Wordmark name="Notegen.ai" />, note: "Clinical AI notes" },
+  { key: "litelink", mark: <Wordmark name="Litelink Labs" />, note: "Logistics and payments" },
+  { key: "1shift", mark: <Wordmark name="1-Shift" />, note: "Startup" },
   { key: "startups", mark: <span className="track-record-name">20+ startups</span>, note: "New and established" },
 ]
-
-// Circular animated badges. Drop the real logo files in /public/logos and set `src`;
-// until then the badge shows the monogram.
-const BADGES: Array<{ key: string; name: string; mono: string; src?: string }> = [
-  { key: "monmedx", name: "MonMedX", mono: "MM" },
-  { key: "notegen", name: "Notegen.ai", mono: "N" },
-  { key: "litelink", name: "Litelink Labs", mono: "LL" },
-  { key: "1shift", name: "1-Shift", mono: "1S" },
-]
-
-function CircleLogo({ name, mono, src }: { name: string; mono: string; src?: string }) {
-  return (
-    <li className="orbit-logo">
-      <span className="orbit-logo-disc">
-        <span className="orbit-logo-ring" aria-hidden="true" />
-        <span className="orbit-logo-ring orbit-logo-ring--rev" aria-hidden="true" />
-        {src ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={src} alt={name} className="orbit-logo-img" />
-        ) : (
-          <span className="orbit-logo-mono" aria-hidden="true">{mono}</span>
-        )}
-      </span>
-      <span className="micro">{name}</span>
-    </li>
-  )
-}
 
 /**
  * The team's experience. These are brands our engineers built for individually,
  * not GrayNest clients, so the copy never implies GrayNest shipped for them.
+ * The row loops as an endless marquee; the second copy is hidden from assistive tech.
  */
 export function TrackRecord() {
   return (
@@ -61,32 +51,31 @@ export function TrackRecord() {
       className="track-record relative border-t border-[var(--gn-line)]"
     >
       <div className="grid-12">
-        <Reveal className="col-span-full lg:col-span-4">
+        <Reveal className="col-span-full">
           <p className="micro mb-4 flex items-center gap-3">
             <CoreGlow size={12} /> TEAM EXPERIENCE
           </p>
-          <h2 id="track-record-title" className="body max-w-[38ch]">
+          <h2 id="track-record-title" className="body max-w-[52ch]">
             Between them, the engineers behind GrayNest have built software for global
             brands and for more than twenty startups, new and established.
           </h2>
         </Reveal>
-
-        <Reveal className="col-span-full lg:col-span-8 mt-8 lg:mt-0" delay={0.1}>
-          <ul className="track-record-list">
-            {RECORD.map((item) => (
-              <li key={item.key} className="track-record-item">
-                <span className="track-record-mark">{item.mark}</span>
-                <span className="micro">{item.note}</span>
-              </li>
-            ))}
-          </ul>
-          <ul className="orbit-logo-list" aria-label="More companies">
-            {BADGES.map((b) => (
-              <CircleLogo key={b.key} name={b.name} mono={b.mono} src={b.src} />
-            ))}
-          </ul>
-        </Reveal>
       </div>
+
+      <Reveal className="track-record-marquee mt-8" delay={0.1}>
+        <div className="track-record-track">
+          {[0, 1].map((copy) => (
+            <ul key={copy} className="track-record-list" aria-hidden={copy === 1 || undefined}>
+              {RECORD.map((item) => (
+                <li key={item.key} className="track-record-item">
+                  <span className="track-record-mark">{item.mark}</span>
+                  <span className="micro">{item.note}</span>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </Reveal>
     </section>
   )
 }

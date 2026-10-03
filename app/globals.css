@@ -3046,24 +3046,49 @@ body:has(:is([data-clinic], [data-teardown])) {
   }
 }
 
-/* Team experience: a quiet typographic band under the hero, not a logo wall. */
+/* Team experience: a quiet typographic band under the hero that loops as a marquee. */
 .track-record {
   padding-block: clamp(32px, 4.5vw, 56px);
+  overflow: hidden;
+}
+
+/* Full-bleed strip with soft fades at both edges so marks drift in and out. */
+.track-record-marquee {
+  direction: ltr;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* Two identical lists side by side; sliding by one list width makes the loop seamless. */
+.track-record-track {
+  display: flex;
+  width: max-content;
+  animation: track-record-scroll 40s linear infinite;
+}
+
+.track-record-marquee:hover .track-record-track,
+.track-record-marquee:focus-within .track-record-track {
+  animation-play-state: paused;
+}
+
+@keyframes track-record-scroll {
+  to { transform: translateX(-50%); }
 }
 
 .track-record-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-shrink: 0;
 }
 
 .track-record-item {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 22px 16px 22px 0;
+  padding: 22px clamp(32px, 4vw, 64px) 22px 0;
+  white-space: nowrap;
 }
 
-/* Logos and the startup count share one baseline box so the row lines up. */
+/* Logos and wordmarks share one baseline box so the row lines up. */
 .track-record-mark {
   display: flex;
   align-items: center;
@@ -3074,11 +3099,11 @@ body:has(:is([data-clinic], [data-teardown])) {
   display: block;
   height: 100%;
   width: auto;
-  max-width: 100%;
+  max-width: none;
 }
 
-.track-record-item:last-child {
-  grid-column: 1 / -1;
+.track-record-logo--img {
+  object-fit: contain;
 }
 
 .track-record-name {
@@ -3090,101 +3115,35 @@ body:has(:is([data-clinic], [data-teardown])) {
   letter-spacing: -0.025em;
 }
 
-@media (min-width: 768px) {
-  .track-record-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .track-record-item:last-child {
-    grid-column: auto;
-  }
-
-  .track-record-item + .track-record-item {
-    padding-left: 20px;
-  }
+/* Brand wordmarks keep their own casing. */
+.track-record-name--brand {
+  text-transform: none;
+  letter-spacing: -0.035em;
 }
 
-/* Circular animated logo badges: a slow orbiting ring around each mark. */
-.orbit-logo-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px 16px;
-  margin-top: 16px;
-  padding-top: 28px;
-  border-top: 1px solid var(--gn-line);
-}
-
-.orbit-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  text-align: center;
-}
-
-.orbit-logo-disc {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: clamp(72px, 7vw, 96px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  overflow: hidden;
-  background: color-mix(in srgb, currentColor 6%, transparent);
-  animation: orbit-logo-float 6s ease-in-out infinite;
-}
-
-.orbit-logo-ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 1.5px dashed currentColor;
-  opacity: 0.45;
-  animation: orbit-logo-spin 18s linear infinite;
-}
-
-.orbit-logo-ring--rev {
-  inset: 7px;
-  border-style: solid;
-  border-color: transparent;
-  border-top-color: currentColor;
-  opacity: 0.8;
-  animation-duration: 7s;
-  animation-direction: reverse;
-}
-
-.orbit-logo-mono {
-  font-family: var(--font-satoshi);
-  font-weight: 800;
-  font-size: clamp(20px, 2vw, 28px);
-  letter-spacing: -0.03em;
-}
-
-.orbit-logo-img {
-  width: 62%;
-  height: 62%;
-  object-fit: contain;
-  border-radius: 50%;
-}
-
-@keyframes orbit-logo-spin {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes orbit-logo-float {
-  50% { transform: translateY(-4px); }
-}
-
-@media (min-width: 768px) {
-  .orbit-logo-list {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
+/* No motion: drop the duplicate and let the row wrap. */
 @media (prefers-reduced-motion: reduce) {
-  .orbit-logo-disc,
-  .orbit-logo-ring {
+  .track-record-marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-left: var(--gn-gutter-left);
+    padding-right: var(--gn-gutter-right);
+  }
+
+  .track-record-track {
+    width: auto;
     animation: none;
+  }
+
+  .track-record-list {
+    flex-wrap: wrap;
+    flex-shrink: 1;
+  }
+
+  .track-record-list[aria-hidden] {
+    display: none;
   }
 }
 
