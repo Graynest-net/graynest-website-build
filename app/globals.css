@@ -3104,6 +3104,90 @@ body:has(:is([data-clinic], [data-teardown])) {
   }
 }
 
+/* Circular animated logo badges: a slow orbiting ring around each mark. */
+.orbit-logo-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 16px;
+  margin-top: 16px;
+  padding-top: 28px;
+  border-top: 1px solid var(--gn-line);
+}
+
+.orbit-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.orbit-logo-disc {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(72px, 7vw, 96px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background: color-mix(in srgb, currentColor 6%, transparent);
+  animation: orbit-logo-float 6s ease-in-out infinite;
+}
+
+.orbit-logo-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px dashed currentColor;
+  opacity: 0.45;
+  animation: orbit-logo-spin 18s linear infinite;
+}
+
+.orbit-logo-ring--rev {
+  inset: 7px;
+  border-style: solid;
+  border-color: transparent;
+  border-top-color: currentColor;
+  opacity: 0.8;
+  animation-duration: 7s;
+  animation-direction: reverse;
+}
+
+.orbit-logo-mono {
+  font-family: var(--font-satoshi);
+  font-weight: 800;
+  font-size: clamp(20px, 2vw, 28px);
+  letter-spacing: -0.03em;
+}
+
+.orbit-logo-img {
+  width: 62%;
+  height: 62%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+@keyframes orbit-logo-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbit-logo-float {
+  50% { transform: translateY(-4px); }
+}
+
+@media (min-width: 768px) {
+  .orbit-logo-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-logo-disc,
+  .orbit-logo-ring {
+    animation: none;
+  }
+}
+
 /* Ship section: the product shot is cut at the bottom, so it sits flush on the section's floor. */
 .method-ship {
   padding-bottom: 0;
