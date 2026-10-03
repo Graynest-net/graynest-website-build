@@ -17,7 +17,9 @@ interface AgentContextValue {
   isOpen: boolean
   mode: AgentMode
   hasOpened: boolean
-  openAgent: (mode?: AgentMode) => void
+  /** True when the opener already chose a mode, so the drawer skips its landing. */
+  autoStart: boolean
+  openAgent: (mode?: AgentMode, autoStart?: boolean) => void
   closeAgent: () => void
   setMode: (mode: AgentMode) => void
   callState: AgentCallState
@@ -40,6 +42,7 @@ export function AgentProvider({ children }: AgentProviderProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [mode, setMode] = useState<AgentMode>("talk")
   const [hasOpened, setHasOpened] = useState(false)
+  const [autoStart, setAutoStart] = useState(false)
   const [callState, setCallState] = useState<AgentCallState>("idle")
   const levelSource = useRef<(() => number) | null>(null)
 
@@ -55,8 +58,9 @@ export function AgentProvider({ children }: AgentProviderProps) {
     }
   }, [])
 
-  const openAgent = useCallback((nextMode: AgentMode = "talk") => {
+  const openAgent = useCallback((nextMode: AgentMode = "talk", start = false) => {
     setMode(nextMode)
+    setAutoStart(start)
     setHasOpened(true)
     setIsOpen(true)
   }, [])
@@ -70,6 +74,7 @@ export function AgentProvider({ children }: AgentProviderProps) {
       isOpen,
       mode,
       hasOpened,
+      autoStart,
       openAgent,
       closeAgent,
       setMode,
@@ -78,7 +83,7 @@ export function AgentProvider({ children }: AgentProviderProps) {
       setLevelSource,
       readLevel,
     }),
-    [callState, closeAgent, hasOpened, isOpen, mode, openAgent, readLevel, setLevelSource]
+    [autoStart, callState, closeAgent, hasOpened, isOpen, mode, openAgent, readLevel, setLevelSource]
   )
 
   return <AgentContext.Provider value={value}>{children}</AgentContext.Provider>

@@ -12,17 +12,7 @@ export function Footer() {
           </h2>
         </div>
 
-        <div className="col-span-full grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-          <div>
-            <p className="micro mb-6">Services</p>
-            <ul className="space-y-3">
-              <li>
-                <Link href="/software-engineering" className="footer-link">
-                  Software Engineering
-                </Link>
-              </li>
-            </ul>
-          </div>
+        <div className="col-span-full grid grid-cols-1 gap-12 mb-16">
 
           <div>
             <p className="micro mb-6">Contact</p>

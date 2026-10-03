@@ -31,9 +31,6 @@ export default function NotFound() {
               <Link href="/" className="btn-primary">
                 <Icon name="arrow-left" /> Back home
               </Link>
-              <Link href="/software-engineering" className="btn-glass">
-                Software
-              </Link>
               <Link href="/contact" className="btn-glass">
                 Contact
               </Link>

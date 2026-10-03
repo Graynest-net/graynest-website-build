@@ -7,13 +7,13 @@ import { AnimateIcon } from "@/components/animate-ui/icons/icon"
 import { LayoutDashboard } from "@/components/animate-ui/icons/layout-dashboard"
 import { Terminal } from "@/components/animate-ui/icons/terminal"
 import { Kanban } from "@/components/animate-ui/icons/kanban"
-import { Sparkles } from "@/components/animate-ui/icons/sparkles"
+import { Workflow } from "@/components/animate-ui/icons/workflow"
 
 const ICONS = {
   "layout-dashboard": LayoutDashboard,
   terminal: Terminal,
   kanban: Kanban,
-  sparkles: Sparkles,
+  workflow: Workflow,
 } as const
 
 export type ServiceIconName = keyof typeof ICONS
@@ -37,7 +37,7 @@ export function ServiceMark({ name }: { name: ServiceIconName }) {
   const Icon = ICONS[name]
   return (
     <span className="service-mark" aria-hidden="true">
-      <Icon size={26} animateOnView animateOnViewOnce animateOnViewMargin="-20%" />
+      <Icon size={28} animateOnView animateOnViewOnce animateOnViewMargin="-20%" />
     </span>
   )
 }

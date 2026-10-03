@@ -1,5 +1,6 @@
 "use client"
 
+import { Menu, X } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { ThemeToggle } from "@/components/theme/ThemeToggle"
@@ -87,12 +88,6 @@ export function Navigation() {
 
         <div className="site-nav-center">
           <div className="site-nav-pill">
-            <Link href="/software-engineering" className="site-nav-link">
-              Software
-            </Link>
-            <span className="site-nav-dot" aria-hidden="true">
-              ·
-            </span>
             <Link href="/#scope" className="site-nav-link">
               Scope Before Spend
             </Link>
@@ -115,7 +110,7 @@ export function Navigation() {
               aria-hidden={!pastHero}
               tabIndex={pastHero ? undefined : -1}
             >
-              Talk to us <Icon name="arrow-right" />
+              Start a project <Icon name="arrow-right" />
             </Link>
           </div>
           <button
@@ -125,13 +120,7 @@ export function Navigation() {
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path
-                d={menuOpen ? "M5 5l14 14M19 5L5 19" : "M3 12h18M3 6h18M3 18h18"}
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
+            {menuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
           </button>
         </div>
       </div>
@@ -141,9 +130,6 @@ export function Navigation() {
         aria-hidden={!menuOpen}
       >
         <div className="mobile-menu-links">
-          <Link href="/software-engineering" onClick={() => setMenuOpen(false)}>
-            Software
-          </Link>
           <Link href="/#scope" onClick={() => setMenuOpen(false)}>
             Scope Before Spend
           </Link>
@@ -151,7 +137,7 @@ export function Navigation() {
             Phase-1 Ship
           </Link>
           <Link href="/contact" onClick={() => setMenuOpen(false)}>
-            Talk to us
+            Start a project
           </Link>
         </div>
         <div className="mobile-menu-footer">
