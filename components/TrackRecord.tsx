@@ -92,7 +92,7 @@ const RECORD: Array<{ key: string; mark: (copy: number) => ReactNode; note: stri
   { key: "monmedx", mark: (copy) => <MonMedXLogo id={`monmedx-cut-${copy}`} />, note: "Healthcare platform" },
   { key: "notegen", mark: (copy) => <NoteGenLogo id={`notegen-cut-${copy}`} />, note: "Clinical AI notes" },
   { key: "1shift", mark: () => <OneShiftLogo />, note: "Logistics startup" },
-  { key: "startups", mark: () => <span className="track-record-name">20+ startups</span>, note: "New and established" },
+  { key: "startups", mark: () => <span className="track-record-name">11+ startups</span>, note: "New and established" },
 ]
 
 /**
@@ -113,7 +113,7 @@ export function TrackRecord() {
           </p>
           <h2 id="track-record-title" className="body max-w-[52ch]">
             Between them, the engineers behind GrayNest have built software for global
-            brands and for more than twenty startups, new and established.
+            brands and for more than ten startups, new and established.
           </h2>
         </Reveal>
       </div>
