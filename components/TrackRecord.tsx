@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 import { Reveal } from "@/components/Reveal"
 import { CoreGlow } from "@/components/CoreGlow"
+import { LogoMarquee } from "@/components/LogoMarquee"
 
 // One-colour marks (currentColor) so they follow the theme. Paths from the official
 // Nokia 2023 and Red Hat 2019 logos.
@@ -19,7 +20,7 @@ const RedHatLogo = () => (
 
 // Redrawn from the MonMedX raster logo: a split medical cross with a twisted DNA lens.
 // One colour like the others; the two-tone wordmark survives as full and muted ink,
-// and hovering the (paused) row brings back the brand teal.
+// and hovering it brings back the brand teal.
 const MonMedXLogo = ({ id }: { id: string }) => (
   <svg viewBox="0 0 109 30" className="track-record-logo track-record-logo--monmedx" role="img" aria-label="MonMedX">
     <defs>
@@ -97,7 +98,7 @@ const RECORD: Array<{ key: string; mark: (copy: number) => ReactNode; note: stri
 /**
  * The team's experience. These are brands our engineers built for individually,
  * not GrayNest clients, so the copy never implies GrayNest shipped for them.
- * The row loops as an endless marquee; the second copy is hidden from assistive tech.
+ * The row loops as an endless, draggable marquee; the second copy is hidden from assistive tech.
  */
 export function TrackRecord() {
   return (
@@ -118,7 +119,7 @@ export function TrackRecord() {
       </div>
 
       <Reveal className="track-record-marquee mt-8" delay={0.1}>
-        <div className="track-record-track">
+        <LogoMarquee>
           {[0, 1].map((copy) => (
             <ul key={copy} className="track-record-list" aria-hidden={copy === 1 || undefined}>
               {RECORD.map((item) => (
@@ -129,7 +130,7 @@ export function TrackRecord() {
               ))}
             </ul>
           ))}
-        </div>
+        </LogoMarquee>
       </Reveal>
     </section>
   )

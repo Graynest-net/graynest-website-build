@@ -3112,20 +3112,28 @@ body:has(:is([data-clinic], [data-teardown])) {
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
-/* Two identical lists side by side; sliding by one list width makes the loop seamless. */
+/* Drag surface: horizontal drags move the row, vertical swipes still scroll the page. */
+.track-record-drag {
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.track-record-drag.is-dragging {
+  cursor: grabbing;
+}
+
+.track-record-drag svg {
+  pointer-events: none;
+}
+
+/* Two identical lists side by side; LogoMarquee slides the track and wraps it by one
+   list width, so the loop is seamless. */
 .track-record-track {
   display: flex;
   width: max-content;
-  animation: track-record-scroll 40s linear infinite;
-}
-
-.track-record-marquee:hover .track-record-track,
-.track-record-marquee:focus-within .track-record-track {
-  animation-play-state: paused;
-}
-
-@keyframes track-record-scroll {
-  to { transform: translateX(-50%); }
+  will-change: transform;
 }
 
 .track-record-list {
@@ -3188,7 +3196,7 @@ body:has(:is([data-clinic], [data-teardown])) {
   fill: #35c1bb;
 }
 
-/* ...and shows its brand teal while the row is paused under the pointer. */
+/* ...and shows its brand teal under the pointer. */
 .track-record-item:hover .track-record-logo--monmedx .mx-accent {
   fill: #00b8b2;
   opacity: 1;
@@ -3214,9 +3222,13 @@ body:has(:is([data-clinic], [data-teardown])) {
     padding-right: var(--gn-gutter-right);
   }
 
+  .track-record-drag {
+    cursor: auto;
+  }
+
   .track-record-track {
     width: auto;
-    animation: none;
+    transform: none !important;
   }
 
   .track-record-list {
