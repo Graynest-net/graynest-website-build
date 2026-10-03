@@ -3132,10 +3132,6 @@ body:has(:is([data-clinic], [data-teardown])) {
   max-width: none;
 }
 
-.track-record-logo--img {
-  object-fit: contain;
-}
-
 .track-record-svg-text {
   font-family: var(--font-satoshi);
 }
@@ -3156,6 +3152,19 @@ body:has(:is([data-clinic], [data-teardown])) {
   opacity: 0.55;
 }
 
+/* NoteGen's tile is full height, so it sits a touch smaller to match the wordmarks. */
+.track-record-logo--notegen {
+  height: 86%;
+}
+
+.track-record-logo--notegen .ng-accent {
+  transition: fill var(--gn-dur-s, 0.2s) ease;
+}
+
+.track-record-item:hover .track-record-logo--notegen .ng-accent {
+  fill: #35c1bb;
+}
+
 /* ...and shows its brand teal while the row is paused under the pointer. */
 .track-record-item:hover .track-record-logo--monmedx .mx-accent {
   fill: #00b8b2;
@@ -3169,12 +3178,6 @@ body:has(:is([data-clinic], [data-teardown])) {
   line-height: 1.05;
   text-transform: uppercase;
   letter-spacing: -0.025em;
-}
-
-/* Brand wordmarks keep their own casing. */
-.track-record-name--brand {
-  text-transform: none;
-  letter-spacing: -0.035em;
 }
 
 /* No motion: drop the duplicate and let the row wrap. */

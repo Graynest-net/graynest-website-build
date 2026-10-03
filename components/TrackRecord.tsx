@@ -48,6 +48,30 @@ const MonMedXLogo = ({ id }: { id: string }) => (
   </svg>
 )
 
+// Redrawn from the NoteGen logo: a notepad tile with a heartbeat trace beside the
+// wordmark. One colour, with the notepad lines knocked out; teal returns on hover.
+const NoteGenLogo = ({ id }: { id: string }) => (
+  <svg viewBox="135 148 1493 260" className="track-record-logo track-record-logo--notegen" role="img" aria-label="NoteGen">
+    <defs>
+      <mask id={id} maskUnits="userSpaceOnUse" x="135" y="148" width="260" height="260">
+        <rect x="135" y="148" width="260" height="260" fill="#fff" />
+        <g fill="none" stroke="#000" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="168" y="181" width="194" height="194" rx="26" strokeWidth="10" />
+          <path d="M168 228H362" strokeWidth="9" />
+          <path d="M207 171V187M245 171V187M284 171V187M322 171V187" strokeWidth="9" />
+          <path d="M167 294H214L232 327L248 263L268 314L286 272L297 311L306 294H363" strokeWidth="11" />
+        </g>
+        <circle cx="167" cy="294" r="10" fill="#000" />
+        <circle cx="363" cy="294" r="10" fill="#000" />
+      </mask>
+    </defs>
+    <rect className="ng-accent" x="135" y="148" width="260" height="260" rx="46" fill="currentColor" mask={`url(#${id})`} />
+    <text x="466" y="375" fontSize="286" fontWeight="900" textLength="1162" lengthAdjust="spacingAndGlyphs" fill="currentColor" className="track-record-svg-text">
+      NoteGen
+    </text>
+  </svg>
+)
+
 // 1-Shift Logistics: heavy "1SHIFT" set tight against a light "LOGISTICS".
 const OneShiftLogo = () => (
   <svg viewBox="0 5 116 20" className="track-record-logo" role="img" aria-label="1-Shift Logistics" fill="currentColor">
@@ -60,24 +84,12 @@ const OneShiftLogo = () => (
   </svg>
 )
 
-// Logos without a vector mark yet render as a wordmark. To use the real file, put it in
-// /public/logos and set `src` (an SVG or a transparent PNG, ideally one colour).
-const Wordmark = ({ name, src }: { name: string; src?: string }) =>
-  src ? (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img src={src} alt={name} className="track-record-logo track-record-logo--img" />
-  ) : (
-    <span className="track-record-name track-record-name--brand" role="img" aria-label={name}>
-      {name}
-    </span>
-  )
-
 // Marks are render functions: the marquee renders the row twice, and SVG mask ids must stay unique.
 const RECORD: Array<{ key: string; mark: (copy: number) => ReactNode; note: string }> = [
   { key: "nokia", mark: () => <NokiaLogo />, note: "Telecom" },
   { key: "redhat", mark: () => <RedHatLogo />, note: "Enterprise open source" },
   { key: "monmedx", mark: (copy) => <MonMedXLogo id={`monmedx-cut-${copy}`} />, note: "Healthcare platform" },
-  { key: "notegen", mark: () => <Wordmark name="Notegen.ai" />, note: "Clinical AI notes" },
+  { key: "notegen", mark: (copy) => <NoteGenLogo id={`notegen-cut-${copy}`} />, note: "Clinical AI notes" },
   { key: "1shift", mark: () => <OneShiftLogo />, note: "Logistics startup" },
   { key: "startups", mark: () => <span className="track-record-name">20+ startups</span>, note: "New and established" },
 ]
