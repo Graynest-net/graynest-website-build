@@ -529,9 +529,18 @@ body:has(.gn-promo) .not-found-stage {
   gap: 10px;
 }
 
+/* Mostly clear so the page shows through; the blur does the glass work. The
+   url() refraction filter on the inner layer only renders in Chromium, so this
+   plain backdrop blur keeps Safari and Firefox glassy too. */
 .site-nav .site-nav-glass-btn {
   border-radius: 999px;
-  background: var(--gn-glass-fill);
+  background: rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(8px) saturate(1.8);
+  backdrop-filter: blur(8px) saturate(1.8);
+}
+
+:root[data-theme="dark"] .site-nav .site-nav-glass-btn {
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .site-nav-glass-links .site-nav-glass-btn {
@@ -590,26 +599,12 @@ body:has(.gn-promo) .not-found-stage {
   flex-shrink: 0;
 }
 
+/* Same liquid-glass pill as the nav links; only the size is set here. */
 .theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 999px;
-  border: 1px solid var(--gn-glass-border);
-  background: var(--gn-glass-fill);
-  box-shadow: var(--gn-glass-highlight);
-  -webkit-backdrop-filter: blur(var(--gn-glass-blur)) saturate(1.6);
-  backdrop-filter: blur(var(--gn-glass-blur)) saturate(1.6);
   color: var(--gn-bone-50);
-  cursor: pointer;
-  transition: border-color var(--gn-dur-s) ease, background-color var(--gn-dur-s) ease;
-}
-
-.theme-toggle:hover {
-  border-color: var(--gn-glass-border-hover);
-  background: var(--gn-glass-fill-strong);
 }
 
 .site-nav-menu-btn {
@@ -662,6 +657,29 @@ body::before {
   color: var(--gn-bone-50);
   text-wrap: balance;
   animation: line-reveal var(--gn-dur-l) var(--gn-ease-enter) both;
+}
+
+/* Hero headline mixes voices: regular, light italic, then a hairline close. */
+.hero-title .hero-normal {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.03em;
+}
+
+.hero-title .hero-soft {
+  font-weight: 300;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  color: var(--gn-text-2);
+}
+
+.hero-title .hero-thin {
+  font-family: var(--font-thin), var(--font-satoshi);
+  font-weight: 200;
+  font-style: normal;
+  letter-spacing: -0.035em;
+  text-shadow: none;
 }
 
 .display-line:nth-child(2) {
@@ -3173,10 +3191,9 @@ body:has(:is([data-clinic], [data-teardown])) {
   height: 128%;
 }
 
-/* MonMedX keeps its two-tone wordmark as full and muted ink... */
+/* MonMedX keeps its two-tone wordmark as full and muted ink. */
 .track-record-logo--monmedx .mx-accent {
   fill: currentColor;
-  transition: fill var(--gn-dur-s, 0.2s) ease, opacity var(--gn-dur-s, 0.2s) ease;
 }
 
 .track-record-logo--monmedx .mx-muted {
@@ -3186,20 +3203,6 @@ body:has(:is([data-clinic], [data-teardown])) {
 /* NoteGen's tile is full height, so it sits a touch smaller to match the wordmarks. */
 .track-record-logo--notegen {
   height: 86%;
-}
-
-.track-record-logo--notegen .ng-accent {
-  transition: fill var(--gn-dur-s, 0.2s) ease;
-}
-
-.track-record-item:hover .track-record-logo--notegen .ng-accent {
-  fill: #35c1bb;
-}
-
-/* ...and shows its brand teal under the pointer. */
-.track-record-item:hover .track-record-logo--monmedx .mx-accent {
-  fill: #00b8b2;
-  opacity: 1;
 }
 
 .track-record-name {

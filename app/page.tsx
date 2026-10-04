@@ -10,7 +10,11 @@ import { MediaSlot } from "@/components/MediaSlot"
 import { CoreGlow } from "@/components/CoreGlow"
 import { Icon } from "@/components/Icon"
 import { HeroFilm } from "@/components/HeroFilm"
+import { Outfit } from "next/font/google"
 import { ServiceRowMotion, ServiceMark } from "@/components/ServiceIcons"
+
+// Hairline counter-voice for the hero's closing line.
+const outfit = Outfit({ subsets: ["latin"], weight: ["200"], display: "swap", variable: "--font-thin" })
 
 const SERVICES = [
   {
@@ -77,10 +81,13 @@ export default function Home() {
             <p className="micro flex items-center gap-3">
               <CoreGlow size={12} /> SOFTWARE HOUSE · AI WHERE IT PAYS OFF
             </p>
-            <h1>
-              <span className="display-line">WE BUILD</span>
+            <h1 className={`hero-title ${outfit.variable}`}>
               <span className="display-line">
-                SOFTWARE <span className="accent-word">that works.</span>
+                <span className="hero-normal">We Build</span>
+              </span>
+              <span className="display-line">
+                <span className="hero-soft">Software</span>{" "}
+                <span className="accent-word hero-thin">fast and of value.</span>
               </span>
             </h1>
             <p className="body-lg mt-8 max-w-[54ch]">
