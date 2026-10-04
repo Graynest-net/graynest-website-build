@@ -26,7 +26,7 @@
 
 ## Team experience
 - Individually, GrayNest's engineers have built software for Nokia, Red Hat,
-  and more than 20 startups, new and established. These were not GrayNest
+  and more than 10 startups, new and established. These were not GrayNest
   projects
 
 ## Contact

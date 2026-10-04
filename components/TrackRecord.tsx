@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 import { Reveal } from "@/components/Reveal"
 import { CoreGlow } from "@/components/CoreGlow"
+import { LogoMarquee } from "@/components/LogoMarquee"
 
 // One-colour marks (currentColor) so they follow the theme. Paths from the official
 // Nokia 2023 and Red Hat 2019 logos.
@@ -17,15 +18,87 @@ const RedHatLogo = () => (
   </svg>
 )
 
-const RECORD: Array<{ key: string; mark: ReactNode; note: string }> = [
-  { key: "nokia", mark: <NokiaLogo />, note: "Telecom" },
-  { key: "redhat", mark: <RedHatLogo />, note: "Enterprise open source" },
-  { key: "startups", mark: <span className="track-record-name">20+ startups</span>, note: "New and established" },
+// Redrawn from the MonMedX raster logo: a split medical cross with a twisted DNA lens.
+// One colour like the others; the two-tone wordmark survives as full and muted ink,
+// and hovering it brings back the brand teal.
+const MonMedXLogo = ({ id }: { id: string }) => (
+  <svg viewBox="0 0 109 30" className="track-record-logo track-record-logo--monmedx" role="img" aria-label="MonMedX">
+    <defs>
+      <mask id={id} maskUnits="userSpaceOnUse" x="0" y="0" width="31" height="30">
+        <rect width="31" height="30" fill="#fff" />
+        <rect x="0" y="13.9" width="31" height="1.3" fill="#000" />
+        <path d="M14.2 3.8C18.6 4.4 24.6 8.6 25.6 13.7H9.9C9.8 9.6 11.2 5.8 14.2 3.8Z" fill="#000" />
+        <path d="M4 15.4H22.6C22.4 19.6 20.4 23.6 16.6 25.6C12 24.8 6 20.4 4 15.4Z" fill="#000" />
+        <g fill="none" stroke="#fff" strokeWidth="0.55" strokeLinecap="round" opacity="0.55">
+          <path d="M13.4 5.6C13 9 17 8 18.4 10.4S22.6 12.4 24.4 13.2" />
+          <path d="M11 11.4C14.6 9.6 15.4 12.6 18.2 12S21 8.6 20.2 6.6" />
+          <path d="M5.4 16.4C8.4 17 9.6 19.6 12 19.4S15.6 21.6 15.8 24.4" />
+          <path d="M8.6 20.6C9.6 18.2 12.6 18.4 14.4 17.6S19.4 16.8 21.6 16.2" />
+        </g>
+      </mask>
+    </defs>
+    <g className="mx-accent" fill="currentColor" mask={`url(#${id})`}>
+      <rect x="7.6" y="0" width="15.6" height="30" rx="4.2" />
+      <rect x="0" y="7.2" width="31" height="15.4" rx="4.2" />
+    </g>
+    <text x="35.5" y="20.4" fontSize="15.2" fontWeight="500" textLength="73" lengthAdjust="spacingAndGlyphs" className="track-record-svg-text">
+      <tspan className="mx-accent mx-muted">MON</tspan>
+      <tspan fill="currentColor">MED</tspan>
+      <tspan className="mx-accent mx-muted">X</tspan>
+    </text>
+  </svg>
+)
+
+// Redrawn from the NoteGen logo: a notepad tile with a heartbeat trace beside the
+// wordmark. One colour, with the notepad lines knocked out; teal returns on hover.
+const NoteGenLogo = ({ id }: { id: string }) => (
+  <svg viewBox="135 148 1493 260" className="track-record-logo track-record-logo--notegen" role="img" aria-label="NoteGen">
+    <defs>
+      <mask id={id} maskUnits="userSpaceOnUse" x="135" y="148" width="260" height="260">
+        <rect x="135" y="148" width="260" height="260" fill="#fff" />
+        <g fill="none" stroke="#000" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="168" y="181" width="194" height="194" rx="26" strokeWidth="10" />
+          <path d="M168 228H362" strokeWidth="9" />
+          <path d="M207 171V187M245 171V187M284 171V187M322 171V187" strokeWidth="9" />
+          <path d="M167 294H214L232 327L248 263L268 314L286 272L297 311L306 294H363" strokeWidth="11" />
+        </g>
+        <circle cx="167" cy="294" r="10" fill="#000" />
+        <circle cx="363" cy="294" r="10" fill="#000" />
+      </mask>
+    </defs>
+    <rect className="ng-accent" x="135" y="148" width="260" height="260" rx="46" fill="currentColor" mask={`url(#${id})`} />
+    <text x="466" y="375" fontSize="286" fontWeight="900" textLength="1162" lengthAdjust="spacingAndGlyphs" fill="currentColor" className="track-record-svg-text">
+      NoteGen
+    </text>
+  </svg>
+)
+
+// 1-Shift Logistics: heavy "1SHIFT" set tight against a light "LOGISTICS".
+const OneShiftLogo = () => (
+  <svg viewBox="0 5 116 20" className="track-record-logo" role="img" aria-label="1-Shift Logistics" fill="currentColor">
+    <text x="0" y="20.2" fontSize="14.4" fontWeight="900" textLength="45" lengthAdjust="spacingAndGlyphs" className="track-record-svg-text">
+      1SHIFT
+    </text>
+    <text x="46.2" y="20.2" fontSize="14.4" fontWeight="300" textLength="69.8" lengthAdjust="spacingAndGlyphs" className="track-record-svg-text">
+      LOGISTICS
+    </text>
+  </svg>
+)
+
+// Marks are render functions: the marquee renders the row twice, and SVG mask ids must stay unique.
+const RECORD: Array<{ key: string; mark: (copy: number) => ReactNode; note: string }> = [
+  { key: "nokia", mark: () => <NokiaLogo />, note: "Telecom" },
+  { key: "redhat", mark: () => <RedHatLogo />, note: "Enterprise open source" },
+  { key: "monmedx", mark: (copy) => <MonMedXLogo id={`monmedx-cut-${copy}`} />, note: "Healthcare platform" },
+  { key: "notegen", mark: (copy) => <NoteGenLogo id={`notegen-cut-${copy}`} />, note: "Clinical AI notes" },
+  { key: "1shift", mark: () => <OneShiftLogo />, note: "Logistics startup" },
+  { key: "startups", mark: () => <span className="track-record-name">11+ startups</span>, note: "New and established" },
 ]
 
 /**
  * The team's experience. These are brands our engineers built for individually,
  * not GrayNest clients, so the copy never implies GrayNest shipped for them.
+ * The row loops as an endless, draggable marquee; the second copy is hidden from assistive tech.
  */
 export function TrackRecord() {
   return (
@@ -34,27 +107,31 @@ export function TrackRecord() {
       className="track-record relative border-t border-[var(--gn-line)]"
     >
       <div className="grid-12">
-        <Reveal className="col-span-full lg:col-span-4">
+        <Reveal className="col-span-full">
           <p className="micro mb-4 flex items-center gap-3">
             <CoreGlow size={12} /> TEAM EXPERIENCE
           </p>
-          <h2 id="track-record-title" className="body max-w-[38ch]">
+          <h2 id="track-record-title" className="body max-w-[52ch]">
             Between them, the engineers behind GrayNest have built software for global
-            brands and for more than twenty startups, new and established.
+            brands and for more than ten startups, new and established.
           </h2>
         </Reveal>
-
-        <Reveal className="col-span-full lg:col-span-8 mt-8 lg:mt-0" delay={0.1}>
-          <ul className="track-record-list">
-            {RECORD.map((item) => (
-              <li key={item.key} className="track-record-item">
-                <span className="track-record-mark">{item.mark}</span>
-                <span className="micro">{item.note}</span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
       </div>
+
+      <Reveal className="track-record-marquee mt-8" delay={0.1}>
+        <LogoMarquee>
+          {[0, 1].map((copy) => (
+            <ul key={copy} className="track-record-list" aria-hidden={copy === 1 || undefined}>
+              {RECORD.map((item) => (
+                <li key={item.key} className="track-record-item">
+                  <span className="track-record-mark">{item.mark(copy)}</span>
+                  <span className="micro">{item.note}</span>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </LogoMarquee>
+      </Reveal>
     </section>
   )
 }

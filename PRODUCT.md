@@ -29,7 +29,7 @@ Success is a qualified inbound conversation: a founder or business decision-make
 
 Claims a neighbouring agency could not truthfully copy, all binding:
 
-- **Senior team with real pedigree.** The engineers have built for Nokia, Red Hat and 20+ startups (as individuals, see Evidence).
+- **Senior team with real pedigree.** The engineers have built for Nokia, Red Hat and 11+ startups (as individuals, see Evidence).
 - **Senior engineers who stay until it works.** No junior churn, no handoff at launch. MVP in weeks; ownership through launch and after.
 - **Built in Palestine, on purpose.** A local team and local economy are part of the offer, not a footnote.
 
@@ -58,8 +58,8 @@ Claims a neighbouring agency could not truthfully copy, all binding:
 
 ## Evidence on Hand
 
-- **Real:** shipped NutriFit work (web app, mobile app); the team's individual experience (Nokia, Red Hat, 20+ startups); the Ask GrayNest site assistant, which works but is a helper, not a product being sold.
-- **Real and cleared by the owner (2026-10-01, revised 2026-10-02):** the team's individual experience: engineers have given development services to Nokia, Red Hat, and 20+ startups (new and established). These are not GrayNest clients. Shown in `components/TrackRecord.tsx` with one-colour Nokia and Red Hat logos (owner's call, 2026-10-02), always framed as the engineers' own experience, never as GrayNest's client work or an endorsement. Stella Stays was removed at the owner's request. Add no other names without the owner.
+- **Real:** shipped NutriFit work (web app, mobile app); the team's individual experience (Nokia, Red Hat, 11+ startups); the Ask GrayNest site assistant, which works but is a helper, not a product being sold.
+- **Real and cleared by the owner (2026-10-01, revised 2026-10-02):** the team's individual experience: engineers have given development services to Nokia, Red Hat, and 11+ startups (new and established). These are not GrayNest clients. Shown in `components/TrackRecord.tsx` with one-colour Nokia and Red Hat logos (owner's call, 2026-10-02), always framed as the engineers' own experience, never as GrayNest's client work or an endorsement. Stella Stays was removed at the owner's request. Add no other names without the owner.
 - **Real but unpublishable today:** other client work, including named clients and case studies. Permission is not cleared. Future work must not publish client names, logos, project details or outcomes until the owner supplies them.
 - **Does not exist — never fabricate:** statistics, user counts, uptime or performance figures, testimonials, press, awards, team headcount, pricing.
 
