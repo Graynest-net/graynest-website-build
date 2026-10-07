@@ -36,8 +36,8 @@ export function Footer() {
           </div>
 
           <div className="flex items-center gap-6">
-            <Link href="/team" className="footer-link-muted">
-              Team
+            <Link href="/about" className="footer-link-muted">
+              About
             </Link>
             <Link href="/privacy" className="footer-link-muted">
               Privacy

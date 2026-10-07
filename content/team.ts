@@ -1,5 +1,5 @@
 /**
- * The people behind GrayNest, shown on /team.
+ * The people behind GrayNest, shown on /about.
  *
  * MOCK DATA: roles, bios, photos and social links below are placeholders so the
  * layout can be reviewed. PRODUCT.md forbids inventing titles or bios, so replace

@@ -30,7 +30,7 @@
   projects
 
 ## People
-- Jihad Badran, Firas Nassar and Ahmad Alkhatib: https://www.graynest.co/team
+- Jihad Badran, Firas Nassar and Ahmad Alkhatib: https://www.graynest.co/about
 
 ## Contact
 - Email: hello@graynest.co
