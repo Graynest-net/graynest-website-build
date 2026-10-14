@@ -7,20 +7,26 @@ import { CoreGlow } from "@/components/CoreGlow"
 
 const SRC = "/media/how-we-work"
 
+// Same breakpoints as the <source> media queries below: phones get 540p, tablets 720p, desktop 1080p.
+const posterFor = (width: number) => `${SRC}-${width < 768 ? "540p" : width < 1280 ? "720p" : "1080p"}.jpg`
+
 /**
  * The how-we-work film: plays muted while on screen and pauses when scrolled away.
  * It runs over 5s, so a pause control is always visible; reduced-motion visitors
- * get the poster and start it themselves.
+ * get the poster and start it themselves. Each size tier ships AV1 first with an
+ * H.264 fallback; the browser takes the first <source> whose media query and codec match.
  */
 export function ProcessFilm() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [playing, setPlaying] = useState(false)
   const [reduced, setReduced] = useState(false)
+  const [poster, setPoster] = useState(`${SRC}-720p.jpg`)
   // Once a visitor pauses, scrolling back must not restart it.
   const userPaused = useRef(false)
 
   useEffect(() => {
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+    setPoster(posterFor(window.innerWidth))
   }, [])
 
   useEffect(() => {
@@ -65,7 +71,7 @@ export function ProcessFilm() {
         <Reveal className="col-span-full lg:col-span-6 lg:self-end mt-6 lg:mt-0" delay={0.08}>
           <p className="body-lg max-w-[52ch]">
             Agree the MVP, plan it week by week, design it, build it, test every change, ship it,
-            then learn from real users. Twenty seconds, start to finish.
+            then learn from real users. Seventeen seconds, start to finish.
           </p>
         </Reveal>
 
@@ -74,7 +80,7 @@ export function ProcessFilm() {
             <video
               ref={videoRef}
               className="process-film-media"
-              poster={`${SRC}-poster.webp`}
+              poster={poster}
               muted
               loop
               playsInline
@@ -83,8 +89,12 @@ export function ProcessFilm() {
               onPause={() => setPlaying(false)}
               aria-label="Animated walkthrough of how GrayNest works: kickoff chat, weekly plan, design, build, test, ship, and learning from users"
             >
-              <source src={`${SRC}-720.mp4`} type="video/mp4" media="(max-width: 767px)" />
-              <source src={`${SRC}.mp4`} type="video/mp4" />
+              <source src={`${SRC}-540p.av1.mp4`} type='video/mp4; codecs="av01.0.04M.08"' media="(max-width: 767px)" />
+              <source src={`${SRC}-540p.mp4`} type="video/mp4" media="(max-width: 767px)" />
+              <source src={`${SRC}-720p.av1.mp4`} type='video/mp4; codecs="av01.0.08M.08"' media="(max-width: 1279px)" />
+              <source src={`${SRC}-720p.mp4`} type="video/mp4" media="(max-width: 1279px)" />
+              <source src={`${SRC}-1080p.av1.mp4`} type='video/mp4; codecs="av01.0.09M.08"' />
+              <source src={`${SRC}-1080p.mp4`} type="video/mp4" />
             </video>
             <button
               type="button"

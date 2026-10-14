@@ -2877,24 +2877,6 @@ body:has(:is([data-clinic], [data-teardown])) {
   scroll-margin-top: calc(var(--gn-nav-height) + var(--gn-promo-h, 44px) + 8px);
 }
 
-.method-points {
-  list-style: none;
-  padding: 0;
-}
-
-.method-point {
-  display: grid;
-  grid-template-columns: 40px 1fr;
-  gap: 16px;
-  align-items: baseline;
-  padding: 16px 0;
-  border-top: 1px solid var(--gn-line);
-}
-
-.method-point:last-child {
-  border-bottom: 1px solid var(--gn-line);
-}
-
 /* Plan steps: a numbered sequence across the width, unlike the stacked ship list. */
 .method-steps {
   list-style: none;
@@ -2926,10 +2908,6 @@ body:has(:is([data-clinic], [data-teardown])) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(16px, 2vw, 32px);
   }
-}
-
-.proof-card {
-  padding: clamp(24px, 3vw, 40px);
 }
 
 .proof-shot .media-slot {
@@ -3086,16 +3064,6 @@ body:has(:is([data-clinic], [data-teardown])) {
   .track-record-list[aria-hidden] {
     display: none;
   }
-}
-
-/* Ship section: the product shot is cut at the bottom, so it sits flush on the section's floor. */
-.method-ship {
-  padding-bottom: 0;
-}
-
-.method-ship-shot .media-slot {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
 }
 
 /* How-we-work film: a 16:9 frame with an always-visible pause control. */
