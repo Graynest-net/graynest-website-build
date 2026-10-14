@@ -24,8 +24,9 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
     }
 
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 0.7,
       smoothWheel: true,
+      wheelMultiplier: 1.3,
       touchMultiplier: 1.4,
     })
 
