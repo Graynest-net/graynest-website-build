@@ -2,12 +2,8 @@ import { Reveal } from "@/components/Reveal"
 import { CoreGlow } from "@/components/CoreGlow"
 import { MediaSlot } from "@/components/MediaSlot"
 
-const EXAMPLE = {
-  name: "NutriFit",
-  kind: "WEB APP · MOBILE APP · WHATSAPP AGENT",
-  body: "A nutrition product built end to end: a web app where nutritionists run consultations, a mobile app where their clients follow the plan in Arabic or English, AI and MCP built into both, and a reception agent answering on WhatsApp.",
-  tags: ["Web app", "Mobile app", "AI built in", "MCP", "WhatsApp reception agent"],
-} as const
+const BODY =
+  "A nutrition product built end to end: a web app where nutritionists run consultations, a mobile app where their clients follow the plan in Arabic or English, AI and MCP built into both, and a reception agent answering on WhatsApp."
 
 const SHOTS = [
   {
@@ -31,7 +27,7 @@ export function ProofStrip() {
   return (
     <section id="work" className="section-padding relative overflow-hidden border-t border-[var(--gn-line)]">
       <div className="grid-12">
-        <Reveal className="col-span-full lg:col-span-5 lg:self-start">
+        <Reveal className="col-span-full">
           <p className="micro mb-6 flex items-center gap-3">
             <CoreGlow size={12} /> SHIPPED
           </p>
@@ -40,22 +36,7 @@ export function ProofStrip() {
             <br />
             <span className="accent-word">built end to end.</span>
           </h2>
-          <p className="body-lg mt-8 max-w-[48ch]">
-            A web app, a mobile app, AI and a WhatsApp reception agent, all built by GrayNest.
-          </p>
-        </Reveal>
-
-        <Reveal className="col-span-full lg:col-span-7 mt-10 lg:mt-0" delay={0.1}>
-          <article className="feature-card proof-card">
-            <p className="micro mb-4">{EXAMPLE.kind}</p>
-            <h3 className="h3 mb-3">{EXAMPLE.name}</h3>
-            <p className="body text-[var(--gn-text-secondary)] mb-6 max-w-[52ch]">{EXAMPLE.body}</p>
-            <div className="service-row-caps">
-              {EXAMPLE.tags.map((tag) => (
-                <span key={tag} className="service-cap">{tag}</span>
-              ))}
-            </div>
-          </article>
+          <p className="body-lg mt-8 max-w-[60ch]">{BODY}</p>
         </Reveal>
 
         {SHOTS.map((shot, index) => (

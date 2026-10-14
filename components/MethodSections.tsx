@@ -21,14 +21,6 @@ const SHIP = {
   eyebrow: "02 · FIRST PHASE",
   title: ["SHIP PHASE ONE.", "then decide."],
   body: "The first phase is a working product in real hands, in weeks. The next decision comes from real usage, not slide decks.",
-  points: [
-    "Something working early, not a prototype behind glass",
-    "We stay through the first wave of real usage",
-    "Phase two is scoped from what phase one taught us",
-  ],
-  mediaId: "method.ship.web",
-  alt: "The NutriFit web app in a browser, open on a consultation: body composition measurements beside the patient's health context",
-  caption: "NutriFit's platform for nutritionists, built by GrayNest.",
 } as const
 
 /**
@@ -74,10 +66,10 @@ export function MethodSections() {
         </div>
       </section>
 
-      {/* Ship: copy across the top, then the product shot running off the section's bottom edge. */}
+      {/* Ship: heading beside the short pitch. */}
       <section
         id={SHIP.id}
-        className="section-padding method-ship relative overflow-hidden border-t border-[var(--gn-line)] section-tint"
+        className="section-padding relative overflow-hidden border-t border-[var(--gn-line)] section-tint"
       >
         <div className="grid-12">
           <Reveal className="col-span-full lg:col-span-5">
@@ -93,21 +85,6 @@ export function MethodSections() {
 
           <Reveal className="col-span-full lg:col-span-7 mt-8 lg:mt-0" delay={0.1}>
             <p className="body-lg max-w-[54ch]">{SHIP.body}</p>
-            <ul className="method-points mt-8">
-              {SHIP.points.map((point, i) => (
-                <li key={point} className="method-point">
-                  <span className="micro">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="body">{point}</span>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-
-          <Reveal className="col-span-full mt-10 md:mt-14" delay={0.15}>
-            <figure className="method-ship-shot">
-              <figcaption className="micro mb-4">{SHIP.caption}</figcaption>
-              <MediaSlot id={SHIP.mediaId} type="image" aspect="1600:1117" register="system" alt={SHIP.alt} />
-            </figure>
           </Reveal>
         </div>
       </section>
