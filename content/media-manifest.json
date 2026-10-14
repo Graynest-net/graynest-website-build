@@ -95,64 +95,6 @@
       "assetNote": "delivered files are swapped: the engineer scene ships under the agents.card filename"
     },
     {
-      "id": "home.office.day",
-      "page": "/ai-agents",
-      "section": "OfficeScrollFilm, day plate (people), shown in light theme",
-      "component": "components/OfficeScrollFilm.tsx",
-      "type": "video",
-      "register": "world",
-      "status": "generate",
-      "aspect": "16:9",
-      "mobileAspect": "9:16",
-      "size": "1920x1080",
-      "duration": "8s",
-      "loop": false,
-      "src": "/media/home.office.day.mp4",
-      "poster": "/media/home.office.day.poster.webp",
-      "alt": "Daytime GrayNest agency office with people working at desks under natural daylight",
-      "focus": "Wide tracking shot; left third clear for typography; mobile crops to the centre 9:16, so the aisle stays centred",
-      "model": "Higgsfield photoreal still (first frame), then image-to-video with camera path locked",
-      "prompt": "FILM: a grounded workplace drama, an ordinary productive afternoon. SCENE: an open-plan software agency office in Ramallah, Palestine: long oak desks with monitors (screens angled away or softly out of focus), a few plants, limestone and concrete walls, a glass-walled meeting room at the far end of the central aisle. CAMERA: eye level, slow forward dolly from the entrance down the central aisle towards the glass meeting room, one continuous move, no cuts. Composition keeps the left third calm and darker for overlaid typography. PEOPLE: six to eight Palestinian engineers and designers in their twenties to forties, casual smart clothes, working naturally: typing, one pair talking at a whiteboard, one person carrying a coffee down the aisle. Nobody looks at the camera. LIGHT: soft natural daylight from large windows on the right as the key, a small red-orange LED strip on the meeting room glass as the single brand practical. Cinematic film still, shot on Canon EOS 5D full-frame, 35mm prime lens at f/1.8, natural white balance, neutral true-to-life tones and real skin texture, fine organic film grain across the whole frame including the shadows, natural lens falloff and a slight natural vignette. Lighting is realistic and restrained: one motivated key light, soft fill so the shadows keep detail, and the brand red-orange #EA2E00 appearing only as one small practical light accent (an LED strip, a device glow, a gel spill), never a colour wash. Three depth planes: a soft out-of-focus foreground element, a tack-sharp subject, and an atmospheric background falling into soft round bokeh. Absolutely no text, letters, logos, readable signage or third-party brands anywhere in the frame.",
-      "motion": "Continuous forward dolly down the aisle over the full 8 s at constant speed, ending just outside the glass meeting room. People keep working with small natural movements. Not a loop: this clip is scrubbed by scroll, frame 0 = scroll start.",
-      "negative": "flat background, paper studio backdrop, CGI, 3D render, plastic skin, airbrushed skin, oversharpened, HDR look, teal-orange grade, colour cast, heavy haze, crushed blacks, neon overload, stock-photo smile at camera, posed model look, text, letters, numbers on screens, watermark, logo, brand names, readable signage, distorted hands, extra fingers, warped faces, duplicated people, camera shake, cuts, speed ramps",
-      "camera": {
-        "path": "Entrance → aisle between desks → glass meeting room at the far wall",
-        "move": "Slow forward tracking / dolly, gimbal-stable, no cuts, constant speed so scroll scrubbing feels linear",
-        "safeArea": "Keep the left ~35% relatively clear for live HTML typography"
-      }
-    },
-    {
-      "id": "home.office.night",
-      "page": "/ai-agents",
-      "section": "OfficeScrollFilm, night plate (persona), shown in dark theme",
-      "component": "components/OfficeScrollFilm.tsx",
-      "type": "video",
-      "register": "world",
-      "status": "generate",
-      "aspect": "16:9",
-      "mobileAspect": "9:16",
-      "size": "1920x1080",
-      "duration": "8s",
-      "loop": false,
-      "src": "/media/home.office.night.mp4",
-      "poster": "/media/home.office.night.poster.webp",
-      "alt": "Same agency office at night, soft warm light, the GrayNest persona working the desks",
-      "focus": "Identical framing and camera path to home.office.day so the theme toggle cross-fades cleanly; persona is the primary moving subject",
-      "references": [
-        "persona/reference/source_graynest-logo-mark.png",
-        "persona/reference/hero_senior-engineers.png"
-      ],
-      "model": "Generate from the approved home.office.day first frame (same set, relit for night), then image-to-video with the same camera path",
-      "prompt": "FILM: a quiet after-hours drama, the same office once everyone has gone home. SCENE: an open-plan software agency office in Ramallah, Palestine: long oak desks with monitors (screens angled away or softly out of focus), a few plants, limestone and concrete walls, a glass-walled meeting room at the far end of the central aisle. CAMERA: eye level, slow forward dolly from the entrance down the central aisle towards the glass meeting room, one continuous move, no cuts. Composition keeps the left third calm and darker for overlaid typography. The desks are empty of people. SUBJECT: a single faceless GrayNest persona built entirely from soft-shaded hexagonal panels fitted together like a honeycomb exoskeleton (flat-faced hex tiles, not rounded low-poly blobs, not cartoon proportions), off-white / light warm grey material, no face, no discernible gender, age or ethnicity, the head is one large hexagon panel angled slightly like a visor, and the chest carries a glowing panel shaped exactly like the nest glyph from the GrayNest logo, glowing red-orange #EA2E00 as its single signature core light (glow on the chest only), rendered as a real physical object in the photographed room (matte off-white panels catching the room light, a real contact shadow), standing at a desk midway down the aisle and answering a call, its chest core glowing. LIGHT: warm low desk lamps and monitor spill as the key, city light through the windows, the persona's chest core as the single red-orange practical. Cinematic film still, shot on Canon EOS 5D full-frame, 35mm prime lens at f/1.8, natural white balance, neutral true-to-life tones, fine organic film grain across the whole frame including the shadows, natural lens falloff and a slight natural vignette. Lighting is realistic and restrained: one motivated key light, soft fill so the shadows keep detail, and the brand red-orange #EA2E00 appearing only as one small practical light accent (an LED strip, a device glow, a gel spill), never a colour wash. Three depth planes: a soft out-of-focus foreground element, a tack-sharp subject, and an atmospheric background falling into soft round bokeh. Absolutely no text, letters, logos, readable signage or third-party brands anywhere in the frame.",
-      "motion": "Exact same dolly path, speed and timing as home.office.day. The persona turns its head panel slightly as the camera passes; its chest glow pulses softly as if speaking. Not a loop: scrubbed by scroll.",
-      "negative": "flat background, paper studio backdrop, CGI, 3D render, plastic skin, airbrushed skin, oversharpened, HDR look, teal-orange grade, colour cast, heavy haze, crushed blacks, neon overload, stock-photo smile at camera, posed model look, text, letters, numbers on screens, watermark, logo, brand names, readable signage, distorted hands, extra fingers, warped faces, duplicated people, people, face on the persona, eyes, glowing head, cartoon robot, camera shake, cuts, speed ramps",
-      "camera": {
-        "path": "Entrance → aisle between desks → glass meeting room at the far wall",
-        "move": "Exact same slow forward tracking path and timing as home.office.day",
-        "safeArea": "Keep the left ~35% relatively clear for live HTML typography"
-      }
-    },
-    {
       "id": "global.og.default",
       "page": "*",
       "section": "Open Graph / social share",

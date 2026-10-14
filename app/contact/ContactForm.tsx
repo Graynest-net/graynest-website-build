@@ -96,8 +96,8 @@ export function ContactForm() {
       </fieldset>
 
       <label className="block">
-        <span className="micro mb-2 block">WHAT ARE WE MAKING?</span>
-        <textarea className="contact-input min-h-36" name="message" placeholder="A brief on what you need…" maxLength={4000} required />
+        <span className="micro mb-2 block">PROJECT BRIEF</span>
+        <textarea className="contact-input min-h-36" name="message" placeholder="What it does, who uses it, and when you need it…" maxLength={4000} required />
       </label>
 
       {/* Honeypot: hidden from people and assistive tech, bots fill it. */}

@@ -21,12 +21,12 @@ export default function ContactPage() {
               <CoreGlow size={12} /> START A PROJECT
             </p>
             <h1 className="display-line">
-              LET&apos;S MAKE
+              TELL US WHAT
               <br />
-              <span className="accent-word">something.</span>
+              <span className="accent-word">you&apos;re building.</span>
             </h1>
             <p className="body-lg">
-              Tell us what you are building, what is stuck, or what needs to exist next.
+              Tell us what you are building, what is stuck, or what you want to replace. We reply within one business day.
             </p>
             <ContactForm />
           </Reveal>

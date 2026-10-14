@@ -90,7 +90,7 @@ export interface TeardownCopy {
 export const TEARDOWN_COPY: Record<TeardownLang, TeardownCopy> = {
   ar: {
     dir: "rtl",
-    metaTitle: "GrayNest — تفكيك مجاني لتطبيقك أو موقعك من الـCTO",
+    metaTitle: "GrayNest | تفكيك مجاني لتطبيقك أو موقعك من الـCTO",
     metaDescription: "مراجعة مسجّلة، 15 دقيقة، من الـCTO. على حسابنا، بدون أي عرض بيع.",
     tag: "تفكيك مجاني من الـCTO",
 
@@ -154,7 +154,7 @@ export const TEARDOWN_COPY: Record<TeardownLang, TeardownCopy> = {
 
   en: {
     dir: "ltr",
-    metaTitle: "GrayNest — Free app teardown by our CTO",
+    metaTitle: "GrayNest | Free app teardown by our CTO",
     metaDescription: "A recorded 15-minute review of your app or website by our CTO. On us, with no sales pitch.",
     tag: "Free teardown by our CTO",
 

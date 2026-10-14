@@ -124,8 +124,8 @@ export function TrackRecord() {
             <CoreGlow size={12} /> TEAM EXPERIENCE
           </p>
           <h2 id="track-record-title" className="body max-w-[52ch]">
-            Between them, the engineers behind GrayNest have built software for global
-            brands and for more than ten startups, new and established.
+            Individually, the engineers behind GrayNest have built software for Nokia, Red Hat
+            and more than ten startups.
           </h2>
         </Reveal>
       </div>
