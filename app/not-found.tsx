@@ -24,9 +24,9 @@ export default function NotFound() {
             <h1 className="display-line">
               THIS PAGE
               <br />
-              <span className="accent-word">shipped.</span>
+              <span className="accent-word">does not exist.</span>
             </h1>
-            <p className="body-lg mt-8">But it is not here.</p>
+            <p className="body-lg mt-8">The link may be old or mistyped. Head home, or tell us what you were looking for.</p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-10">
               <Link href="/" className="btn-primary">
                 <Icon name="arrow-left" /> Back home

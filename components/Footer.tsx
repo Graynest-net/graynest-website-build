@@ -6,9 +6,9 @@ export function Footer() {
       <div className="relative z-10 grid-12 py-[clamp(96px,12vh,160px)]">
         <div className="col-span-full mb-[clamp(48px,8vw,80px)]">
           <h2 className="h2">
-            YOUR ROADMAP.
+            GOT A PRODUCT TO BUILD?
             <br />
-            <span className="accent-word">OUR problem.</span>
+            <span className="accent-word">Send us the brief.</span>
           </h2>
         </div>
 

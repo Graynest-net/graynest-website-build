@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ market: s
   const copy = COPY[MARKETS[market].lang]
 
   return {
-    title: `GrayNest — ${copy.headline.join(" ")} ${copy.headlineAccent}`,
+    title: `GrayNest | ${copy.headline.join(" ")} ${copy.headlineAccent}`,
     description: copy.subhead,
     alternates: { canonical: `/clinics/${market}` },
     // Sales page with dated local prices: shared by link, kept out of search.

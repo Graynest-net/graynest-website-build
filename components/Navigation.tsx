@@ -91,12 +91,12 @@ export function Navigation() {
           <nav className="site-nav-glass-links" aria-label="Primary">
             <LiquidButton asChild size="default" className="site-nav-link site-nav-glass-btn">
               <Link href="/#scope">
-                <span className="relative z-10">Scope Before Spend</span>
+                <span className="relative z-10">Plan first</span>
               </Link>
             </LiquidButton>
             <LiquidButton asChild size="default" className="site-nav-link site-nav-glass-btn">
               <Link href="/#phase-1">
-                <span className="relative z-10">Phase-1 Ship</span>
+                <span className="relative z-10">Ship phase one</span>
               </Link>
             </LiquidButton>
           </nav>
@@ -134,10 +134,10 @@ export function Navigation() {
       >
         <div className="mobile-menu-links">
           <Link href="/#scope" onClick={() => setMenuOpen(false)}>
-            Scope Before Spend
+            Plan first
           </Link>
           <Link href="/#phase-1" onClick={() => setMenuOpen(false)}>
-            Phase-1 Ship
+            Ship phase one
           </Link>
           <Link href="/contact" onClick={() => setMenuOpen(false)}>
             Start a project

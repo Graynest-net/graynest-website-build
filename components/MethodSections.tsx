@@ -4,7 +4,7 @@ import { MediaSlot } from "@/components/MediaSlot"
 
 const PLAN = {
   id: "scope",
-  eyebrow: "01 · SCOPE BEFORE SPEND",
+  eyebrow: "01 · BEFORE YOU BUILD",
   title: ["PLAN FIRST.", "spend second."],
   body: "Before anything is built, we learn the problem, the users, and the constraints. You get a plan you can hold us to, and a clear picture of what it takes, before you commit to the build.",
   points: [
@@ -18,7 +18,7 @@ const PLAN = {
 
 const SHIP = {
   id: "phase-1",
-  eyebrow: "02 · PHASE-1 SHIP",
+  eyebrow: "02 · FIRST PHASE",
   title: ["SHIP PHASE ONE.", "then decide."],
   body: "The first phase is a working product in real hands, in weeks. The next decision comes from real usage, not slide decks.",
   points: [

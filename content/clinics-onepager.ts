@@ -145,40 +145,40 @@ export const COPY: Record<Lang, PageCopy> = {
     numberLocale: "en-US",
     tag: "Your WhatsApp front desk",
 
-    headline: ["Every patient booked.", "Every appointment confirmed."],
+    headline: ["Patients booked.", "Appointments confirmed."],
     headlineAccent: "On WhatsApp, around the clock.",
     subhead:
-      "Your WhatsApp front desk, on autopilot — answering patients in their own dialect, booking appointments and reminding them before the visit.",
+      "Your WhatsApp front desk, on autopilot, answering patients in their own dialect, booking appointments and reminding them before the visit.",
     primaryCta: "Try the agent",
     secondaryCta: "See it book a patient",
     proofChips: ["On WhatsApp", "Answers 24/7", "Their own dialect", "Live in 7 days"],
 
     problemTitle: "Where clinics lose patients",
     problems: [
-      "Messages after closing go unanswered — and the patient books at the clinic that replied first.",
+      "Messages after closing go unanswered, and the patient books at the clinic that replied first.",
       "Appointments slip because no one confirmed or sent a reminder.",
       "Your team spends the day on the same questions: price, location, hours, how to prepare.",
     ],
 
     demoTitle: "Watch it book",
     demoTitleAccent: "a patient.",
-    demoCaption: "A patient messages. It answers, books, confirms, and reminds — start to finish, no one at the desk.",
+    demoCaption: "A patient messages. It answers, books, confirms, and reminds, start to finish, no one at the desk.",
     thread: [
       { from: "patient", text: "Hi, do you have an appointment this week?" },
       { from: "agent", text: "We do. I have Tuesday 4:30 PM or Wednesday 11:00 AM free." },
       { from: "patient", text: "Tuesday works." },
       { from: "agent", text: "Booked ✓ What name should I put it under?" },
       { from: "patient", text: "Sara" },
-      { from: "agent", text: "You're set, Sara — Tuesday 4:30 PM. I'll remind you the day before." },
+      { from: "agent", text: "You're set, Sara: Tuesday 4:30 PM. I'll remind you the day before." },
     ],
-    demoNote: "This isn't a recording. The number below is the same agent — message it yourself.",
+    demoNote: "This isn't a recording. The number below is the same agent, message it yourself.",
     chatOnline: "online",
     chatTyping: "typing…",
     chatReplay: "Play again",
 
     outcomesLabel: "What changes for your clinic",
     outcomes: [
-      { title: "More bookings", text: "Patients book the moment they message — day, night, or after you've closed." },
+      { title: "More bookings", text: "Patients book the moment they message, day, night, or after you've closed." },
       { title: "Fewer no-shows", text: "Every appointment is confirmed and reminded, automatically." },
       { title: "Less front-desk work", text: "Routine WhatsApp questions are handled without your team touching them." },
     ],
@@ -194,7 +194,7 @@ export const COPY: Record<Lang, PageCopy> = {
     proofTitle: "Don't take our word.",
     proofTitleAccent: "Talk to the agent.",
     proofText:
-      "The WhatsApp number below isn't a sales line — it's the agent itself. Message it and you'll get exactly what your patients get.",
+      "The WhatsApp number below isn't a sales line. It's the agent itself. Message it and you'll get exactly what your patients get.",
 
     discountBadge: "50% off your first month",
     firstMonthLabel: "first month",
@@ -209,18 +209,18 @@ export const COPY: Record<Lang, PageCopy> = {
       "One WhatsApp number, answering 24/7",
     ],
     offerScope: "For a single clinic. Multi-branch, integrations and custom flows are scoped with you.",
-    offerEnds: "Offer ends 31 December 2026 — standard price from 2027.",
+    offerEnds: "Offer ends 31 December 2026. Standard price from 2027.",
     validity: "Price valid October 2026.",
 
     guaranteeTitle: "We guarantee it works.",
     guaranteeText:
-      "Before we start, we agree on clear checks with you — answers prices correctly, books without anyone stepping in, hands over to staff when needed. We fix it free until it passes all of them.",
+      "Before we start, we agree on clear checks with you: answers prices correctly, books without anyone stepping in, hands over to staff when needed. We fix it free until it passes all of them.",
 
     finalTitle: "Ready to stop losing patients",
     finalAccent: "on WhatsApp?",
     finalText: "Message the agent now, or scan to open it on your phone.",
     finalCta: "Try the agent",
-    scanLabel: "Scan — it's the agent",
+    scanLabel: "Scan: it's the agent",
 
     smallPrint: "The agent handles conversations in Arabic (Palestinian/Jordanian dialect) and Turkish.",
   },
@@ -230,40 +230,40 @@ export const COPY: Record<Lang, PageCopy> = {
     numberLocale: "ar-u-nu-arab",
     tag: "مكتب استقبالك على واتساب",
 
-    headline: ["كل مريض يحجز.", "كل موعد يتأكد."],
+    headline: ["المريض يحجز.", "الموعد يتأكد."],
     headlineAccent: "على واتساب، ٢٤ ساعة.",
     subhead:
-      "مكتب استقبالك على واتساب، شغّال لحاله — يرد على مرضاك بلهجتهم، يحجز المواعيد، ويذكّرهم قبل الموعد.",
+      "مكتب استقبالك على واتساب، شغّال لحاله، يرد على مرضاك بلهجتهم، يحجز المواعيد، ويذكّرهم قبل الموعد.",
     primaryCta: "جرّب الوكيل",
     secondaryCta: "شوفه يحجز موعد",
     proofChips: ["على واتساب", "يرد ٢٤ ساعة", "بلهجة مرضاك", "جاهز خلال ٧ أيام"],
 
     problemTitle: "وين العيادات بتخسر مرضاها",
     problems: [
-      "رسالة بتيجي بعد الدوام وبتظل بدون رد — والمريض بيحجز عند العيادة اللي ردّت عليه.",
+      "رسالة بتيجي بعد الدوام وبتظل بدون رد، والمريض بيحجز عند العيادة اللي ردّت عليه.",
       "مواعيد بتضيع لأنه ما حدا أكّد الموعد أو ذكّر فيه.",
       "فريقك بيقضي يومه على نفس الأسئلة: كم السعر؟ وين العيادة؟ إيمتى الدوام؟ كيف أتحضّر؟",
     ],
 
     demoTitle: "شوفه يحجز",
     demoTitleAccent: "موعد مريض.",
-    demoCaption: "المريض بيراسل. الوكيل بيرد، بيحجز، بيأكّد، وبيذكّر — من الأول للآخر، وما حدا على المكتب.",
+    demoCaption: "المريض بيراسل. الوكيل بيرد، بيحجز، بيأكّد، وبيذكّر، من الأول للآخر، وما حدا على المكتب.",
     thread: [
       { from: "patient", text: "مرحبا، في موعد فاضي هالأسبوع؟" },
       { from: "agent", text: "أكيد. عندي الثلاثاء ٤:٣٠ العصر أو الأربعاء ١١:٠٠ الصبح." },
       { from: "patient", text: "الثلاثاء مناسب." },
       { from: "agent", text: "تم الحجز ✓ على أي اسم أسجّله؟" },
       { from: "patient", text: "سارة" },
-      { from: "agent", text: "تمام يا سارة — الثلاثاء ٤:٣٠ العصر. رح أذكّرك قبلها بيوم." },
+      { from: "agent", text: "تمام يا سارة: الثلاثاء ٤:٣٠ العصر. رح أذكّرك قبلها بيوم." },
     ],
-    demoNote: "هاي مش تسجيل. الرقم تحت هو نفس الوكيل — راسله وجرّبه بنفسك.",
+    demoNote: "هاي مش تسجيل. الرقم تحت هو نفس الوكيل، راسله وجرّبه بنفسك.",
     chatOnline: "متصل",
     chatTyping: "بيكتب…",
     chatReplay: "شغّلها من جديد",
 
     outcomesLabel: "شو بيتغيّر في عيادتك",
     outcomes: [
-      { title: "حجوزات أكثر", text: "المريض بيحجز بنفس اللحظة اللي بيراسل فيها — نهار، ليل، وبعد ما تسكّر." },
+      { title: "حجوزات أكثر", text: "المريض بيحجز بنفس اللحظة اللي بيراسل فيها، نهار، ليل، وبعد ما تسكّر." },
       { title: "غيابات أقل", text: "كل موعد بيتأكّد وبيجيه تذكير، تلقائياً." },
       { title: "شغل أقل على الاستقبال", text: "أسئلة واتساب المتكررة بتنحل بدون ما يلمسها فريقك." },
     ],
@@ -279,7 +279,7 @@ export const COPY: Record<Lang, PageCopy> = {
     proofTitle: "لا تصدّقنا.",
     proofTitleAccent: "كلّم الوكيل.",
     proofText:
-      "الرقم تحت مش رقم مبيعات — هو الوكيل نفسه. راسله وبتوصلك بالضبط نفس التجربة اللي رح يعيشها مريضك.",
+      "الرقم تحت مش رقم مبيعات، هو الوكيل نفسه. راسله وبتوصلك بالضبط نفس التجربة اللي رح يعيشها مريضك.",
 
     discountBadge: "خصم ٥٠٪ على أول شهر",
     firstMonthLabel: "الشهر الأول",
@@ -294,18 +294,18 @@ export const COPY: Record<Lang, PageCopy> = {
       "رقم واتساب واحد يرد ٢٤ ساعة",
     ],
     offerScope: "لعيادة واحدة. الفروع والتكاملات والمسارات الخاصة نتفق عليها معك.",
-    offerEnds: "العرض ساري حتى ٣١ كانون الأول ٢٠٢٦ — من ٢٠٢٧ بالسعر الأصلي.",
+    offerEnds: "العرض ساري حتى ٣١ كانون الأول ٢٠٢٦. من ٢٠٢٧ بالسعر الأصلي.",
     validity: "السعر ساري خلال تشرين الأول ٢٠٢٦، بما يعادل السعر بالدولار.",
 
     guaranteeTitle: "نضمن إنه يشتغل.",
     guaranteeText:
-      "قبل ما نبدأ نتفق معك على معايير واضحة — يجيب عن الأسعار بدقة، يحجز بدون تدخل أحد، يحوّل للموظف عند الحاجة. ونعدّل مجاناً لحدّ ما يحقق كلها.",
+      "قبل ما نبدأ نتفق معك على معايير واضحة: يجيب عن الأسعار بدقة، يحجز بدون تدخل أحد، يحوّل للموظف عند الحاجة. ونعدّل مجاناً لحدّ ما يحقق كلها.",
 
     finalTitle: "جاهز توقف خسارة المرضى",
     finalAccent: "على واتساب؟",
     finalText: "راسل الوكيل هلأ، أو امسح الرمز تفتحه على تلفونك.",
     finalCta: "جرّب الوكيل",
-    scanLabel: "امسح — هذا هو الوكيل",
+    scanLabel: "امسح: هذا هو الوكيل",
 
     smallPrint: "يتحدث الوكيل بالعربية (اللهجة الفلسطينية والأردنية) وبالتركية.",
   },
@@ -315,40 +315,40 @@ export const COPY: Record<Lang, PageCopy> = {
     numberLocale: "tr-TR",
     tag: "WhatsApp'taki resepsiyonunuz",
 
-    headline: ["Her hasta randevusunu alır.", "Her randevu onaylanır."],
+    headline: ["Hasta randevusunu alır.", "Randevu onaylanır."],
     headlineAccent: "WhatsApp'ta, 7/24.",
     subhead:
-      "WhatsApp'taki resepsiyonunuz, kendi kendine çalışır — hastalarınıza kendi dilinde yanıt verir, randevu alır ve muayeneden önce hatırlatır.",
+      "WhatsApp'taki resepsiyonunuz, kendi kendine çalışır, hastalarınıza kendi dilinde yanıt verir, randevu alır ve muayeneden önce hatırlatır.",
     primaryCta: "Asistanı deneyin",
     secondaryCta: "Randevu alışını izleyin",
     proofChips: ["WhatsApp'ta", "7/24 yanıt", "Kendi dilinde", "7 günde hazır"],
 
     problemTitle: "Klinikler hastalarını nerede kaybeder",
     problems: [
-      "Mesai sonrası gelen mesaj yanıtsız kalır — hasta ise ilk cevap veren kliniğe gider.",
+      "Mesai sonrası gelen mesaj yanıtsız kalır, hasta ise ilk cevap veren kliniğe gider.",
       "Kimse onaylamadığı ya da hatırlatmadığı için randevular boşa gider.",
       "Ekibiniz gününü aynı sorulara harcar: ücret, adres, çalışma saatleri, nasıl hazırlanılır.",
     ],
 
     demoTitle: "Bir hastanın randevusunu",
     demoTitleAccent: "alışını izleyin.",
-    demoCaption: "Hasta yazar. Asistan yanıtlar, randevu alır, onaylar ve hatırlatır — baştan sona, masada kimse yok.",
+    demoCaption: "Hasta yazar. Asistan yanıtlar, randevu alır, onaylar ve hatırlatır, baştan sona, masada kimse yok.",
     thread: [
       { from: "patient", text: "Merhaba, bu hafta randevunuz var mı?" },
       { from: "agent", text: "Var. Salı 16:30 ya da Çarşamba 11:00 boşta." },
       { from: "patient", text: "Salı uygun." },
       { from: "agent", text: "Alındı ✓ Hangi isme kaydedeyim?" },
       { from: "patient", text: "Sara" },
-      { from: "agent", text: "Hazırsınız Sara — Salı 16:30. Bir gün önce hatırlatacağım." },
+      { from: "agent", text: "Hazırsınız Sara: Salı 16:30. Bir gün önce hatırlatacağım." },
     ],
-    demoNote: "Bu bir kayıt değil. Aşağıdaki numara aynı asistan — kendiniz yazın.",
+    demoNote: "Bu bir kayıt değil. Aşağıdaki numara aynı asistan, kendiniz yazın.",
     chatOnline: "çevrimiçi",
     chatTyping: "yazıyor…",
     chatReplay: "Tekrar oynat",
 
     outcomesLabel: "Kliniğinizde ne değişir",
     outcomes: [
-      { title: "Daha çok randevu", text: "Hasta yazdığı anda randevu alır — gündüz, gece, kapandıktan sonra." },
+      { title: "Daha çok randevu", text: "Hasta yazdığı anda randevu alır, gündüz, gece, kapandıktan sonra." },
       { title: "Daha az kaçan randevu", text: "Her randevu otomatik onaylanır ve hatırlatılır." },
       { title: "Daha az resepsiyon yükü", text: "Sık gelen WhatsApp soruları ekibiniz dokunmadan çözülür." },
     ],
@@ -364,7 +364,7 @@ export const COPY: Record<Lang, PageCopy> = {
     proofTitle: "Bize inanmayın.",
     proofTitleAccent: "Asistanla konuşun.",
     proofText:
-      "Aşağıdaki numara bir satış hattı değil — asistanın kendisi. Yazın ve hastalarınızın alacağı yanıtın aynısını alın.",
+      "Aşağıdaki numara bir satış hattı değil, asistanın kendisi. Yazın ve hastalarınızın alacağı yanıtın aynısını alın.",
 
     discountBadge: "İlk ay %50 indirim",
     firstMonthLabel: "ilk ay",
@@ -379,19 +379,19 @@ export const COPY: Record<Lang, PageCopy> = {
       "7/24 yanıt veren tek WhatsApp numarası",
     ],
     offerScope: "Tek klinik içindir. Çok şube, entegrasyon ve özel akışlar sizinle planlanır.",
-    offerEnds: "Kampanya 31 Aralık 2026'da biter — 2027'de tam fiyat.",
+    offerEnds: "Kampanya 31 Aralık 2026'da biter. 2027'de tam fiyat.",
     validity: "Fiyat Ekim 2026 için geçerlidir.",
     priceNote: "TL fiyat USD karşılığıdır ve sözleşme tarihinde sabitlenir.",
 
     guaranteeTitle: "Çalıştığını garanti ederiz.",
     guaranteeText:
-      "Başlamadan önce sizinle net ölçütlerde anlaşırız — fiyatları doğru söyler, kimse müdahale etmeden randevu alır, gerektiğinde çalışana devreder. Hepsini karşılayana kadar ücretsiz düzeltiriz.",
+      "Başlamadan önce sizinle net ölçütlerde anlaşırız: fiyatları doğru söyler, kimse müdahale etmeden randevu alır, gerektiğinde çalışana devreder. Hepsini karşılayana kadar ücretsiz düzeltiriz.",
 
     finalTitle: "WhatsApp'ta hasta kaybetmeyi",
     finalAccent: "bırakmaya hazır mısınız?",
     finalText: "Asistana şimdi yazın ya da telefonunuzda açmak için tarayın.",
     finalCta: "Asistanı deneyin",
-    scanLabel: "Tarayın — asistan bu",
+    scanLabel: "Tarayın: asistan bu",
 
     smallPrint: "Asistan Arapça (Filistin/Ürdün lehçesi) ve Türkçe konuşur.",
   },

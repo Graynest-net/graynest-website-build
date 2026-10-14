@@ -10,31 +10,35 @@ import { MediaSlot } from "@/components/MediaSlot"
 import { CoreGlow } from "@/components/CoreGlow"
 import { Icon } from "@/components/Icon"
 import { HeroFilm } from "@/components/HeroFilm"
+import { Outfit } from "next/font/google"
 import { ServiceRowMotion, ServiceMark } from "@/components/ServiceIcons"
+
+// Hairline counter-voice for the hero's closing line.
+const outfit = Outfit({ subsets: ["latin"], weight: ["200"], display: "swap", variable: "--font-thin" })
 
 const SERVICES = [
   {
     eyebrow: "01 · WEB & MOBILE",
-    title: "Products people use every day",
-    body: "Web apps and iOS and Android apps, designed and built by the same senior team, from the first screen to the store listing.",
+    title: "Apps for web, iOS and Android",
+    body: "Designed and built by the same senior team, from the first screen to the store listing.",
     icon: "layout-dashboard",
   },
   {
     eyebrow: "02 · BACKEND & APIS",
-    title: "The systems underneath",
+    title: "Backends built for real traffic",
     body: "APIs, data models, integrations and payments, built to keep working as usage grows.",
     icon: "terminal",
   },
   {
     eyebrow: "03 · INTERNAL TOOLS",
-    title: "Tools your team actually uses",
-    body: "Dashboards, back offices and workflows that replace the spreadsheet everyone is afraid to touch.",
+    title: "Dashboards and back offices",
+    body: "Admin panels and workflows that replace the spreadsheet everyone is afraid to touch.",
     icon: "kanban",
   },
   {
     eyebrow: "04 · AI INTEGRATION",
-    title: "AI where it earns its place",
-    body: "Search, assistants and automation inside your product, only where it saves real time or money.",
+    title: "AI inside your product",
+    body: "Search, assistants and automation, added only where they save real time or money.",
     icon: "workflow",
   },
 ] as const
@@ -43,8 +47,8 @@ const PRINCIPLES = [
   {
     mediaId: "home.principle.puzzle",
     eyebrow: "01 · INTEGRATION",
-    title: "Built in, not bolted on.",
-    body: "What we build connects to your real systems and fits how your team already works, not wedged on top of it.",
+    title: "Connected to your real systems.",
+    body: "We build against the systems you already run and the way your team already works, so nothing sits on top of them.",
     alt: "Two interlocking off-white hexagon forms fitted together, their seam glowing red-orange",
   },
   {
@@ -58,7 +62,7 @@ const PRINCIPLES = [
     mediaId: "home.principle.roadmap",
     eyebrow: "03 · OWNERSHIP",
     title: "We stay until it works.",
-    body: "No handoff at launch. The plan is ours to carry, from architecture through production and whatever comes after.",
+    body: "No handoff at launch. We carry the plan from architecture through production and stay through the first wave of real usage.",
     alt: "A winding path of hexagon tiles leading into the dark towards one glowing tile",
   },
 ] as const
@@ -75,17 +79,20 @@ export default function Home() {
         <div className="grid-12 relative z-10">
           <div className="col-span-full lg:col-span-7 hero-copy">
             <p className="micro flex items-center gap-3">
-              <CoreGlow size={12} /> SOFTWARE HOUSE · AI WHERE IT PAYS OFF
+              <CoreGlow size={12} /> SOFTWARE HOUSE · MVPs IN WEEKS
             </p>
-            <h1>
-              <span className="display-line">WE BUILD</span>
+            <h1 className={`hero-title ${outfit.variable}`}>
               <span className="display-line">
-                SOFTWARE <span className="accent-word">that works.</span>
+                <span className="hero-normal">We Build</span>
+              </span>
+              <span className="display-line">
+                <span className="hero-soft">Software</span>{" "}
+                <span className="accent-word hero-thin">that ships in weeks.</span>
               </span>
             </h1>
             <p className="body-lg mt-8 max-w-[54ch]">
-              Web and mobile products, backends and internal tools, built by senior engineers
-              who ship fast and stay until it works.
+              Web and mobile apps, backends and internal tools, built by senior engineers.
+              A working MVP in weeks, and we stay through launch and the first wave of real usage.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-10">
               <MagneticButton href="/contact" event="cta_project">
@@ -106,13 +113,12 @@ export default function Home() {
               <CoreGlow size={12} /> WHAT WE BUILD
             </p>
             <h2 className="h2">
-              FOUR THINGS
+              FOUR KINDS OF WORK,
               <br />
-              <span className="accent-word">we build well.</span>
+              <span className="accent-word">one senior team.</span>
             </h2>
             <p className="body-lg mt-8 max-w-[48ch]">
-              Most companies don&apos;t need more software. They need the right software, shipped,
-              and AI only where it earns its keep.
+              Hire us for one, or combine them. The same engineers handle design, build and launch.
             </p>
           </Reveal>
 
@@ -147,7 +153,7 @@ export default function Home() {
             <h2 className="h2">
               THREE RULES.
               <br />
-              <span className="accent-word">No exceptions.</span>
+              <span className="accent-word">Hold us to them.</span>
             </h2>
           </Reveal>
 
@@ -196,7 +202,7 @@ export default function Home() {
                   <span className="accent-word">a conversation.</span>
                 </h2>
                 <p className="body-lg">
-                  Tell us what you need. We&apos;ll tell you what it takes.
+                  Tell us what you need. We&apos;ll tell you what it takes, and reply within one business day.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                   <MagneticButton href="/contact" event="cta_project">

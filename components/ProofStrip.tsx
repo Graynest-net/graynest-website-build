@@ -36,12 +36,12 @@ export function ProofStrip() {
             <CoreGlow size={12} /> SHIPPED
           </p>
           <h2 className="h2">
-            AN EXAMPLE
+            NUTRIFIT,
             <br />
-            <span className="accent-word">of what we ship.</span>
+            <span className="accent-word">built end to end.</span>
           </h2>
           <p className="body-lg mt-8 max-w-[48ch]">
-            One product, end to end. It shows the range, not the limit: we build what your product needs.
+            A web app, a mobile app, AI and a WhatsApp reception agent, all built by GrayNest.
           </p>
         </Reveal>
 

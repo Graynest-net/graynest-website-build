@@ -32,7 +32,7 @@ const CAPABILITIES = [
   {
     eyebrow: "04 · INTERNAL",
     title: "Internal tools",
-    body: "The admin panels and workflows your own team lives in, made faster to work with.",
+    body: "Admin panels, dashboards and workflows for your own team, replacing the spreadsheet everyone is afraid to touch.",
     tags: ["Dashboards", "Automation", "Data pipelines", "Admin"],
   },
 ] as const
@@ -44,7 +44,7 @@ const PROCESS = [
   },
   {
     title: "Architecture",
-    body: "System design, data model, and infrastructure decisions — documented and reviewed before build begins.",
+    body: "System design, data model, and infrastructure decisions, documented and reviewed before build begins.",
   },
   {
     title: "Build",
@@ -65,14 +65,14 @@ const USE_CASES = [
     mediaId: "software.uc.mvp.scene",
     eyebrow: "STARTUPS",
     title: "MVP in weeks",
-    body: "From idea to a working product people can use. We scope tight, build fast, and iterate from real feedback instead of research decks.",
+    body: "From idea to a working product people can use. We scope the smallest version that proves the idea, ship it, and iterate from real feedback.",
     alt: "Two startup founders late at night, one showing a working app on a phone while the other reacts",
   },
   {
     mediaId: "software.uc.ai.scene",
     eyebrow: "AI INTEGRATION",
     title: "AI inside your product",
-    body: "Search, answers, and automation built into the app your team already uses. No AI for its own sake — only where it removes friction.",
+    body: "Search, answers, and automation built into the app your team already uses. We add AI only where it saves real time or money.",
     alt: "A product manager in a bright office typing a question into her company's app and getting an instant answer",
   },
   {
@@ -96,17 +96,17 @@ export default function SoftwareEngineeringPage() {
         <div className="grid-12 relative z-10">
           <div className="col-span-full lg:col-span-8 hero-copy">
             <p className="micro flex items-center gap-3">
-              <CoreGlow size={12} /> SOFTWARE / 02
+              <CoreGlow size={12} /> SOFTWARE ENGINEERING
             </p>
             <h1>
-              <span className="display-line">GOOD SOFTWARE</span>
+              <span className="display-line">SENIOR ENGINEERS.</span>
               <span className="display-line">
-                SHIPS <span className="accent-word">with intent.</span>
+                <span className="accent-word">Working software in weeks.</span>
               </span>
             </h1>
             <p className="body-lg mt-8 max-w-[54ch]">
-              Product engineering for founders, startups, and teams who need the right thing built.
-              Web, mobile, backend, and AI where it pays off.
+              Product engineering for founders, startups and teams with a product to build or replace.
+              Web, mobile, backend and internal tools, with AI added where it saves time or money.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-10">
               <MagneticButton href="/contact" event="cta_project">
@@ -130,12 +130,12 @@ export default function SoftwareEngineeringPage() {
               <CoreGlow size={12} /> WHAT WE BUILD
             </p>
             <h2 className="h2">
-              FROM FIRST
+              WEB, MOBILE,
               <br />
-              <span className="accent-word">commit.</span>
+              <span className="accent-word">backend and internal.</span>
             </h2>
             <p className="body-lg mt-8 max-w-[48ch]">
-              Senior engineers who own the plan from architecture through production and whatever comes after.
+              Senior engineers own the plan from architecture through production, and stay after launch.
             </p>
           </Reveal>
 
@@ -171,7 +171,7 @@ export default function SoftwareEngineeringPage() {
               <span className="accent-word">One team.</span>
             </h2>
             <p className="body-lg mt-8 max-w-[48ch]">
-              Discovery, design, engineering, and launch in one accountable team. No handoff between phases — the people who plan it are the people who ship it.
+              Discovery, architecture, build, launch and maintenance, all by one team. No handoff between phases: the people who plan it are the people who ship it.
             </p>
           </Reveal>
 
