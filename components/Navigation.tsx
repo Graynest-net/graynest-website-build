@@ -76,14 +76,8 @@ export function Navigation() {
     >
       <div className="site-nav-inner">
         <Link href="/" className="site-nav-brand">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Dark%20Mode-Jl3dgrEza60F7WftOu1bn9DbKbFDqu.png"
-            alt=""
-            width={28}
-            height={28}
-            className="site-nav-mark"
-            aria-hidden="true"
-          />
+          <img src="/brand/mark-light.png" alt="" width={28} height={28} className="site-nav-mark dark:hidden" aria-hidden="true" />
+          <img src="/brand/mark-dark.png" alt="" width={28} height={28} className="site-nav-mark hidden dark:block" aria-hidden="true" />
           <span className="site-nav-wordmark">GrayNest</span>
         </Link>
 

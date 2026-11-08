@@ -39,13 +39,8 @@ export function Footer() {
             <Link href="/privacy" className="footer-link-muted">
               Privacy
             </Link>
-            <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Dark%20Mode-Jl3dgrEza60F7WftOu1bn9DbKbFDqu.png"
-              alt="GrayNest"
-              width={24}
-              height={24}
-              className="h-6 w-6 opacity-30"
-            />
+            <img src="/brand/mark-light.png" alt="GrayNest" width={24} height={24} className="h-6 w-6 opacity-30 dark:hidden" />
+            <img src="/brand/mark-dark.png" alt="GrayNest" width={24} height={24} className="hidden h-6 w-6 opacity-30 dark:block" />
           </div>
         </div>
       </div>
