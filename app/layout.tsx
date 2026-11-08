@@ -13,6 +13,12 @@ export const metadata: Metadata = {
   description:
     "Senior engineers building web and mobile products, backends and internal tools, with AI where it pays off. MVPs in weeks, for startups and businesses.",
   alternates: { canonical: "/" },
+  icons: {
+    icon: [
+      { url: "/icon-light.png", media: "(prefers-color-scheme: light)" },
+      { url: "/icon-dark.png", media: "(prefers-color-scheme: dark)" },
+    ],
+  },
 }
 
 // Organization facts for search engines and assistants. Only list what the site states.
@@ -24,7 +30,7 @@ const orgJsonLd = {
       "@id": "https://www.graynest.co/#organization",
       name: "GrayNest",
       url: "https://www.graynest.co",
-      logo: "https://www.graynest.co/icon.png",
+      logo: "https://www.graynest.co/icon-light.png",
       email: "hello@graynest.co",
       description:
         "GrayNest is a software house in Palestine building web and mobile products, backends and internal tools for startups and businesses, with AI where it pays off.",
